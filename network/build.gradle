@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.publishVersionCode
+        versionName versions.publishVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':base')
+//    api "io.reactivex.rxjava2:rxjava:${versions.rxjava}"
+//    api "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
+    api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+    api "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    api "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    api "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

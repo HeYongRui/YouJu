@@ -1,0 +1,72 @@
+if (rootProject.ext.isModule1Debug) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        if (!rootProject.ext.isModule1Debug) {
+            applicationId "com.heyongrui.component"
+        }
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.publishVersionCode
+        versionName versions.publishVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            if (!rootProject.ext.isModule1Debug) {
+                manifest.srcFile 'src/debug/AndroidManifest.xml'
+                java.srcDirs = ['src/debug/java/', 'src/main/java/']
+                res.srcDirs = ['src/debug/res', 'src/main/res']
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java.srcDirs = ['src/main/java/']
+                res.srcDirs = ['src/main/res']
+                java {
+                    exclude 'src/debug/**'
+                }
+            }
+
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':network')
+    //Arouter路由
+    annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

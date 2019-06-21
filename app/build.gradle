@@ -1,27 +1,82 @@
 apply plugin: 'com.android.application'
+apply plugin: 'walle'
+apply from: '../version.gradle'
+apply from: '../config.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compileSdk
+
     defaultConfig {
         applicationId "com.heyongrui.youju"
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.publishVersionCode
+        versionName versions.publishVersion
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
+
+    signingConfigs {
+        release {
+            storeFile file("./keystore.jks")
+            storePassword "111111"
+            keyAlias "youju"
+            keyPassword "111111"
+        }
+
+        debug {
+            storeFile file("./keystore.jks")
+            storePassword "111111"
+            keyAlias "youju"
+            keyPassword "111111"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
-
+walle {
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels")
+    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}-${flavorName}.apk'
+    //configFile与channelFile两者必须存在一个，否则无法生成渠道包。两者都存在时优先执行configFile
+    channelFile = new File("${project.getProjectDir()}/channel")
+    //configFile = new File("${project.getProjectDir()}/config.json")
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation project(':network')
+    if (rootProject.ext.isMouleDebugHome) {
+        implementation project(':main')
+    }
+    if (rootProject.ext.isModule1Debug) {
+        implementation project(':component')
+    }
+    //美团walle打包
+    implementation "com.meituan.android.walle:library:${versions.walle}"
+    //Arouter路由
+    annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

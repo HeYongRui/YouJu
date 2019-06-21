@@ -1,0 +1,22 @@
+#生成configFile或者channelFile配置的所有渠道包: gradlew clean assembleReleaseChannels
+#生成单个渠道包: gradlew clean assembleReleaseChannels -PchannelList=xiaoxi
+#生成多个渠道包: gradlew clean assembleReleaseChannels -PchannelList=aliyun,anzhiwang
+aliyun
+anzhiwang
+anzhuoshichang
+baidu
+googleplay
+huawei
+keke
+leshi
+meizu
+oppo
+official
+qihu360
+sougou
+test
+tengxun
+vivo
+xiaomi
+yingyonghui
+zhushou91

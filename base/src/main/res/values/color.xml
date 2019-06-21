@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d7fbff</color>
+    <color name="colorPrimaryDark">#9ec7f5</color>
+    <color name="colorAccent">#ffe4be</color>
+    <color name="white">#fff</color>
+    <color name="gray">#cccccc</color>
+    <color name="window_background">#f3f4f4</color>
+    <color name="black">#000</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucentColor">#31ffffff</color>
+    <color name="textColorPrimary">#333333</color>
+    <color name="text_color">#333333</color>
+    <color name="text_color_hint">#999999</color>
+    <color name="text_color_black">#666666</color>
+    <color name="text_color_gray">#bbbcbe</color>
+    <color name="text_color_blue">#2BACFF</color>
+    <color name="background">#ffffff</color>
+    <color name="custom_camera_bg">#121415</color>
+    <color name="transparentShadowColor">#44000000</color>
+    <color name="mapStrokeColor">#d6e3ef</color>
+    <color name="mapFillColor">#250090ff</color>
+</resources>

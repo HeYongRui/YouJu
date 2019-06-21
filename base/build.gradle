@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.publishVersionCode
+        versionName versions.publishVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    //官方组件
+    api "androidx.appcompat:appcompat:${versions.androidx}"
+    api "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+    //管理Fragment和Activity
+    api "me.yokeyword:fragmentationx:${versions.fragmentationx}"
+    //Arouter路由
+    api "com.alibaba:arouter-api:${versions.arouterApi}"
+    annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    //解决dex超出方法数限制的问题
+    api "com.android.support:multidex:${versions.multidex}"
+    //工具类
+    api "com.blankj:utilcodex:${versions.utilcode}"
+    //线程调度
+    api "io.reactivex.rxjava2:rxjava:${versions.rxjava}"
+    api "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
+    //Glide图片加载
+    api "com.github.bumptech.glide:glide:${versions.glide}"
+    annotationProcessor 'androidx.annotation:annotation:1.0.0-beta01'
+    annotationProcessor "com.github.bumptech.glide:compiler:${versions.glide}"
+    //状态栏管理
+    api "com.gyf.immersionbar:immersionbar:${versions.immersionbar}"
+    api "com.gyf.immersionbar:immersionbar-components:${versions.immersionbar}"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_cat_loading"
+    android:paddingLeft="@dimen/dp_20"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_20"
+    android:paddingBottom="@dimen/dp_10">
+
+    <ImageView
+        android:id="@+id/mouse"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/mouse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.heyongrui.base.widget.catloadingview.PieChartView
+        android:id="@+id/pie_chart_view"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/cat"
+        android:layout_width="55dp"
+        android:layout_height="0dp"
+        android:src="@drawable/cat"
+        app:layout_constraintBottom_toBottomOf="@+id/mouse"
+        app:layout_constraintDimensionRatio="83:79"
+        app:layout_constraintEnd_toEndOf="@+id/mouse"
+        app:layout_constraintStart_toStartOf="@+id/mouse"
+        app:layout_constraintTop_toTopOf="@+id/mouse" />
+
+    <ImageView
+        android:id="@+id/eye_left"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginLeft="3.5dp"
+        android:layout_marginTop="12.5dp"
+        android:src="@drawable/eyes"
+        app:layout_constraintStart_toStartOf="@+id/cat"
+        app:layout_constraintTop_toTopOf="@+id/cat" />
+
+    <testcomponent.heyongrui.com.base.widget.catloadingview.EyelidView
+        android:id="@+id/eyelid_left"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_10"
+        app:layout_constraintEnd_toEndOf="@+id/eye_left"
+        app:layout_constraintStart_toStartOf="@+id/eye_left"
+        app:layout_constraintTop_toTopOf="@+id/eye_left" />
+
+    <ImageView
+        android:id="@+id/eye_right"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginRight="3.5dp"
+        android:src="@drawable/eyes"
+        app:layout_constraintEnd_toEndOf="@+id/cat"
+        app:layout_constraintTop_toTopOf="@+id/eye_left" />
+
+    <testcomponent.heyongrui.com.base.widget.catloadingview.EyelidView
+        android:id="@+id/eyelid_right"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_10"
+        android:src="@drawable/eyes"
+        app:layout_constraintEnd_toEndOf="@+id/eye_right"
+        app:layout_constraintStart_toStartOf="@+id/eye_right"
+        app:layout_constraintTop_toTopOf="@+id/eye_right" />
+
+    <ImageView
+        android:id="@+id/smile_cat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/smile_cat"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/cat"
+        app:layout_constraintEnd_toEndOf="@+id/cat"
+        app:layout_constraintStart_toStartOf="@+id/cat"
+        app:layout_constraintTop_toTopOf="@+id/cat"
+        tools:visibility="visible" />
+
+    <testcomponent.heyongrui.com.base.widget.catloadingview.GraduallyTextView
+        android:id="@+id/graduallyTextView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="C A T C H I N G ..."
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mouse" />
+
+</android.support.constraint.ConstraintLayout>
