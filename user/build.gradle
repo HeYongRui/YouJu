@@ -1,16 +1,21 @@
-apply plugin: 'com.android.application'
-apply plugin: 'walle'
+if (rootProject.ext.isRunAloneUser) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        applicationId "com.heyongrui.youju"
+        if (rootProject.ext.isRunAloneUser) {
+            applicationId "com.heyongrui.user"
+        }
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
         versionCode versions.publishVersionCode
         versionName versions.publishVersion
-        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -20,59 +25,45 @@ android {
         }
     }
 
-    signingConfigs {
-        release {
-            storeFile file("./keystore.jks")
-            storePassword "111111"
-            keyAlias "youju"
-            keyPassword "111111"
-        }
-
-        debug {
-            storeFile file("./keystore.jks")
-            storePassword "111111"
-            keyAlias "youju"
-            keyPassword "111111"
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+        }
+    }
+    sourceSets {
+        main {
+            if (rootProject.ext.isRunAloneUser) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                java.srcDirs = ['src/main/debug/java/', 'src/main/java/']
+                res.srcDirs = ['src/main/debug/res', 'src/main/res']
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java.srcDirs = ['src/main/java/']
+                res.srcDirs = ['src/main/res']
+                java {
+                    exclude 'src/main/debug/**'
+                }
+            }
+
         }
     }
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
 }
-walle {
-    apkOutputFolder = new File("${project.buildDir}/outputs/channels")
-    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}-${flavorName}.apk'
-    //configFile与channelFile两者必须存在一个，否则无法生成渠道包。两者都存在时优先执行configFile
-    channelFile = new File("${project.getProjectDir()}/channel")
-    //configFile = new File("${project.getProjectDir()}/config.json")
-}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
     implementation project(':network')
-    if (!rootProject.ext.isRunAloneHome) {
-        implementation project(':main')
-    }
-    if (!rootProject.ext.isRunAloneUser) {
-        implementation project(':user')
-    }
-    //美团walle打包
-    implementation "com.meituan.android.walle:library:${versions.walle}"
     //Arouter路由
     annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
 

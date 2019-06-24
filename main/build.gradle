@@ -1,13 +1,13 @@
-if (rootProject.ext.isMouleDebugHome) {
-    apply plugin: 'com.android.library'
-} else {
+if (rootProject.ext.isRunAloneHome) {
     apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
 android {
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        if (!rootProject.ext.isMouleDebugHome) {
+        if (rootProject.ext.isRunAloneHome) {
             applicationId "com.heyongrui.main"
         }
         minSdkVersion versions.minSdk
@@ -36,16 +36,16 @@ android {
     }
     sourceSets {
         main {
-            if (!rootProject.ext.isMouleDebugHome) {
-                manifest.srcFile 'src/debug/AndroidManifest.xml'
-                java.srcDirs = ['src/debug/java/', 'src/main/java/']
-                res.srcDirs = ['src/debug/res', 'src/main/res']
+            if (rootProject.ext.isRunAloneHome) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                java.srcDirs = ['src/main/debug/java/', 'src/main/java/']
+                res.srcDirs = ['src/main/debug/res', 'src/main/res']
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
                 java.srcDirs = ['src/main/java/']
                 res.srcDirs = ['src/main/res']
                 java {
-                    exclude 'src/debug/**'
+                    exclude 'src/main/debug/**'
                 }
             }
         }
@@ -58,6 +58,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':base')
     implementation project(':network')
     //Arouter路由
     annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"

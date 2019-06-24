@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.heyongrui.base.base.BaseStatic;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +21,7 @@ public class AppData {
     private SPUtils spUtils;
 
     public AppData() {
-        spUtils = SPUtils.getInstance(BaseStatic.APP_DATA_SP_NAME);
+        spUtils = SPUtils.getInstance(ConfigConstants.SP_NAME_APP_DATA);
     }
 
     public void clearTarget(Context context, String targetKey) {
@@ -36,30 +35,30 @@ public class AppData {
 
     public void clearAppData(Context context) {
         spUtils.clear();
-        deleteObject(BaseStatic.APP_DATA_NEWS, context);
+        deleteObject(ConfigConstants.SP_KEY_DATA, context);
     }
 
     public void saveNewsData(Context context, List<Object> newsDtoList) {
         if (newsDtoList != null) {
-            saveObject((Serializable) newsDtoList, BaseStatic.APP_DATA_NEWS, context);
+            saveObject((Serializable) newsDtoList, ConfigConstants.SP_KEY_DATA, context);
         }
     }
 
     public List<Object> getNewsData(Context context) {
         List<Object> newsDtoList = null;
-        if (isExistDataCache(BaseStatic.APP_DATA_NEWS, context)) {
-            newsDtoList = (List<Object>) readObject(BaseStatic.APP_DATA_NEWS, context);
+        if (isExistDataCache(ConfigConstants.SP_KEY_DATA, context)) {
+            newsDtoList = (List<Object>) readObject(ConfigConstants.SP_KEY_DATA, context);
         }
         return newsDtoList;
     }
 
     public void setBaseUrl(String baseUrl) {
         if (TextUtils.isEmpty(baseUrl)) return;
-        spUtils.put(BaseStatic.BASE_URL_SP_KEY, baseUrl);
+        spUtils.put(ConfigConstants.SP_KEY_BASE_URL, baseUrl);
     }
 
     public String getBaseUrl() {
-        return spUtils.getString(BaseStatic.BASE_URL_SP_KEY);
+        return spUtils.getString(ConfigConstants.SP_KEY_BASE_URL);
     }
 
     /**

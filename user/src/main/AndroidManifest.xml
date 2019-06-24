@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.heyongrui.user">
+
+    <application>
+        <activity
+            android:name=".UserActivity"
+            android:theme="@style/BaseAppTheme"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/BaseAppTheme" />
+    </application>
+
+</manifest>

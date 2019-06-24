@@ -60,6 +60,11 @@ dependencies {
     //状态栏管理
     api "com.gyf.immersionbar:immersionbar:${versions.immersionbar}"
     api "com.gyf.immersionbar:immersionbar-components:${versions.immersionbar}"
+    //Recyclerview适配器
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${versions.baseRlvAdapter}"
+    //刷新框架
+    api "com.scwang.smartrefresh:SmartRefreshLayout:${versions.smartRefreshLayout}"
+    api "com.scwang.smartrefresh:SmartRefreshHeader:${versions.smartRefreshLayout}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

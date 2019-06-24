@@ -12,6 +12,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.heyongrui.base.assist.NetStateChangeObserver;
 import com.heyongrui.base.assist.NetStateChangeReceiver;
@@ -46,6 +47,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
             // 通过注解绑定控件
             setContentView(getLayoutId());
         }
+        ARouter.getInstance().inject(this);
         mPresenter = setPresenter();
         if (mPresenter != null) {
             if (this instanceof BaseView) {

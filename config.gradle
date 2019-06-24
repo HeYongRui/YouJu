@@ -1,6 +1,37 @@
 ext {
-    //home是否是作为模块，true的时候是，false的时候可以独立运行
-    isMouleDebugHome = true;
-    //module1是否是作为模块，true的时候是，false的时候可以独立运行
-    isModule1Debug = true;
+    isRunAloneHome = true;//home模块是否可以单独运行
+    isRunAloneUser = true;//user模块是否可以单独运行
+    //版本号控制
+    versions = [
+            //Project
+            minSdk            : 15,
+            compileSdk        : 28,
+            buildTools        : '28.0.3',
+            supportVersion    : '28.0.0',
+            publishVersion    : '1.0',
+            publishVersionCode: 1,
+
+            //Plugins
+            gradlePlugin      : '3.4.1',
+
+            //Library
+            androidx          : '1.0.2',
+            constraintLayout  : '1.1.3',
+            multidex          : '1.0.3',
+            walle             : '1.1.6',
+            arouterApi        : '1.5.0',
+            arouterCompiler   : '1.2.2',
+            arouterRegister   : '1.0.2',
+            retrofit          : '2.6.0',
+            okhttp            : '3.14.2',
+            rxpermissions     : '0.10.2',
+            rxjava            : '2.2.9',
+            rxandroid         : '2.1.1',
+            glide             : '4.9.0',
+            fragmentationx    : '1.0.1',
+            utilcode          : '1.24.4',
+            immersionbar      : '3.0.0-beta05',
+            baseRlvAdapter    : '2.9.45-androidx',
+            smartRefreshLayout: '1.1.0-andx-11',
+    ]
 }

@@ -32,7 +32,8 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':base')
+    implementation project(':base')
+    //因base模块中有rxjava依赖，故此处注释禁用
 //    api "io.reactivex.rxjava2:rxjava:${versions.rxjava}"
 //    api "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
     api "com.squareup.retrofit2:retrofit:${versions.retrofit}"

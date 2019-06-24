@@ -1,14 +1,23 @@
 package com.heyongrui.main;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
+import com.heyongrui.base.base.BaseFragment;
+import com.heyongrui.base.provider.IFragmentProvider;
 
-@Route(path = "/main/activity")
+import java.util.LinkedHashMap;
+
+@Route(path = ConfigConstants.PATH_MAIN)
 public class MainActivity extends BaseActivity {
+
+    private final String[] TAB_PATH_ARRAY = {ConfigConstants.PATH_HOME_PROVIDER, ConfigConstants.PATH_USER_PROVIDER};
+    private LinkedHashMap<String, BaseFragment> mRootFragmentMap = new LinkedHashMap<>();
 
     @Override
     protected int getLayoutId() {
@@ -17,25 +26,40 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        ARouter.getInstance().inject(this);
+
+        for (String tabPath : TAB_PATH_ARRAY) {
+            addFragment(tabPath);
+        }
+
+        loadMultipleRootFragment(R.id.home_content_fragment, 0, mRootFragmentMap.values().toArray(new BaseFragment[mRootFragmentMap.size()]));
+
         addOnClickListeners(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int id = view.getId();
                 if (id == R.id.btn1) {
-                    // 1. 应用内简单的跳转(通过URL跳转在'进阶用法'中)
-                    ARouter.getInstance().build("/test/activity").navigation();
+                    selectedTab(0);
                 } else if (id == R.id.btn2) {
-                    // 2. 跳转并携带参数
-                    Bundle bundle = new Bundle();
-                    bundle.putString("test", "this is value");
-                    ARouter.getInstance().build("/test/activity")
-                            .withBundle("bundle", bundle)
-                            .withString("key3", "888")
-//                            .withObject("key4", true)
-                            .navigation();
+                    selectedTab(1);
                 }
             }
         }, R.id.btn1, R.id.btn2);
+    }
+
+    private void addFragment(String providerPath) {
+        BaseFragment baseFragment = mRootFragmentMap.get(providerPath);
+        if (baseFragment == null) {
+            IFragmentProvider homeFragmentProvider = (IFragmentProvider) ARouter.getInstance().build(providerPath).navigation();
+            mRootFragmentMap.put(providerPath, homeFragmentProvider.newInstance());
+        }
+    }
+
+    public void selectedTab(int position) {
+        if (position < 0 || position >= TAB_PATH_ARRAY.length) return;
+        String tabPath = TAB_PATH_ARRAY[position];
+        if (TextUtils.isEmpty(tabPath)) return;
+        BaseFragment baseFragment = mRootFragmentMap.get(tabPath);
+        if (baseFragment == null) return;
+        showHideFragment(baseFragment);
     }
 }
