@@ -39,6 +39,7 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     //官方组件
+    api "com.android.support:design:${versions.supportVersion}"
     api "androidx.appcompat:appcompat:${versions.androidx}"
     api "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
     //管理Fragment和Activity

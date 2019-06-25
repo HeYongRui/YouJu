@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">user</string>
+    <string name="hitokoto_title">一言</string>
+    <string name="all">全部</string>
+    <string name="soulposion">毒鸡汤</string>
+    <string name="anim">动画</string>
+    <string name="comic">漫画</string>
+    <string name="game">游戏</string>
+    <string name="novel">小说</string>
+    <string name="myself">原创</string>
+    <string name="internet">网络</string>
+    <string name="other">其他</string>
 </resources>

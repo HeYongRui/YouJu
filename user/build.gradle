@@ -66,6 +66,8 @@ dependencies {
     implementation project(':network')
     //Arouter路由
     annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    //3D球形控件
+    implementation "com.moxun:tagcloudlib:${versions.tagcloudlib}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

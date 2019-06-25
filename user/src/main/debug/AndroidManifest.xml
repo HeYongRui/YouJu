@@ -24,6 +24,9 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".hitokoto.view.HitokotoActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 
 </manifest>
