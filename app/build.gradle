@@ -46,13 +46,15 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
     }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
 }
 walle {
     apkOutputFolder = new File("${project.buildDir}/outputs/channels")
@@ -70,6 +72,9 @@ dependencies {
     }
     if (!rootProject.ext.isRunAloneUser) {
         implementation project(':user')
+    }
+    if (!rootProject.ext.isRunAloneModule) {
+        implementation project(':module')
     }
     //美团walle打包
     implementation "com.meituan.android.walle:library:${versions.walle}"

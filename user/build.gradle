@@ -25,17 +25,41 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file("./keystore.jks")
+            storePassword "111111"
+            keyAlias "youju"
+            keyPassword "111111"
+        }
+
+        debug {
+            storeFile file("./keystore.jks")
+            storePassword "111111"
+            keyAlias "youju"
+            keyPassword "111111"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
     sourceSets {
         main {
             if (rootProject.ext.isRunAloneUser) {
@@ -52,10 +76,6 @@ android {
             }
 
         }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
     }
 
 }

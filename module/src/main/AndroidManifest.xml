@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.heyongrui.module">
+
+    <application>
+        <activity
+            android:name=".hitokoto.view.HitokotoActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".kaiyan.view.KaiYanActivity"
+            android:theme="@style/BaseAppTheme" />
+    </application>
+</manifest>

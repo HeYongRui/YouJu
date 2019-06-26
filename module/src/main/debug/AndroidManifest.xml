@@ -1,0 +1,29 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.heyongrui.module">
+
+    <application
+        android:name=".ModuleLaunchApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/BaseAppTheme"
+        tools:replace="android:name">
+        <activity
+            android:name=".ModuleLaunchActivity"
+            android:theme="@style/BaseAppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".hitokoto.view.HitokotoActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".kaiyan.view.KaiYanActivity"
+            android:theme="@style/BaseAppTheme" />
+    </application>
+
+</manifest>

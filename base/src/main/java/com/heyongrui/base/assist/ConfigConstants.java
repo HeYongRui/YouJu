@@ -20,9 +20,11 @@ public class ConfigConstants {
 
     //路由路径
     public static final String PATH_MAIN = "/main/activity";
+    public static final String PATH_HOME_PROVIDER = "/home/main/service";
     public static final String PATH_LOGIN = "/user/login";
     public static final String PATH_USER = "/user/activity";
-    public static final String PATH_HITOKOTO = "/user/hitokoto";
-    public static final String PATH_HOME_PROVIDER = "/home/main/service";
     public static final String PATH_USER_PROVIDER = "/user/main/service";
+    public static final String PATH_HITOKOTO = "/module/hitokoto";
+    public static final String PATH_KAIYAN = "/module/kaiyan";
+    public static final String PATH_MODULE_PROVIDER = "/module/main/service";
 }

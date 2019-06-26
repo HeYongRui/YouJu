@@ -1,6 +1,7 @@
 ext {
     isRunAloneHome = false;//home模块是否可以单独运行
     isRunAloneUser = false;//user模块是否可以单独运行
+    isRunAloneModule = false;//module模块是否可以单独运行
     //版本号控制
     versions = [
             //Project
