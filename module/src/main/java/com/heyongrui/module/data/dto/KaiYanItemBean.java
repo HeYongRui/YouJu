@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class KaiYanItemBean implements Parcelable {
-    private String type;
+    private String type;//banner banner3 videoSmallCard followCard  textCard squareCardCollection
     private KaiYanDataBean data;
     private String tag;
     private int id;

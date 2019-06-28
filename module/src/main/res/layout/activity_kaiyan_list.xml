@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/window_background"
-    tools:context=".kaiyan.view.KaiYanActivity">
+    tools:context=".kaiyan.view.KaiYanListActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tool_bar"
@@ -40,6 +40,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar">
+
+        <com.scwang.smartrefresh.header.StoreHouseHeader
+            android:id="@+id/storeHouseHeader"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:shhLineWidth="2dp"
+            app:shhText="KAIYAN" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
     <View
         android:id="@+id/divide"

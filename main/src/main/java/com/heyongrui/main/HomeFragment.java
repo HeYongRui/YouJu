@@ -1,7 +1,6 @@
 package com.heyongrui.main;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.heyongrui.base.assist.ConfigConstants;
@@ -20,13 +19,11 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        addOnClickListeners(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int id = view.getId();
-                if (id == R.id.tv_home) {
-                    ARouter.getInstance().build(ConfigConstants.PATH_USER).withBoolean(ConfigConstants.IS_NEED_INTERCEPT, true).navigation();
-                }
+        addOnClickListeners(view -> {
+            int id = view.getId();
+            if (id == R.id.tv_home) {
+//                    ARouter.getInstance().build(ConfigConstants.PATH_USER).withBoolean(ConfigConstants.IS_NEED_INTERCEPT, true).navigation();
+                ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://ys.juan8014.cn/yin/").navigation();
             }
         }, R.id.tv_home);
     }

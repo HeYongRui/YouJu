@@ -1,6 +1,5 @@
 package com.heyongrui.module.kaiyan.presenter;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.heyongrui.module.data.dto.KaiYanDto;
 import com.heyongrui.module.data.service.KaiYanService;
 import com.heyongrui.module.kaiyan.contract.KaiYanContract;
@@ -21,13 +20,15 @@ public class KaiYanPresenter extends KaiYanContract.Presenter {
                     @Override
                     protected void onSuccess(KaiYanDto kaiYanDto) {
                         if (mView != null) {
-                            mView.getRecommendSuccess(kaiYanDto);
+                            mView.getKaiYanSuccess(kaiYanDto);
                         }
                     }
 
                     @Override
                     protected void onFailure(int errorCode, String errorMsg) {
-                        ToastUtils.showShort(errorMsg);
+                        if (mView != null) {
+                            mView.requestFail(errorCode, errorMsg);
+                        }
                     }
                 }));
     }
@@ -39,13 +40,15 @@ public class KaiYanPresenter extends KaiYanContract.Presenter {
                     @Override
                     protected void onSuccess(KaiYanDto kaiYanDto) {
                         if (mView != null) {
-                            mView.getDiscoverySuccess(kaiYanDto);
+                            mView.getKaiYanSuccess(kaiYanDto);
                         }
                     }
 
                     @Override
                     protected void onFailure(int errorCode, String errorMsg) {
-                        ToastUtils.showShort(errorMsg);
+                        if (mView != null) {
+                            mView.requestFail(errorCode, errorMsg);
+                        }
                     }
                 }));
     }
@@ -57,13 +60,35 @@ public class KaiYanPresenter extends KaiYanContract.Presenter {
                     @Override
                     protected void onSuccess(KaiYanDto kaiYanDto) {
                         if (mView != null) {
-                            mView.getDailySuccess(kaiYanDto);
+                            mView.getKaiYanSuccess(kaiYanDto);
                         }
                     }
 
                     @Override
                     protected void onFailure(int errorCode, String errorMsg) {
-                        ToastUtils.showShort(errorMsg);
+                        if (mView != null) {
+                            mView.requestFail(errorCode, errorMsg);
+                        }
+                    }
+                }));
+    }
+
+    @Override
+    public void getRelatedRecommend(int id) {
+        mRxManager.add(mKaiYanService.getRelatedRecommend(id).subscribeWith(
+                new ResponseDisposable<KaiYanDto>(mContext, true) {
+                    @Override
+                    protected void onSuccess(KaiYanDto kaiYanDto) {
+                        if (mView != null) {
+                            mView.getKaiYanSuccess(kaiYanDto);
+                        }
+                    }
+
+                    @Override
+                    protected void onFailure(int errorCode, String errorMsg) {
+                        if (mView != null) {
+                            mView.requestFail(errorCode, errorMsg);
+                        }
                     }
                 }));
     }

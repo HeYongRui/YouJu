@@ -2,6 +2,7 @@ package com.heyongrui.network.service;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.heyongrui.network.BuildConfig;
 import com.heyongrui.network.configure.HttpCache;
 import com.heyongrui.network.configure.TrustManager;
@@ -49,6 +50,10 @@ public class ApiService {
     }
 
     public static <T> T createApi(Class<T> clazz, String baseUrl) {
+        return createApi(clazz, baseUrl, null);
+    }
+
+    public static <T> T createApi(Class<T> clazz, String baseUrl, Gson gson) {
         Retrofit.Builder builder = new Retrofit.Builder();
         if (TextUtils.isEmpty(baseUrl)) {
             if (BuildConfig.DEBUG) {
@@ -59,8 +64,9 @@ public class ApiService {
         } else {
             builder.baseUrl(baseUrl);
         }
+        GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create();
         builder.client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(gson == null ? GsonConverterFactory.create() : GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
         Retrofit retrofit = builder.build();
         return retrofit.create(clazz);

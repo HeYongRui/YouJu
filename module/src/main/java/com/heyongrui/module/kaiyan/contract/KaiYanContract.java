@@ -7,11 +7,9 @@ import com.heyongrui.module.data.dto.KaiYanDto;
 public interface KaiYanContract {
     interface View extends BaseView {
 
-        void getRecommendSuccess(KaiYanDto kaiYanDto);
+        void getKaiYanSuccess(KaiYanDto kaiYanDto);
 
-        void getDiscoverySuccess(KaiYanDto kaiYanDto);
-
-        void getDailySuccess(KaiYanDto kaiYanDto);
+        void requestFail(int errorCode, String errorMsg);
     }
 
     abstract class Presenter extends BasePresenter<View> {
@@ -20,5 +18,7 @@ public interface KaiYanContract {
         public abstract void getDiscovery();
 
         public abstract void getDaily();
+
+        public abstract void getRelatedRecommend(int id);
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
@@ -12,6 +13,7 @@ import com.blankj.utilcode.util.Utils;
 import com.heyongrui.base.BuildConfig;
 import com.heyongrui.base.assist.AppManager;
 import com.heyongrui.base.assist.NetStateChangeReceiver;
+import com.tencent.smtt.sdk.QbSdk;
 
 public class BaseApplication extends Application {
     @Override
@@ -31,9 +33,27 @@ public class BaseApplication extends Application {
             ARouter.openDebug();
         }
         ARouter.init(this);
+        initX5Webview();
         //注册网络状态监听器
         NetStateChangeReceiver.registerReceiver(this);
         registerActivityLife();
+    }
+
+    private void initX5Webview() {
+        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
+
+            @Override
+            public void onViewInitFinished(boolean arg0) {
+                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核
+                Log.i("AppContext", "X5WebView InitFinished: " + arg0);
+            }
+
+            @Override
+            public void onCoreInitFinished() {
+            }
+        };
+        //x5内核初始化接口
+        QbSdk.initX5Environment(getApplicationContext(), cb);
     }
 
     private void registerActivityLife() {

@@ -22,7 +22,15 @@
             android:name=".hitokoto.view.HitokotoActivity"
             android:theme="@style/BaseAppTheme" />
         <activity
-            android:name=".kaiyan.view.KaiYanActivity"
+            android:name=".kaiyan.view.KaiYanListActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".kaiyan.view.KaiYanDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".h5.X5WebViewActivity"
             android:theme="@style/BaseAppTheme" />
     </application>
 

@@ -20,6 +20,7 @@ public class KaiYanHeaderBean implements Parcelable {
     private String rightText;
     private String icon;
     private String description;
+    private boolean showHateVideo;
 
     public int getId() {
         return id;

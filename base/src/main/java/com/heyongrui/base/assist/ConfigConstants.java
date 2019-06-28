@@ -25,6 +25,8 @@ public class ConfigConstants {
     public static final String PATH_USER = "/user/activity";
     public static final String PATH_USER_PROVIDER = "/user/main/service";
     public static final String PATH_HITOKOTO = "/module/hitokoto";
-    public static final String PATH_KAIYAN = "/module/kaiyan";
+    public static final String PATH_KAIYAN_LIST = "/module/kaiyanList";
+    public static final String PATH_KAIYAN_DETAIL = "/module/kaiyanDetail";
+    public static final String PATH_H5 = "/module/h5";
     public static final String PATH_MODULE_PROVIDER = "/module/main/service";
 }

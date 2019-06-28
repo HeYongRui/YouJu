@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
         loadMultipleRootFragment(R.id.home_content_fragment, 0, mRootFragmentMap.values().toArray(new BaseFragment[mRootFragmentMap.size()]));
     }
 
-    public void selectedTab(int position) {//https://ys.juan8014.cn/
+    public void selectedTab(int position) {
         if (position < 0 || position >= TAB_PATH_ARRAY.length) return;
         String tabPath = TAB_PATH_ARRAY[position];
         if (TextUtils.isEmpty(tabPath)) return;

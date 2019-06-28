@@ -22,7 +22,7 @@ public class ModuleFragment extends BaseFragment {
         addOnClickListeners(view -> {
             int id = view.getId();
             if (id == R.id.tv_title) {
-                ARouter.getInstance().build(ConfigConstants.PATH_KAIYAN).navigation();
+                ARouter.getInstance().build(ConfigConstants.PATH_KAIYAN_LIST).withInt("type", 1).navigation();
             }
         }, R.id.tv_title);
     }

@@ -12,7 +12,8 @@ import java.util.List;
  */
 public class ModuleSectionEntity extends SectionMultiEntity implements MultiItemEntity {
 
-    public static final int KAIYAN = 100;
+    public static final int KAIYAN_ONE = 100;
+    public static final int KAIYAN_TWO = 101;
 
     private int itemType;
     private int spanSize;

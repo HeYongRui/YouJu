@@ -86,6 +86,8 @@ dependencies {
     implementation project(':network')
     //Arouter路由
     annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    //视频框架
+    implementation "cn.jzvd:jiaozivideoplayer:${versions.jiaozivideoplayer}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
