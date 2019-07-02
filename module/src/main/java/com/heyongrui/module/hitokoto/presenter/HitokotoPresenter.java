@@ -153,4 +153,44 @@ public class HitokotoPresenter extends HitokotoContract.Presenter {
                     }
                 }));
     }
+//    public static class ObservableIterable implements Iterable<Observable<String>> {
+//        private List<Observable<String>> observableList;
+//
+//        public ObservableIterable() {
+//            super();
+//            observableList = new ArrayList<>();
+//        }
+//
+//        public void add(Observable<String> value) {
+//            if (observableList != null) {
+//                observableList.add(value);
+//            }
+//        }
+//
+//        @Override
+//        public Iterator<Observable<String>> iterator() {
+//            return new Iterator<Observable<String>>() {
+//                int index = -1;
+//
+//                @Override
+//                public boolean hasNext() {
+//                    return observableList.size() - 1 > index;
+//                }
+//
+//                @Override
+//                public Observable<String> next() {
+//                    index++;
+//                    return observableList.get(index);
+//                }
+//            };
+//        }
+//    }
+//    ObservableIterable observables = new ObservableIterable();
+//        observables.add(Observable.just(""));
+//        Observable.zip(observables, new FuncN<Object>() {
+//        @Override
+//        public Object call(Object... args) {
+//            return null;
+//        }
+//    });
 }

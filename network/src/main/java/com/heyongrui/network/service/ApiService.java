@@ -64,7 +64,6 @@ public class ApiService {
         } else {
             builder.baseUrl(baseUrl);
         }
-        GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create();
         builder.client(okHttpClient)
                 .addConverterFactory(gson == null ? GsonConverterFactory.create() : GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
