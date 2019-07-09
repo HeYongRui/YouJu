@@ -86,9 +86,9 @@ public class PieChartView extends View {
 
     //初始化画笔和效果动画
     private void init() {
-        //读取猫爪原图的1/2大小bitmap
+        //读取猫爪原图的1/3大小bitmap
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 2;
+        options.inSampleSize = 3;
         options.inJustDecodeBounds = false;
         catClawBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat_claw, options);
 

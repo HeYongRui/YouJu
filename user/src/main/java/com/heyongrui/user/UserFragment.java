@@ -31,7 +31,8 @@ public class UserFragment extends BaseFragment {
 //                            .withBundle("bundle", bundle)
 //                            .withString("key3", "888")
 //                            .navigation();
-                    ARouter.getInstance().build(ConfigConstants.PATH_HITOKOTO).navigation();
+//                    ARouter.getInstance().build(ConfigConstants.PATH_HITOKOTO).navigation();
+                    ARouter.getInstance().build(ConfigConstants.PATH_GARBAGE_CLASSIFY).navigation();
                 }
             }
         }, R.id.tv_user);
