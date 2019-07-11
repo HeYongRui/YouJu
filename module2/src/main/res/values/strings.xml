@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">module2</string>
+    <string name="gank">Gank</string>
+    <string name="qing_mang">轻芒</string>
+    <string name="welfare">福利</string>
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
+    <string name="rest_video">休息视频</string>
+    <string name="front_end">前端</string>
+    <string name="expand">拓展</string>
+    <string name="app">App</string>
+    <string name="blind_recommend">瞎推荐</string>
+</resources>

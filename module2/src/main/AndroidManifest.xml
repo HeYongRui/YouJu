@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.heyongrui.module2">
+
+    <application>
+        <activity
+            android:name=".gank.view.WelfareActivity"
+            android:theme="@style/BaseAppTheme" />
+    </application>
+</manifest>

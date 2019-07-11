@@ -18,16 +18,24 @@ public class ConfigConstants {
     public static final String IS_NEED_INTERCEPT = "is_need_intercept";
     public static final String PATH_TARGET = "target_path";
 
-    //路由路径
+    //main模块路由路径
     public static final String PATH_MAIN = "/main/activity";
     public static final String PATH_HOME_PROVIDER = "/home/main/service";
+    //user模块路由路径
     public static final String PATH_LOGIN = "/user/login";
     public static final String PATH_USER = "/user/activity";
     public static final String PATH_USER_PROVIDER = "/user/main/service";
+    //module模块路由路径
+    public static final String PATH_MONO_TEA = "/module/monoTea";
+    public static final String PATH_MONO_TEA_HISTORY_DATE = "/module/monoTeaHistoryDate";
+    public static final String PATH_MONO_CATEGORY = "/module/monoCategory";
     public static final String PATH_HITOKOTO = "/module/hitokoto";
     public static final String PATH_KAIYAN_LIST = "/module/kaiyanList";
     public static final String PATH_KAIYAN_DETAIL = "/module/kaiyanDetail";
     public static final String PATH_GARBAGE_CLASSIFY = "/module/garbageClassify";
     public static final String PATH_H5 = "/module/h5";
     public static final String PATH_MODULE_PROVIDER = "/module/main/service";
+    //module2模块路由路径
+    public static final String PATH_MODULE2_PROVIDER = "/module2/main/service";
+    public static final String PATH_WELFARE = "/module2/welfare";
 }

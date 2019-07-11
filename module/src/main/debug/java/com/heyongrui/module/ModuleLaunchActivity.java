@@ -13,5 +13,6 @@ public class ModuleLaunchActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        loadRootFragment(R.id.content_fragment, ModuleFragment.getInstance(), true, true);
     }
 }

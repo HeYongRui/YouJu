@@ -65,13 +65,13 @@ public class HitokotoActivity extends BaseActivity<HitokotoContract.Presenter> i
 
         addOnClickListeners(view -> {
             int id = view.getId();
-            if (id == R.id.back_iv) {
+            if (id == R.id.iv_back) {
                 finish();
             } else if (id == R.id.fab_refresh) {
                 tabLayout.getTabAt(tabLayout.getSelectedTabPosition()).select();
                 startRotateAnim(fabRefresh);
             }
-        }, R.id.back_iv, R.id.fab_refresh);
+        }, R.id.iv_back, R.id.fab_refresh);
     }
 
     private void initTabLayout(TabLayout tabLayout) {

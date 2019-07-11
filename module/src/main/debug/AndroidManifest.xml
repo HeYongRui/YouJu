@@ -33,6 +33,15 @@
             android:name=".dailylife.view.GarbageClassificationActivity"
             android:theme="@style/BaseAppTheme" />
         <activity
+            android:name=".mono.view.MonoTeaActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".mono.view.MonoTeaHistoryDateActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".mono.view.MonoCategoryActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
             android:name=".h5.X5WebViewActivity"
             android:theme="@style/BaseAppTheme" />
     </application>

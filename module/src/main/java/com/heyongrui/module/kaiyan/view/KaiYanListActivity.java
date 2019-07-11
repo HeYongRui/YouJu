@@ -50,10 +50,10 @@ public class KaiYanListActivity extends BaseActivity<KaiYanContract.Presenter> i
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recycler_view);
         initRecyclerView(recyclerView);
-        refreshLayout = findViewById(R.id.refreshLayout);
-        StoreHouseHeader storeHouseHeader = findViewById(R.id.storeHouseHeader);
+        refreshLayout = findViewById(R.id.refresh_layout);
+        StoreHouseHeader storeHouseHeader = findViewById(R.id.store_house_header);
         initSwipeRefresh(refreshLayout, storeHouseHeader);
         refreshLayout.autoRefresh();
 

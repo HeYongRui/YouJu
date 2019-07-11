@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/bg_iv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/head_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.heyongrui.base.widget.DashView
+        android:id="@+id/leftline"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/line"
+        android:layout_marginLeft="@dimen/dp_20"
+        app:dash_color="@color/white"
+        app:dash_length="10"
+        app:dash_space_length="0"
+        app:layout_constraintBottom_toBottomOf="@+id/summary_tv"
+        app:layout_constraintEnd_toStartOf="@+id/summary_tv"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/summary_tv"
+        app:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/summary_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toStartOf="@+id/rightline"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/leftline"
+        app:layout_constraintTop_toBottomOf="@+id/head_tv" />
+
+    <com.heyongrui.base.widget.DashView
+        android:id="@+id/rightline"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/line"
+        android:layout_marginRight="@dimen/dp_20"
+        app:dash_color="@color/white"
+        app:dash_length="10"
+        app:dash_space_length="0"
+        app:layout_constraintBottom_toBottomOf="@+id/summary_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/summary_tv"
+        app:layout_constraintTop_toTopOf="@+id/summary_tv"
+        app:orientation="horizontal" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/window_background"
+        app:layout_constraintTop_toBottomOf="@+id/summary_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

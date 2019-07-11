@@ -9,7 +9,12 @@ import com.heyongrui.base.base.BaseFragment;
 public class HomeFragment extends BaseFragment {
 
     public static HomeFragment getInstance() {
-        return new HomeFragment();
+        HomeFragment fragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("tabIconId", R.drawable.icon_mono);
+        bundle.putInt("tabTitleId", R.string.gank);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

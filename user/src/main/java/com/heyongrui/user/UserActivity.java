@@ -2,6 +2,7 @@ package com.heyongrui.user;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -28,5 +29,14 @@ public class UserActivity extends BaseActivity {
             String test = bundle.getString("test");
             Log.e(TAG, "test: " + test);
         }
+        addOnClickListeners(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = view.getId();
+                if (id == R.id.tv) {
+//                    MiniPayUtils.setupPay(UserActivity.this, new Config.Builder("fkx00263qmoxalrjiwqgo21", R.drawable.ic_zhifubao, R.drawable.ic_weixin).build());
+                }
+            }
+        }, R.id.tv);
     }
 }

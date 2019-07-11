@@ -31,7 +31,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/kaiyan_title"
+            android:text="@string/kaiyan"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,21 +42,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tool_bar">
 
         <com.scwang.smartrefresh.header.StoreHouseHeader
-            android:id="@+id/storeHouseHeader"
+            android:id="@+id/store_house_header"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:shhLineWidth="2dp"
             app:shhText="KAIYAN" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -67,7 +67,6 @@
             android:paddingRight="@dimen/dp_10" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
 
     <View
         android:id="@+id/divide"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">main</string>
+    <string name="gank">Gank</string>
+    <string name="tip_click_again_exit">再按一次退出程序</string>
 </resources>

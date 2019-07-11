@@ -22,14 +22,14 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("./keystore.jks")
+            storeFile file("../keystore.jks")
             storePassword "111111"
             keyAlias "youju"
             keyPassword "111111"
         }
 
         debug {
-            storeFile file("./keystore.jks")
+            storeFile file("../keystore.jks")
             storePassword "111111"
             keyAlias "youju"
             keyPassword "111111"
@@ -75,6 +75,9 @@ dependencies {
     }
     if (!rootProject.ext.isRunAloneModule) {
         implementation project(':module')
+    }
+    if (!rootProject.ext.isRunAloneModule2) {
+        implementation project(':module2')
     }
     //美团walle打包
     implementation "com.meituan.android.walle:library:${versions.walle}"

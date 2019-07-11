@@ -78,4 +78,21 @@
         <attr name="dash_length" format="integer" />
         <attr name="dash_space_length" format="integer" />
     </declare-styleable>
+    <!--九宫格视图-->
+    <declare-styleable name="RatioImageView">
+        <attr name="ratio" format="float" />
+    </declare-styleable>
+    <declare-styleable name="NineGridLayout">
+        <attr name="sapcing" format="dimension" />
+        <attr name="maxCount" format="integer" />
+    </declare-styleable>
+    <!--随机浮点粒子-->
+    <declare-styleable name="FireflyView">
+        <!-- 浮点粒子数量 默认400 -->
+        <attr name="firefly_num" format="integer"></attr>
+        <!-- 浮点粒子的最大半径 默认5 -->
+        <attr name="firefly_max_radius" format="integer"></attr>
+        <!-- 浮点粒子的移动速率 默认5 越大移动越慢 -->
+        <attr name="firefly_move_rate" format="integer"></attr>
+    </declare-styleable>
 </resources>

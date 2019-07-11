@@ -60,7 +60,7 @@ public class DialogUtil {
      */
     public static Dialog creatLoadingDialog(Context context, @DrawableRes int gif_res, CharSequence loading_text) {
         if (context == null) return null;
-        Dialog loadingDialog = new Dialog(context, R.style.Dialog);
+        Dialog loadingDialog = new Dialog(context, R.style.BaseDialogTheme);
         //自定义弹窗根视图
         ConstraintLayout constraintLayout = new ConstraintLayout(context);
         constraintLayout.setPadding(ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10), ConvertUtils.dp2px(10));
@@ -188,7 +188,7 @@ public class DialogUtil {
         public Dialog showRemindDialog() {
             if (mContext == null) return null;
             int roundRadius = 20;
-            Dialog remindDialog = new Dialog(mContext, R.style.Dialog);
+            Dialog remindDialog = new Dialog(mContext, R.style.BaseDialogTheme);
             View customView = LayoutInflater.from(mContext).inflate(R.layout.dialog_layout_reminder, null);
             GradientDrawable roundDrawable = new DrawableUtil.DrawableBuilder(mContext).setColor(Color.WHITE).setGradientRoundRadius(roundRadius).createGradientDrawable();
             ViewCompat.setBackground(customView, roundDrawable);

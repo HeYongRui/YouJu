@@ -2,6 +2,7 @@ ext {
     isRunAloneHome = false;//home模块是否可以单独运行
     isRunAloneUser = false;//user模块是否可以单独运行
     isRunAloneModule = false;//module模块是否可以单独运行
+    isRunAloneModule2 = false;//module2模块是否可以单独运行
     //版本号控制
     versions = [
             //Project
@@ -36,5 +37,6 @@ ext {
             smartRefreshLayout: '1.1.0-andx-11',
             tagcloudlib       : '1.2.0',
             jiaozivideoplayer : '7.0.4',
+            ahbottomnavigation: '2.3.4',
     ]
 }

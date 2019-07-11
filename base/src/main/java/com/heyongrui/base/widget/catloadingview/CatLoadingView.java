@@ -33,7 +33,7 @@ public class CatLoadingView extends Dialog {
     private float mRotateAngle;
 
     public CatLoadingView(@NonNull Context context) {
-        this(context, R.style.Dialog);
+        this(context, R.style.BaseDialogTheme);
     }
 
     public CatLoadingView(@NonNull Context context, int themeResId) {

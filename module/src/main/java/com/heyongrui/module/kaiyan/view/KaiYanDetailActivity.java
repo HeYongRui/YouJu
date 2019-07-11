@@ -161,15 +161,9 @@ public class KaiYanDetailActivity extends BaseActivity<KaiYanContract.Presenter>
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Jzvd.goOnPlayOnResume();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
-        Jzvd.goOnPlayOnPause();
+        Jzvd.resetAllVideos();
     }
 
     @Override

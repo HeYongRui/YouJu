@@ -1,5 +1,7 @@
 package com.heyongrui.module.adapter;
 
+import androidx.core.content.ContextCompat;
+
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
@@ -23,7 +25,7 @@ public class ExpandableAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
 
     @Override
     protected void convert(BaseViewHolder helper, MultiItemEntity item) {
-        UiUtil.setOnclickFeedBack(mContext, R.color.background, R.color.gray, helper.itemView);
+        UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
         switch (helper.getItemViewType()) {
         }
     }

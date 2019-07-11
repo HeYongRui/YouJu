@@ -25,14 +25,14 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("./keystore.jks")
+            storeFile file("../keystore.jks")
             storePassword "111111"
             keyAlias "youju"
             keyPassword "111111"
         }
 
         debug {
-            storeFile file("./keystore.jks")
+            storeFile file("../keystore.jks")
             storePassword "111111"
             keyAlias "youju"
             keyPassword "111111"
@@ -83,6 +83,7 @@ dependencies {
     implementation project(':network')
     //Arouter路由
     annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

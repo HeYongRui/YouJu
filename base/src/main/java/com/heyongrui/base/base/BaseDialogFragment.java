@@ -33,7 +33,7 @@ public abstract class BaseDialogFragment<T extends BasePresenter> extends Dialog
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.BaseDialogTheme);
         mActivity = getActivity();
         mContext = getContext();
     }

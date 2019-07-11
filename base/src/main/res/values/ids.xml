@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--ImageWatcher-->
+    <item name="image_orientation" type="id" />
+    <item name="state_origin" type="id" />
+    <item name="state_default" type="id" />
+    <item name="state_current" type="id" />
+    <item name="state_thumb" type="id" />
+    <item name="state_temp" type="id" />
+    <item name="state_exit" type="id" />
+    <item name="state_touch_drag" type="id" />
+    <item name="state_touch_scale" type="id" />
+    <item name="view_image_watcher" type="id" />
+    <!--物理撞击小球-->
+    <item name="circle_tag" type="id" />
+    <item name="body_tag" type="id" />
+</resources>
