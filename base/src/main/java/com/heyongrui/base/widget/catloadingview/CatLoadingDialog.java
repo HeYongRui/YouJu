@@ -23,7 +23,7 @@ import java.util.List;
  * Created by lambert on 2018/10/15.
  */
 
-public class CatLoadingView extends Dialog {
+public class CatLoadingDialog extends Dialog {
 
     private View mouse, smileCat, eyeLeft, eyeRight;
     private EyelidView eyelidLeft, eyelidRight;
@@ -32,11 +32,11 @@ public class CatLoadingView extends Dialog {
     private int mCatchTime;
     private float mRotateAngle;
 
-    public CatLoadingView(@NonNull Context context) {
+    public CatLoadingDialog(@NonNull Context context) {
         this(context, R.style.BaseDialogTheme);
     }
 
-    public CatLoadingView(@NonNull Context context, int themeResId) {
+    public CatLoadingDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
         init(context);
     }

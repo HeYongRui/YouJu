@@ -16,8 +16,8 @@ import android.view.SurfaceView;
 import com.heyongrui.base.R;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 
@@ -104,8 +104,8 @@ public class FireflyView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        stopAnimation();
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
     }
 
     public void stopAnimation() {
@@ -126,7 +126,7 @@ public class FireflyView extends SurfaceView implements SurfaceHolder.Callback {
                             // 清屏
                             mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                             if (mListParticles != null) {
-                                Iterator<FloatParticle> iterator = mListParticles.iterator();
+                                ListIterator<FloatParticle> iterator = mListParticles.listIterator();
                                 while (iterator.hasNext()) {
                                     FloatParticle fp = iterator.next();
                                     if (fp != null) {

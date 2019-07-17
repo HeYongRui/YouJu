@@ -38,4 +38,6 @@ public class ConfigConstants {
     //module2模块路由路径
     public static final String PATH_MODULE2_PROVIDER = "/module2/main/service";
     public static final String PATH_WELFARE = "/module2/welfare";
+    public static final String PATH_ABOUT = "/module2/about";
+    public static final String PATH_ENCOURAGE = "/module2/encourage";
 }

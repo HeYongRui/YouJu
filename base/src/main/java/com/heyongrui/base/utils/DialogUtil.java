@@ -209,7 +209,7 @@ public class DialogUtil {
             if (!TextUtils.isEmpty(mCancelText)) {
                 tvCancel.setText(mCancelText);
             }
-            DrawableUtil.DrawableBuilder confirmBuilder = new DrawableUtil.DrawableBuilder(mContext).setColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
+            DrawableUtil.DrawableBuilder confirmBuilder = new DrawableUtil.DrawableBuilder(mContext).setColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark));
             DrawableUtil.DrawableBuilder cancelBuilder = new DrawableUtil.DrawableBuilder(mContext).setColor(ContextCompat.getColor(mContext, R.color.window_background));
             if (mIsShowConfirm) {
                 confirmBuilder.setGradientRBRoundRadius(roundRadius);

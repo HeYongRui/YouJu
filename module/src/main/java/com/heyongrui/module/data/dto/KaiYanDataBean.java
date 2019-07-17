@@ -13,7 +13,7 @@ public class KaiYanDataBean implements Parcelable {
     private String text;
     private String subTitle;
     private String actionUrl;
-    private String adTrack;
+//    private String adTrack;
     private AuthorBean.FollowBean follow;
 
     private int count;
@@ -114,13 +114,13 @@ public class KaiYanDataBean implements Parcelable {
         this.actionUrl = actionUrl;
     }
 
-    public String getAdTrack() {
-        return adTrack;
-    }
+//    public String getAdTrack() {
+//        return adTrack;
+//    }
 
-    public void setAdTrack(String adTrack) {
-        this.adTrack = adTrack;
-    }
+//    public void setAdTrack(String adTrack) {
+//        this.adTrack = adTrack;
+//    }
 
     public AuthorBean.FollowBean getFollow() {
         return follow;
@@ -1350,7 +1350,7 @@ public class KaiYanDataBean implements Parcelable {
         dest.writeString(this.text);
         dest.writeString(this.subTitle);
         dest.writeString(this.actionUrl);
-        dest.writeString(this.adTrack);
+//        dest.writeString(this.adTrack);
         dest.writeParcelable(this.follow, flags);
         dest.writeInt(this.count);
         dest.writeString(this.title);
@@ -1407,7 +1407,7 @@ public class KaiYanDataBean implements Parcelable {
         this.text = in.readString();
         this.subTitle = in.readString();
         this.actionUrl = in.readString();
-        this.adTrack = in.readString();
+//        this.adTrack = in.readString();
         this.follow = in.readParcelable(AuthorBean.FollowBean.class.getClassLoader());
         this.count = in.readInt();
         this.title = in.readString();

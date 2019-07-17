@@ -93,7 +93,7 @@ public class Module2Fragment extends BaseFragment {
         }
         if (fireflyView != null) {
             fireflyView.stopAnimation();
-            fireflyView.setZOrderMediaOverlay(true);
+//            fireflyView.setZOrderMediaOverlay(true);
             fireflyView.setVisibility(View.GONE);
         }
     }
@@ -154,6 +154,9 @@ public class Module2Fragment extends BaseFragment {
                     case 1://福利
                         ARouter.getInstance().build(ConfigConstants.PATH_WELFARE).navigation();
                         break;
+                    case 9://关于
+                        ARouter.getInstance().build(ConfigConstants.PATH_ABOUT).navigation();
+                        break;
                 }
             });
             poolBall.addView(floatingActionButton, layoutParams);
@@ -162,14 +165,15 @@ public class Module2Fragment extends BaseFragment {
 
     private List<GankMenuDto> getMenuList() {
         List<GankMenuDto> gankMenuDtos = new ArrayList<>();
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.welfare), R.drawable.welfare, 1));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.android), R.drawable.android, 2));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.ios), R.drawable.ios, 3));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.rest_video), R.drawable.video, 4));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.front_end), R.drawable.js, 5));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.expand), R.drawable.expand, 6));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.app), R.drawable.app, 7));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.blind_recommend), R.drawable.recommend, 8));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.welfare), R.drawable.ic_welfare, 1));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.android), R.drawable.ic_android, 2));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.ios), R.drawable.ic_ios, 3));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.rest_video), R.drawable.ic_video, 4));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.front_end), R.drawable.ic_js, 5));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.expand), R.drawable.ic_expand, 6));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.app), R.drawable.ic_app, 7));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.blind_recommend), R.drawable.ic_recommend, 8));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.about), R.drawable.ic_about, 9));
         return gankMenuDtos;
     }
 }

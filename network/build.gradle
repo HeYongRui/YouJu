@@ -53,14 +53,6 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
-    //因base模块中有rxjava依赖，故此处注释禁用
-//    api "io.reactivex.rxjava2:rxjava:${versions.rxjava}"
-//    api "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
-    api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    api "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
-    api "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-    api "com.squareup.okhttp3:okhttp:${versions.okhttp}"
-    api "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

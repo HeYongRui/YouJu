@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /><!--开启未知应用安装权限的入口-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application>
         <!--适配全面屏手机-->
@@ -22,7 +24,7 @@
             android:value="portrait|landscape" />
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
+            android:authorities="com.heyongrui.base.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

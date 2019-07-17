@@ -5,7 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.heyongrui.base.widget.catloadingview.CatLoadingView;
+import com.heyongrui.base.widget.catloadingview.CatLoadingDialog;
 import com.heyongrui.network.core.CoreApiException;
 
 import java.lang.ref.SoftReference;
@@ -82,8 +82,8 @@ public abstract class ResponseDisposable<T> extends DisposableObserver<T> {
         Context context = mContext.get();
         if (context == null) return;
         if (mLoadingDialog == null) {
-            mLoadingDialog = new CatLoadingView(context);
-            ((CatLoadingView) mLoadingDialog).setGraduallyText(loadingContent);
+            mLoadingDialog = new CatLoadingDialog(context);
+            ((CatLoadingDialog) mLoadingDialog).setGraduallyText(loadingContent);
         }
         mLoadingDialog.setOnCancelListener(dialog -> unsubscribe());
         mLoadingDialog.setOnDismissListener(dialogInterface -> unsubscribe());

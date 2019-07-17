@@ -10,4 +10,12 @@
     <string name="expand">拓展</string>
     <string name="app">App</string>
     <string name="blind_recommend">瞎推荐</string>
+    <string name="about">关于</string>
+    <string name="author">作者</string>
+    <string name="version">版本</string>
+    <string name="encourage">鼓励</string>
+    <string name="wx_encourage_tip">微信扫一扫，或者点击“鼓励”，点击微信右上角菜单中“从相册选取二维码”</string>
+    <string name="ali_encourage_tip">支付宝扫一扫，或者点击“鼓励”，你的鼓励就是我的动力</string>
+    <string name="wx_install_tip">未安装微信</string>
+    <string name="ali_install_tip">未安装支付宝</string>
 </resources>

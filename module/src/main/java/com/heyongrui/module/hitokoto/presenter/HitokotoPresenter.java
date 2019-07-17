@@ -3,7 +3,7 @@ package com.heyongrui.module.hitokoto.presenter;
 import android.app.Dialog;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.heyongrui.base.widget.catloadingview.CatLoadingView;
+import com.heyongrui.base.widget.catloadingview.CatLoadingDialog;
 import com.heyongrui.module.data.dto.DuJiTang2Dto;
 import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
@@ -32,7 +32,7 @@ public class HitokotoPresenter extends HitokotoContract.Presenter {
 
     private void showDuJiTangDialog() {
         if (mDuJiTangDialog == null) {
-            mDuJiTangDialog = new CatLoadingView(mContext);
+            mDuJiTangDialog = new CatLoadingDialog(mContext);
             mDuJiTangDialog.setCancelable(false);
             mDuJiTangDialog.setCanceledOnTouchOutside(false);
         }

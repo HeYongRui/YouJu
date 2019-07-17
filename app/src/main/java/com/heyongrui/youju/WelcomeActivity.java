@@ -18,13 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.heyongrui.base.assist.ConfigConstants;
+import com.heyongrui.base.assist.RxManager;
 import com.heyongrui.base.base.BaseActivity;
+import com.heyongrui.base.glide.GlideApp;
 import com.heyongrui.base.utils.DrawableUtil;
 import com.heyongrui.base.utils.FileUtil;
 
@@ -37,6 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class WelcomeActivity extends BaseActivity {
 
     private ImageView ivWelcome;
+    private RxManager rxManager;
 
     @Override
     protected int getLayoutId() {
@@ -50,6 +52,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        rxManager = new RxManager();
         //初始化View
         ivWelcome = findViewById(R.id.iv_welcome);
         View bg = findViewById(R.id.bg);
@@ -77,20 +80,20 @@ public class WelcomeActivity extends BaseActivity {
         File cacheDirectory = FileUtil.getCacheDirectory(this, null);
         if (cacheDirectory != null && cacheDirectory.exists()) {
             File file = new File(cacheDirectory.getPath(), "splash.jpg");
-            if (file != null && file.exists()) {
+            if (file.exists()) {
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.placeholder(R.drawable.welcomimg);
                 requestOptions.skipMemoryCache(true);
                 requestOptions.diskCacheStrategy(DiskCacheStrategy.NONE);
-                Glide.with(this).load(file.getAbsolutePath()).apply(requestOptions).into(ivWelcome);
+                GlideApp.with(this).load(file.getAbsolutePath()).apply(requestOptions).into(ivWelcome);
             }
         }
     }
 
     private void startMainActivity() {//开始缩放动画
-        Observable.timer(1000, TimeUnit.MILLISECONDS)
+        rxManager.add(Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> startAnim());
+                .subscribe(aLong -> startAnim()));
     }
 
     private void startDownloadCover() {//随机下载封面图
@@ -125,5 +128,13 @@ public class WelcomeActivity extends BaseActivity {
             return true;//屏蔽物理返回按钮
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (rxManager != null) {
+            rxManager.clear();
+        }
+        super.onDestroy();
     }
 }
