@@ -4,25 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_cat_loading"
-    android:paddingLeft="@dimen/dp_20"
-    android:paddingTop="@dimen/dp_10"
-    android:paddingRight="@dimen/dp_20"
-    android:paddingBottom="@dimen/dp_10">
+    android:background="@drawable/bg_cat_loading">
 
     <ImageView
         android:id="@+id/mouse"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
         android:src="@drawable/mouse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.heyongrui.base.widget.catloadingview.PieChartView
-        android:id="@+id/pie_chart_view"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,14 +81,26 @@
 
     <com.heyongrui.base.widget.catloadingview.GraduallyTextView
         android:id="@+id/graduallyTextView"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
         android:gravity="center"
         android:text="C A T C H I N G ..."
         android:textColor="#ffffff"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/mouse"
+        app:layout_constraintStart_toStartOf="@+id/mouse"
+        app:layout_constraintTop_toBottomOf="@+id/mouse" />
+
+    <com.heyongrui.base.widget.catloadingview.CatClaw
+        android:id="@+id/cat_claw"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mouse" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

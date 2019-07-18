@@ -6,9 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,7 +14,6 @@ import com.heyongrui.base.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 
 
@@ -35,9 +31,6 @@ public class FireflyView extends SurfaceView implements SurfaceHolder.Callback {
 
     private SurfaceHolder mHolder;
 
-    // 动画线程
-    private Handler mHandler;
-
     // 粒子半径
     private int mParticleMaxRadius;
 
@@ -47,7 +40,7 @@ public class FireflyView extends SurfaceView implements SurfaceHolder.Callback {
     // 粒子移动速率
     private int mParticleMoveRate;
 
-    private static final int EMPTY_FLAG = 1;
+    private boolean mIsPlaying = false;
 
     public FireflyView(Context context) {
         this(context, null);
@@ -109,48 +102,43 @@ public class FireflyView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void stopAnimation() {
-        mHandler.removeCallbacksAndMessages(null);
+        mIsPlaying = false;
     }
 
     public void startAnimation() {
-        try {
-            HandlerThread fireThread = new HandlerThread(this.getClass().getName());
-            fireThread.start();
-            mHandler = new Handler(fireThread.getLooper()) {
-                @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    Canvas mCanvas = mHolder.lockCanvas(null);
-                    if (mCanvas != null) {
+        mIsPlaying = true;
+        new Thread(() -> {
+            while (mIsPlaying) {
+                Canvas canvas = null;
+                try {
+                    canvas = mHolder.lockCanvas(null);
+                    if (canvas != null) {
                         synchronized (mHolder) {
                             // 清屏
-                            mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+                            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                             if (mListParticles != null) {
-                                ListIterator<FloatParticle> iterator = mListParticles.listIterator();
-                                while (iterator.hasNext()) {
-                                    FloatParticle fp = iterator.next();
-                                    if (fp != null) {
-                                        fp.drawParticle(mCanvas);
+                                for (FloatParticle floatParticle : mListParticles) {
+                                    if (mIsPlaying) {
+                                        floatParticle.drawParticle(canvas);
+                                    } else {
+                                        break;
                                     }
                                 }
                             }
+                            // 控制帧数
+                            Thread.sleep(25);
                         }
                     }
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (canvas != null) {
+                        mHolder.unlockCanvasAndPost(canvas);
                     }
-                    if (mCanvas != null) {
-                        mHolder.unlockCanvasAndPost(mCanvas);
-                    }
-                    mHandler.sendEmptyMessageDelayed(EMPTY_FLAG, mParticleMoveRate);
                 }
-            };
-            mHandler.sendEmptyMessage(EMPTY_FLAG);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            }
+        }).start();
+
     }
 
     public int getParticleMoveRate() {
@@ -167,5 +155,9 @@ public class FireflyView extends SurfaceView implements SurfaceHolder.Callback {
 
     public int getParticleNum() {
         return mParticleNum;
+    }
+
+    public boolean isPlaying() {
+        return mIsPlaying;
     }
 }

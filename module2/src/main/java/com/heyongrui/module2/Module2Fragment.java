@@ -10,7 +10,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -67,35 +66,6 @@ public class Module2Fragment extends BaseFragment {
         bundle.putInt("tabTitleId", R.string.gank);
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    @Override
-    public void onSupportVisible() {
-        super.onSupportVisible();
-        Log.e(TAG, "onSupportVisible: ");
-        if (poolBall != null) {
-            mSensorManager.registerListener(listerner, mDefaultSensor, SensorManager.SENSOR_DELAY_UI);
-//            poolBall.getBallView().onStart();
-        }
-        if (fireflyView != null) {
-            fireflyView.setVisibility(View.VISIBLE);
-            fireflyView.startAnimation();
-        }
-    }
-
-    @Override
-    public void onSupportInvisible() {
-        super.onSupportInvisible();
-        Log.e(TAG, "onSupportInvisible: ");
-        if (poolBall != null) {
-//            poolBall.getBallView().onStop();
-            mSensorManager.unregisterListener(listerner);
-        }
-        if (fireflyView != null) {
-            fireflyView.stopAnimation();
-//            fireflyView.setZOrderMediaOverlay(true);
-            fireflyView.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -175,5 +145,40 @@ public class Module2Fragment extends BaseFragment {
         gankMenuDtos.add(new GankMenuDto(getString(R.string.blind_recommend), R.drawable.ic_recommend, 8));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.about), R.drawable.ic_about, 9));
         return gankMenuDtos;
+    }
+
+    private void toggleAnimationEffect(boolean isStart) {
+        if (isStart) {
+            if (poolBall != null) {
+                mSensorManager.registerListener(listerner, mDefaultSensor, SensorManager.SENSOR_DELAY_UI);
+//            poolBall.getBallView().onStart();
+            }
+            if (fireflyView != null && !fireflyView.isPlaying()) {
+                fireflyView.setVisibility(View.VISIBLE);
+                fireflyView.startAnimation();
+            }
+        } else {
+            if (poolBall != null) {
+//            poolBall.getBallView().onStop();
+                mSensorManager.unregisterListener(listerner);
+            }
+            if (fireflyView != null && fireflyView.isPlaying()) {
+                fireflyView.stopAnimation();
+//            fireflyView.setZOrderMediaOverlay(true);
+                fireflyView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        toggleAnimationEffect(true);
+    }
+
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        toggleAnimationEffect(false);
     }
 }

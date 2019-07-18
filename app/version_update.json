@@ -1,7 +1,7 @@
 ﻿{
-  "update_url" : "http://file.findmacau.com/FindManager/Update/FindManager_v2.4_PRO.apk",
-  "update_content" : "1.细节优化\n2.自动更新升级策略更改",
-  "update_ver_code" : 6,
-  "update_ver_name" : "2.4",
-  "ignore_able" : false
+  "update_url": "http://file.findmacau.com/FindManager/Update/FindManager_v2.4_PRO.apk",
+  "update_content": "1.加入检查更新\n2.加入打赏功能",
+  "update_ver_code": 1,
+  "update_ver_name": "1.0",
+  "ignore_able": false
 }

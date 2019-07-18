@@ -15,9 +15,6 @@ import androidx.annotation.NonNull;
 
 import com.heyongrui.base.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * Created by lambert on 2018/10/15.
@@ -27,10 +24,15 @@ public class CatLoadingDialog extends Dialog {
 
     private View mouse, smileCat, eyeLeft, eyeRight;
     private EyelidView eyelidLeft, eyelidRight;
+    private CatClaw catClaw;
     private GraduallyTextView mGraduallyTextView;
     private AnimatorSet mAnimatorSet;
     private int mCatchTime;
     private float mRotateAngle;
+    //老鼠旋转圆参数
+    private int mMouseRouteRadius;
+    private int mMouseCenterX;
+    private int mMouseCenterY;
 
     public CatLoadingDialog(@NonNull Context context) {
         this(context, R.style.BaseDialogTheme);
@@ -47,20 +49,21 @@ public class CatLoadingDialog extends Dialog {
         //初始化控件
         View view = getWindow().getDecorView();
         mouse = view.findViewById(R.id.mouse);
-        PieChartView pieChartView = view.findViewById(R.id.pie_chart_view);
-        List<PieChartView.PieData> pieDataList = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            int colorRes = i % 2 == 0 ? R.color.black : R.color.colorAccent;
-            PieChartView.PieData pieData = new PieChartView.PieData("TYPE" + i, 0.15f, colorRes);
-            pieDataList.add(pieData);
-        }
-        pieChartView.setPieDataList(pieDataList);
-        pieChartView.setOnSpecialTypeClickListener((type, angle) -> {
-            //老鼠旋转起始角度和手势触控旋转起始角度不同，相差180°，故先对手势点击角度进行处理再进行比较
-            double touchAngle = angle > 180 ? (angle - 180) : (angle + 180);
-            float rotateAngle = mRotateAngle > 360 ? mRotateAngle % 360 : mRotateAngle;
-            double abs = Math.abs((rotateAngle - touchAngle));
-            if (abs <= 10) {//如果老鼠头的旋转角度和点击处角度误差不超过10°，就认为砸中了老鼠
+        smileCat = view.findViewById(R.id.smile_cat);
+        eyeLeft = view.findViewById(R.id.eye_left);
+        eyeRight = view.findViewById(R.id.eye_right);
+        eyelidLeft = view.findViewById(R.id.eyelid_left);
+        eyelidLeft.setColor(Color.parseColor("#d0ced1"));
+        eyelidRight = view.findViewById(R.id.eyelid_right);
+        eyelidRight.setColor(Color.parseColor("#d0ced1"));
+        mGraduallyTextView = view.findViewById(R.id.graduallyTextView);
+        catClaw = view.findViewById(R.id.cat_claw);
+        catClaw.setCatClawListener((rawX, rawY, catClawRect) -> {
+            //根据猫爪点击的位置坐标和老鼠旋转角度计算出是否在点击区域
+            float angle = (mRotateAngle + 90);
+            int mouseX = (int) (mMouseCenterX + mMouseRouteRadius * Math.cos(angle * 3.14 / 180));
+            int mouseY = (int) (mMouseCenterY + mMouseRouteRadius * Math.sin(angle * 3.14 / 180));
+            if (catClawRect.contains(mouseX, mouseY)) {
                 stopRotateAnim();
                 smileCat.setVisibility(View.VISIBLE);
                 mGraduallyTextView.stopLoading();
@@ -74,14 +77,11 @@ public class CatLoadingDialog extends Dialog {
                 }, 2000);
             }
         });
-        smileCat = view.findViewById(R.id.smile_cat);
-        eyeLeft = view.findViewById(R.id.eye_left);
-        eyeRight = view.findViewById(R.id.eye_right);
-        eyelidLeft = view.findViewById(R.id.eyelid_left);
-        eyelidLeft.setColor(Color.parseColor("#d0ced1"));
-        eyelidRight = view.findViewById(R.id.eyelid_right);
-        eyelidRight.setColor(Color.parseColor("#d0ced1"));
-        mGraduallyTextView = view.findViewById(R.id.graduallyTextView);
+        mouse.post(() -> {
+            mMouseCenterX = mouse.getLeft() + mouse.getWidth() / 2 - dp2px(13);
+            mMouseCenterY = mouse.getTop() + mouse.getHeight() / 2 - dp2px(8);
+            mMouseRouteRadius = mouse.getHeight() / 2 - dp2px(7);
+        });
     }
 
     private void startRotateAnim() {
@@ -149,5 +149,10 @@ public class CatLoadingDialog extends Dialog {
         super.dismiss();
         stopRotateAnim();
         mGraduallyTextView.stopLoading();
+    }
+
+    private int dp2px(float dpValue) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }
