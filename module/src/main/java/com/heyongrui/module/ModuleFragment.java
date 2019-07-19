@@ -58,24 +58,28 @@ public class ModuleFragment extends BaseFragment {
                 case 2://一言
                     ARouter.getInstance().build(ConfigConstants.PATH_HITOKOTO).navigation();
                     break;
-                case 3://探索
+                case 3://诗词
+                    ARouter.getInstance().build(ConfigConstants.PATH_POETRY).navigation();
                     break;
-                case 4://音乐
+                case 4://探索
                     break;
-                case 5://开眼
+                case 5://音乐
+                    break;
+                case 6://开眼
                     ARouter.getInstance().build(ConfigConstants.PATH_KAIYAN_LIST).withInt("type", 1).navigation();
                     break;
-                case 6://垃圾分类
+                case 7://垃圾分类
                     ARouter.getInstance().build(ConfigConstants.PATH_GARBAGE_CLASSIFY).navigation();
                     break;
             }
         });
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.tea), R.drawable.ic_tea, 1)));
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.hitokoto_title), R.drawable.ic_yiyan, 2)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.explore), R.drawable.ic_explore, 3)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.music), R.drawable.ic_music_disc, 4)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.kaiyan), R.drawable.ic_kaiyan, 5)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.garbage_classification2), R.drawable.ic_ashcan, 6)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.poetry), R.drawable.ic_poetry, 3)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.explore), R.drawable.ic_explore, 4)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.music), R.drawable.ic_music_disc, 5)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.kaiyan), R.drawable.ic_kaiyan, 6)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.garbage_classification2), R.drawable.ic_ashcan, 7)));
         monoAdapter.replaceData(dataList);
     }
 }

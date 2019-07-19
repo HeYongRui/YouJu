@@ -1,4 +1,4 @@
-package com.heyongrui.module.hitokoto.view;
+package com.heyongrui.module.textword.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -17,8 +17,8 @@ import com.heyongrui.base.base.BaseActivity;
 import com.heyongrui.module.R;
 import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
-import com.heyongrui.module.hitokoto.contract.HitokotoContract;
-import com.heyongrui.module.hitokoto.presenter.HitokotoPresenter;
+import com.heyongrui.module.textword.contract.HitokotoContract;
+import com.heyongrui.module.textword.presenter.HitokotoPresenter;
 
 import java.util.Random;
 

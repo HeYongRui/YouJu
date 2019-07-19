@@ -45,6 +45,7 @@ import com.heyongrui.module.data.dto.MenuCardDto;
 import com.heyongrui.module.data.dto.MonoCategoryDto;
 import com.heyongrui.module.data.dto.MonoHistoryTeaDateDto;
 import com.heyongrui.module.data.dto.MonoTeaDto;
+import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 import com.heyongrui.module.mono.view.MonoTeaActivity;
 
 import java.util.Calendar;
@@ -73,6 +74,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
         addItemType(ModuleSectionEntity.TEA_NINE_GRID, R.layout.recycle_item_monotea_nine_grid);
         addItemType(ModuleSectionEntity.MONO_HISTORY_DATE, R.layout.recycle_item_history_date);
         addItemType(ModuleSectionEntity.MONO_CATEGORY, R.layout.recycle_item_monocategory);
+        addItemType(ModuleSectionEntity.TODAY_POEM, R.layout.recycle_item_today_poem);
     }
 
     @Override
@@ -495,6 +497,27 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
                         categoryNameTv.setText(group.getName());
                     }
                 }
+            }
+            break;
+            case ModuleSectionEntity.TODAY_POEM: {
+                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                TextView tvName = helper.getView(R.id.tv_name);
+                UiUtil.setFontStyle(tvName, "fonts/font_hwzs.ttf");
+                TextView tvAuthor = helper.getView(R.id.tv_author);
+                UiUtil.setFontStyle(tvAuthor, "fonts/font_hwzs.ttf");
+                TextView tvContent = helper.getView(R.id.tv_content);
+                UiUtil.setFontStyle(tvContent, "fonts/font_hwzs.ttf");
+
+                String name = "", author = "", content = "";
+                TodayRecommendPoemDto.DataBean todayPoemBean = item.getTodayPoemBean();
+                if (todayPoemBean != null) {
+                    name = todayPoemBean.getMingcheng();
+                    author = todayPoemBean.getZuozhe();
+                    content = todayPoemBean.getZhaiyao();
+                }
+                tvName.setText(name);
+                tvAuthor.setText(author);
+                tvContent.setText(content);
             }
             break;
         }

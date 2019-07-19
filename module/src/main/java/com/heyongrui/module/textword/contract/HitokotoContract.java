@@ -1,4 +1,4 @@
-package com.heyongrui.module.hitokoto.contract;
+package com.heyongrui.module.textword.contract;
 
 import com.heyongrui.base.base.BasePresenter;
 import com.heyongrui.base.base.BaseView;

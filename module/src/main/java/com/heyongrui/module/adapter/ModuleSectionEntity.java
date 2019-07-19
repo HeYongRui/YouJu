@@ -8,6 +8,7 @@ import com.heyongrui.module.data.dto.MenuCardDto;
 import com.heyongrui.module.data.dto.MonoCategoryDto;
 import com.heyongrui.module.data.dto.MonoHistoryTeaDateDto;
 import com.heyongrui.module.data.dto.MonoTeaDto;
+import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     public static final int TEA_NINE_GRID = 107;
     public static final int MONO_HISTORY_DATE = 108;
     public static final int MONO_CATEGORY = 109;
+    public static final int TODAY_POEM = 110;
 
     private int itemType;
     private int spanSize;
@@ -37,6 +39,7 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     private MonoTeaDto.EntityListBean entityListBean;
     private MonoHistoryTeaDateDto.RecentTeaBean recentTeaBean;
     private MonoCategoryDto.MeowsBean meowsBean;
+    private TodayRecommendPoemDto.DataBean todayPoemBean;
 
     public ModuleSectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -69,6 +72,8 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
                 this.recentTeaBean = (MonoHistoryTeaDateDto.RecentTeaBean) object;
             } else if (object instanceof MonoCategoryDto.MeowsBean) {
                 this.meowsBean = (MonoCategoryDto.MeowsBean) object;
+            } else if (object instanceof TodayRecommendPoemDto.DataBean) {
+                this.todayPoemBean = (TodayRecommendPoemDto.DataBean) object;
             }
         }
     }
@@ -144,5 +149,13 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
 
     public void setMeowsBean(MonoCategoryDto.MeowsBean meowsBean) {
         this.meowsBean = meowsBean;
+    }
+
+    public TodayRecommendPoemDto.DataBean getTodayPoemBean() {
+        return todayPoemBean;
+    }
+
+    public void setTodayPoemBean(TodayRecommendPoemDto.DataBean todayPoemBean) {
+        this.todayPoemBean = todayPoemBean;
     }
 }

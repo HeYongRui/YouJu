@@ -1,4 +1,4 @@
-package com.heyongrui.module.hitokoto.presenter;
+package com.heyongrui.module.textword.presenter;
 
 import android.app.Dialog;
 
@@ -7,8 +7,8 @@ import com.heyongrui.base.widget.catloadingview.CatLoadingDialog;
 import com.heyongrui.module.data.dto.DuJiTang2Dto;
 import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
-import com.heyongrui.module.data.service.HitokotoService;
-import com.heyongrui.module.hitokoto.contract.HitokotoContract;
+import com.heyongrui.module.data.service.TextService;
+import com.heyongrui.module.textword.contract.HitokotoContract;
 import com.heyongrui.network.configure.ResponseDisposable;
 
 import java.util.List;
@@ -23,11 +23,11 @@ import okhttp3.Response;
 
 public class HitokotoPresenter extends HitokotoContract.Presenter {
 
-    private HitokotoService mHitokotoService;
+    private TextService mTextService;
     private Dialog mDuJiTangDialog;
 
     public HitokotoPresenter() {
-        mHitokotoService = new HitokotoService();
+        mTextService = new TextService();
     }
 
     private void showDuJiTangDialog() {
@@ -48,7 +48,7 @@ public class HitokotoPresenter extends HitokotoContract.Presenter {
     @Override
     public void getDuJiTang() {
         showDuJiTangDialog();
-        mRxManager.add(mHitokotoService.getDuJiTang().subscribeWith(
+        mRxManager.add(mTextService.getDuJiTang().subscribeWith(
                 new ResponseDisposable<DuJiTangDto>(mContext, false) {
                     @Override
                     protected void onSuccess(DuJiTangDto duJiTangDto) {
@@ -108,7 +108,7 @@ public class HitokotoPresenter extends HitokotoContract.Presenter {
     }
 
     private void getDuJiTang3() {
-        mRxManager.add(mHitokotoService.getDuJiTang2().subscribeWith(
+        mRxManager.add(mTextService.getDuJiTang2().subscribeWith(
                 new ResponseDisposable<DuJiTang2Dto>(mContext, false) {
                     @Override
                     protected void onSuccess(DuJiTang2Dto duJiTang2Dto) {
@@ -138,7 +138,7 @@ public class HitokotoPresenter extends HitokotoContract.Presenter {
 
     @Override
     public void getHitokoto(String c) {
-        mRxManager.add(mHitokotoService.getHitokoto(c).subscribeWith(
+        mRxManager.add(mTextService.getHitokoto(c).subscribeWith(
                 new ResponseDisposable<HitokotoDto>(mContext, true) {
                     @Override
                     protected void onSuccess(HitokotoDto hitokotoDto) {

@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -44,6 +46,15 @@ public class UiUtil {
         if (view.getVisibility() != visibility) {
             view.setVisibility(visibility);
         }
+    }
+
+    /**
+     * 设置字体样式
+     */
+    public static void setFontStyle(TextView textView, String assetsFontPath) {
+        if (textView == null || TextUtils.isEmpty(assetsFontPath)) return;
+        Typeface typeFace = Typeface.createFromAsset(textView.getContext().getAssets(), assetsFontPath);
+        textView.setTypeface(typeFace);
     }
 
     /**

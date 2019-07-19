@@ -1,7 +1,6 @@
 package com.heyongrui.module.mono.view;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
@@ -32,6 +31,7 @@ import com.heyongrui.base.base.BaseActivity;
 import com.heyongrui.base.utils.DrawableUtil;
 import com.heyongrui.base.utils.GlideUtil;
 import com.heyongrui.base.utils.TimeUtil;
+import com.heyongrui.base.utils.UiUtil;
 import com.heyongrui.base.widget.imagewatcher.ImageWatcherHelper;
 import com.heyongrui.base.widget.itemdecoration.RecycleViewItemDecoration;
 import com.heyongrui.module.R;
@@ -112,8 +112,7 @@ public class MonoTeaActivity extends BaseActivity<MonoTeaContract.Presenter> imp
         bgIv = headView.findViewById(R.id.bg_iv);
         headTv = headView.findViewById(R.id.head_tv);
         summaryTv = headView.findViewById(R.id.summary_tv);
-        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/hanyizhuzi.ttf");
-        headTv.setTypeface(typeFace);
+        UiUtil.setFontStyle(headTv, "fonts/hanyizhuzi.ttf");
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(TimeUtil.isPM() ? getString(R.string.afternoon_tea) : getString(R.string.morning_tea));
         stringBuffer.append(TimeUtil.getDateString(new Date(), TimeUtil.DAY_TWO));

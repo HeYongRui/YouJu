@@ -19,7 +19,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".hitokoto.view.HitokotoActivity"
+            android:name=".textword.view.HitokotoActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".textword.view.PoetryActivity"
             android:theme="@style/BaseAppTheme" />
         <activity
             android:name=".kaiyan.view.KaiYanListActivity"

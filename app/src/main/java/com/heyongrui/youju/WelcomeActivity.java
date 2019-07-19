@@ -5,9 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +13,8 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.view.ViewCompat;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,8 +25,11 @@ import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.assist.RxManager;
 import com.heyongrui.base.base.BaseActivity;
 import com.heyongrui.base.glide.GlideApp;
+import com.heyongrui.base.glide.transformations.RoundedCornersTransformation;
 import com.heyongrui.base.utils.DrawableUtil;
 import com.heyongrui.base.utils.FileUtil;
+import com.heyongrui.base.utils.GlideUtil;
+import com.heyongrui.base.utils.UiUtil;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -57,21 +59,18 @@ public class WelcomeActivity extends BaseActivity {
         ivWelcome = findViewById(R.id.iv_welcome);
         View bg = findViewById(R.id.bg);
         ImageView ivLogo = findViewById(R.id.iv_logo);
+        GlideUtil.loadRound(this, R.drawable.ic_launcher, ivLogo, 30, RoundedCornersTransformation.CornerType.ALL, R.drawable.placeholder);
         TextView tvSlogan = findViewById(R.id.tv_slogan);
         //加载本地缓存封面图
         loadLocalCover();
         //同时开始下载新的封面图
         startDownloadCover();
-        //设置logo
-        Drawable logoDrawable = DrawableUtil.tintDrawable(this, R.drawable.app_icon, Color.WHITE);
-        ivLogo.setImageDrawable(logoDrawable);
-        //设置slogan
-        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/HYQinChuanFeiYingW.ttf");
-        tvSlogan.setTypeface(typeFace);
+        //设置slogan字体样式
+        UiUtil.setFontStyle(tvSlogan, "fonts/Quantum.ttf");
         //设置背景透明黑渐变
         int[] colors = new int[]{R.color.transparent, R.color.black};
         GradientDrawable gradientDrawable = new DrawableUtil.DrawableBuilder(this).setGradientColors(colors).createGradientDrawable();
-        bg.setBackgroundDrawable(gradientDrawable);
+        ViewCompat.setBackground(bg, gradientDrawable);
         //开始动画、跳转逻辑
         startMainActivity();
     }
