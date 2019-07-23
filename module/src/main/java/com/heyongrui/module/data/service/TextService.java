@@ -1,10 +1,13 @@
 package com.heyongrui.module.data.service;
 
 
+import com.heyongrui.base.utils.StringUtil;
 import com.heyongrui.module.data.api.TextApi;
 import com.heyongrui.module.data.dto.DuJiTang2Dto;
 import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
+import com.heyongrui.module.data.dto.PoemDetailDto;
+import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.PoetryDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 import com.heyongrui.network.configure.RxHelper;
@@ -63,7 +66,6 @@ public class TextService {
     public Observable<Object> getTodayRecommendCover() {
         return ApiService.createApi(TextApi.class, "http://kkpoem.duowan.com/")
                 .getTodayRecommendCover()
-                .compose(RxHelper.rxSchedulerHelper())
                 .subscribeOn(Schedulers.io());
         //返回数据格式：{"status":200,"message":"","data":{"tp":"秋天","url":"http://kkpoem.bs2dl.yy.com/5e73db78037d79a2ac1bda808c5e7f0d.jpg"}}
     }
@@ -74,7 +76,29 @@ public class TextService {
     public Observable<TodayRecommendPoemDto> getTodayRecommendPoem() {
         return ApiService.createApi(TextApi.class, "http://kkpoem.duowan.com/")
                 .getTodayRecommendPoem()
-                .compose(RxHelper.rxSchedulerHelper())
                 .subscribeOn(Schedulers.io());
+    }
+
+    /**
+     * 获取诗歌完整信息
+     *
+     * @param id id
+     */
+    public Observable<PoemDetailDto> getPoemDetail(int id) {
+        return ApiService.createApi(TextApi.class, "http://kkpoem.duowan.com/")
+                .getPoemDetail(id, StringUtil.MD5encrypt32BitLowerCase(id + "6d767896a2e4b60d"))
+                .compose(RxHelper.rxSchedulerHelper());
+    }
+
+    /**
+     * 根据关键词搜索诗歌
+     *
+     * @param keywords 关键词
+     * @param type     搜索类型 1-原文 2-标题 4-作者
+     */
+    public Observable<PoemSearchDto> searchPoem(String keywords, int type) {
+        return ApiService.createApi(TextApi.class, "http://kkpoem.duowan.com/")
+                .searchPoem(keywords, type, StringUtil.MD5encrypt32BitLowerCase(keywords + "6d767896a2e4b60d"))
+                .compose(RxHelper.rxSchedulerHelper());
     }
 }

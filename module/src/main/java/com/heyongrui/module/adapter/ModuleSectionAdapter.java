@@ -3,6 +3,7 @@ package com.heyongrui.module.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
@@ -45,6 +46,7 @@ import com.heyongrui.module.data.dto.MenuCardDto;
 import com.heyongrui.module.data.dto.MonoCategoryDto;
 import com.heyongrui.module.data.dto.MonoHistoryTeaDateDto;
 import com.heyongrui.module.data.dto.MonoTeaDto;
+import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 import com.heyongrui.module.mono.view.MonoTeaActivity;
 
@@ -58,6 +60,8 @@ import java.util.List;
  * 2019/6/25 18:17
  */
 public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<ModuleSectionEntity, BaseViewHolder> {
+
+    private Typeface typeFace;
 
     public ModuleSectionAdapter(List<ModuleSectionEntity> data) {
         this(0, data);
@@ -502,21 +506,31 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             case ModuleSectionEntity.TODAY_POEM: {
                 UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 TextView tvName = helper.getView(R.id.tv_name);
-                UiUtil.setFontStyle(tvName, "fonts/font_hwzs.ttf");
                 TextView tvAuthor = helper.getView(R.id.tv_author);
-                UiUtil.setFontStyle(tvAuthor, "fonts/font_hwzs.ttf");
                 TextView tvContent = helper.getView(R.id.tv_content);
-                UiUtil.setFontStyle(tvContent, "fonts/font_hwzs.ttf");
 
-                String name = "", author = "", content = "";
+                if (null == typeFace) {
+                    typeFace = Typeface.createFromAsset(mContext.getAssets(), "fonts/font_hwzs.ttf");
+                }
+                tvName.setTypeface(typeFace);
+                tvAuthor.setTypeface(typeFace);
+                tvContent.setTypeface(typeFace);
+
+                String name = "", dynasty = "", author = "", content = "";
                 TodayRecommendPoemDto.DataBean todayPoemBean = item.getTodayPoemBean();
+                PoemSearchDto.DataBean.PoemSearchBean poemSearchBean = item.getPoemSearchBean();
                 if (todayPoemBean != null) {
                     name = todayPoemBean.getMingcheng();
+                    dynasty = todayPoemBean.getChaodai();
                     author = todayPoemBean.getZuozhe();
                     content = todayPoemBean.getZhaiyao();
+                } else if (poemSearchBean != null) {
+                    name = poemSearchBean.getMingcheng();
+                    author = poemSearchBean.getZuozhe();
+                    content = poemSearchBean.getZhaiyao();
                 }
                 tvName.setText(name);
-                tvAuthor.setText(author);
+                tvAuthor.setText(TextUtils.isEmpty(dynasty) ? author : dynasty + "/" + author);
                 tvContent.setText(content);
             }
             break;

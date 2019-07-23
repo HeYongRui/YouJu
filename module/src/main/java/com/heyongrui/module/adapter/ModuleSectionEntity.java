@@ -8,6 +8,7 @@ import com.heyongrui.module.data.dto.MenuCardDto;
 import com.heyongrui.module.data.dto.MonoCategoryDto;
 import com.heyongrui.module.data.dto.MonoHistoryTeaDateDto;
 import com.heyongrui.module.data.dto.MonoTeaDto;
+import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     private MonoHistoryTeaDateDto.RecentTeaBean recentTeaBean;
     private MonoCategoryDto.MeowsBean meowsBean;
     private TodayRecommendPoemDto.DataBean todayPoemBean;
+    private PoemSearchDto.DataBean.PoemSearchBean poemSearchBean;
 
     public ModuleSectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -74,6 +76,8 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
                 this.meowsBean = (MonoCategoryDto.MeowsBean) object;
             } else if (object instanceof TodayRecommendPoemDto.DataBean) {
                 this.todayPoemBean = (TodayRecommendPoemDto.DataBean) object;
+            } else if (object instanceof PoemSearchDto.DataBean.PoemSearchBean) {
+                this.poemSearchBean = (PoemSearchDto.DataBean.PoemSearchBean) object;
             }
         }
     }
@@ -157,5 +161,13 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
 
     public void setTodayPoemBean(TodayRecommendPoemDto.DataBean todayPoemBean) {
         this.todayPoemBean = todayPoemBean;
+    }
+
+    public PoemSearchDto.DataBean.PoemSearchBean getPoemSearchBean() {
+        return poemSearchBean;
+    }
+
+    public void setPoemSearchBean(PoemSearchDto.DataBean.PoemSearchBean poemSearchBean) {
+        this.poemSearchBean = poemSearchBean;
     }
 }

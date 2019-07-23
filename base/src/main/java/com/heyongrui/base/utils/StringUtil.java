@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.Currency;
 import java.util.HashMap;
@@ -181,7 +182,7 @@ public class StringUtil {
     /**
      * MD532位加密大写
      */
-    public static String encryptMD5_32Bit(String source) {
+    public static String MD5encrypt32BitUpperCase(String source) {
         String message = source + "#g5Fv;7Dvk";
         MessageDigest messageDigest = null;
         StringBuilder builder = new StringBuilder();
@@ -201,6 +202,36 @@ public class StringUtil {
             throw new RuntimeException();
         }
         return builder.toString().toUpperCase();
+    }
+
+    /**
+     * MD532位加密小写
+     */
+    public static String MD5encrypt32BitLowerCase(String sourceStr) {
+        try {
+            // 获得MD5摘要算法的 MessageDigest对象
+            MessageDigest mdInst = MessageDigest.getInstance("MD5");
+            // 使用指定的字节更新摘要
+            mdInst.update(sourceStr.getBytes());
+            // 获得密文
+            byte[] md = mdInst.digest();
+            // 把密文转换成十六进制的字符串形式
+            StringBuffer buf = new StringBuffer();
+            for (int i = 0; i < md.length; i++) {
+                int tmp = md[i];
+                if (tmp < 0) {
+                    tmp += 256;
+                }
+                if (tmp < 16) {
+                    buf.append("0");
+                }
+                buf.append(Integer.toHexString(tmp));
+            }
+            return buf.toString().toLowerCase();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     /**

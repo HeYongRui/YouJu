@@ -31,6 +31,8 @@ public class ConfigConstants {
     public static final String PATH_MONO_CATEGORY = "/module/monoCategory";
     public static final String PATH_HITOKOTO = "/module/hitokoto";
     public static final String PATH_POETRY = "/module/poetry";
+    public static final String PATH_POETRY_SEARCH = "/module/poetrySearch";
+    public static final String PATH_POETRY_DETAIL = "/module/poetryDetail";
     public static final String PATH_KAIYAN_LIST = "/module/kaiyanList";
     public static final String PATH_KAIYAN_DETAIL = "/module/kaiyanDetail";
     public static final String PATH_GARBAGE_CLASSIFY = "/module/garbageClassify";

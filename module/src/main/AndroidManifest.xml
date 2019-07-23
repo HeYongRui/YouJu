@@ -9,6 +9,12 @@
             android:name=".textword.view.PoetryActivity"
             android:theme="@style/BaseAppTheme" />
         <activity
+            android:name=".textword.view.PoetrySearchActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".textword.view.PoetryDetailActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
             android:name=".kaiyan.view.KaiYanListActivity"
             android:theme="@style/BaseAppTheme" />
         <activity

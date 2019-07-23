@@ -4,16 +4,26 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseFragment;
 import com.heyongrui.base.utils.GlideUtil;
+import com.heyongrui.base.utils.TimeUtil;
+import com.heyongrui.base.utils.UiUtil;
+import com.heyongrui.base.widget.itemdecoration.Divider;
+import com.heyongrui.base.widget.itemdecoration.DividerBuilder;
 import com.heyongrui.base.widget.itemdecoration.RecycleViewItemDecoration;
 import com.heyongrui.module.R;
 import com.heyongrui.module.adapter.ModuleSectionAdapter;
@@ -30,6 +40,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -39,6 +50,8 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
     private SmartRefreshLayout refreshLayout;
     private ModuleSectionAdapter mPoetryAdapter;
     private int mType;
+    //头部view
+    private ImageView ivCover;
 
     public static PoetryFragment getInstance(int type) {
         PoetryFragment fragment = new PoetryFragment();
@@ -112,8 +125,21 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(manager);
         mPoetryAdapter.bindToRecyclerView(recyclerView);
-        recyclerView.addItemDecoration(new RecycleViewItemDecoration(mContext, ConvertUtils.dp2px(1)));
+        recyclerView.addItemDecoration(new RecycleViewItemDecoration(mContext, ConvertUtils.dp2px(1)) {
+            @Override
+            public Divider getDivider(int itemPosition) {
+                if (itemPosition == 0) {//第一个item不绘制分割线
+                    return new DividerBuilder().create();
+                } else {
+                    return super.getDivider(itemPosition);
+                }
+            }
+        });
         mPoetryAdapter.setOnItemClickListener((adapter, view, position) -> {
+            TodayRecommendPoemDto.DataBean todayPoemBean = mPoetryAdapter.getData().get(position).getTodayPoemBean();
+            if (todayPoemBean != null) {
+                ARouter.getInstance().build(ConfigConstants.PATH_POETRY_DETAIL).withInt("id", todayPoemBean.getPoemId()).navigation();
+            }
         });
     }
 
@@ -126,6 +152,13 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
         switch (mType) {
             case 1:
                 View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_today_poem, null);
+                ivCover = headerView.findViewById(R.id.iv_cover);
+                TextView tvDate = headerView.findViewById(R.id.tv_date);
+                TextView tvTip = headerView.findViewById(R.id.tv_tip);
+                String cnDate = TimeUtil.getCNDate(new Date());
+                tvDate.setText(cnDate.substring(cnDate.indexOf("年") + 1));
+                UiUtil.setFontStyle(tvDate, "fonts/font_hwzs.ttf");
+                UiUtil.setFontStyle(tvTip, "fonts/font_hwzs.ttf");
                 mPoetryAdapter.setHeaderView(headerView);
                 break;
         }
@@ -158,12 +191,18 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
                     .compose(RxHelper.rxSchedulerHelper()).subscribe(new ResponseDisposable<Bitmap>(mContext) {
                 @Override
                 protected void onSuccess(Bitmap bitmap) {
-
+                    ivCover.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams layoutParams = ivCover.getLayoutParams();
+                    if (layoutParams instanceof ConstraintLayout.LayoutParams) {
+                        ((ConstraintLayout.LayoutParams) layoutParams).dimensionRatio = bitmap.getWidth() + ":" + bitmap.getHeight();
+                        ivCover.setLayoutParams(layoutParams);
+                    }
+                    ivCover.setImageBitmap(bitmap);
                 }
 
                 @Override
                 protected void onFailure(int errorCode, String errorMsg) {
-
+                    ivCover.setVisibility(View.GONE);
                 }
             });
             List<TodayRecommendPoemDto.DataBean> dataBeanList = todayRecommendPoemDto.getData();

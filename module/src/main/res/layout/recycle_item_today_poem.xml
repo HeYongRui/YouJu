@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_15"
         android:gravity="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         android:textSize="@dimen/sp_12"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
         tools:text="Mr.He" />

@@ -16,7 +16,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -55,22 +54,6 @@ public class UiUtil {
         if (textView == null || TextUtils.isEmpty(assetsFontPath)) return;
         Typeface typeFace = Typeface.createFromAsset(textView.getContext().getAssets(), assetsFontPath);
         textView.setTypeface(typeFace);
-    }
-
-    /**
-     * 显示软键盘
-     */
-    public static void openSoftInput(EditText et) {
-        InputMethodManager inputMethodManager = (InputMethodManager) et.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInput(et, InputMethodManager.HIDE_NOT_ALWAYS);
-    }
-
-    /**
-     * 隐藏软键盘
-     */
-    public static void hideSoftInput(EditText et) {
-        InputMethodManager inputMethodManager = (InputMethodManager) et.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(et.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /**

@@ -14,6 +14,12 @@
     <string name="hitokoto_title">一言</string>
     <string name="poetry">诗词</string>
     <string name="a">一首</string>
+    <string name="original">原文</string>
+    <string name="title">标题</string>
+    <string name="author">作者</string>
+    <string name="search">搜索</string>
+    <string name="poem_search_tip">请输入关键词</string>
+    <string name="today_poem">今日荐诗</string>
     <string name="green_tea">清茶</string>
     <string name="all">全部</string>
     <string name="soulposion">毒鸡汤</string>

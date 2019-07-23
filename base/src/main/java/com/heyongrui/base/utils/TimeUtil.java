@@ -136,4 +136,46 @@ public class TimeUtil {
             return sdf.format(new Date(timestamp));
         }
     }
+
+    /**
+     * 获取当前时间的中文时间
+     */
+    public static String getCNDate(Date date) {
+        final String[] CN_NUMBER_NAME = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
+
+        Calendar cal = Calendar.getInstance(); // 使用日历类
+        cal.setTime(date);
+        String year = String.valueOf(cal.get(Calendar.YEAR)); // 得到年
+        String month = String.valueOf(cal.get(Calendar.MONTH) + 1); // 得到月，因为从0开始的，所以要加1
+        String day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH)); // 得到天
+
+        StringBuilder cnDate = new StringBuilder();
+        for (int i = 0; i < year.length(); i++) {
+            cnDate.append(CN_NUMBER_NAME[Integer.valueOf(String.valueOf(year.charAt(i)))]);
+        }
+
+        cnDate.append("年");
+
+        for (int i = 0; i < month.length(); i++) {
+            cnDate.append(CN_NUMBER_NAME[Integer.valueOf(String.valueOf(month.charAt(i)))]);
+        }
+
+        cnDate.append("月");
+
+        if (day.length() == 2) {
+            Integer value = Integer.valueOf(String.valueOf(day.charAt(0)));
+            if (!value.equals(1)) {
+                cnDate.append(CN_NUMBER_NAME[value]);
+            }
+            cnDate.append("十");
+            if (!String.valueOf(day.charAt(1)).equals("0")) {
+                cnDate.append(CN_NUMBER_NAME[Integer.valueOf(String.valueOf(day.charAt(1)))]);
+            }
+        } else {
+            cnDate.append(CN_NUMBER_NAME[Integer.valueOf(String.valueOf(day.charAt(0)))]);
+        }
+
+        cnDate.append("日");
+        return cnDate.toString();
+    }
 }

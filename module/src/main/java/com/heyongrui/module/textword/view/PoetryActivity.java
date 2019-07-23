@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.tabs.TabLayout;
 import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
@@ -40,7 +41,7 @@ public class PoetryActivity extends BaseActivity {
             if (id == R.id.iv_back) {
                 finish();
             } else if (id == R.id.iv_search) {
-
+                ARouter.getInstance().build(ConfigConstants.PATH_POETRY_SEARCH).navigation();
             }
         }, R.id.iv_back, R.id.iv_search);
         //设置字体样式

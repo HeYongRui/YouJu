@@ -1,20 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/iv_cover"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/placeholder"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_left"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:src="@drawable/ic_pattern_cloud_left"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+        app:layout_constraintDimensionRatio="102:22"
+        app:layout_constraintEnd_toStartOf="@+id/tv_date"
+        app:layout_constraintTop_toTopOf="@+id/tv_date" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/iv_cover" />
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_cover"
+        tools:text="八月二十日" />
+
+    <ImageView
+        android:id="@+id/iv_right"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:src="@drawable/ic_pattern_cloud_right"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+        app:layout_constraintDimensionRatio="102:22"
+        app:layout_constraintStart_toEndOf="@+id/tv_date"
+        app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_bg"
+        app:layout_constraintTop_toTopOf="@+id/iv_bg" />
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_20"
+        android:src="@drawable/bg_item_rec_title"
+        app:layout_constraintDimensionRatio="18:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/today_poem"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_bg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

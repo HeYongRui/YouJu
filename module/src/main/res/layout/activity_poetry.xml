@@ -75,18 +75,18 @@
         app:tabTextColor="@color/text_color"
         app:tabUnboundedRipple="true" />
 
-    <View
-        android:id="@+id/divide"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_5"
-        android:background="@drawable/tool_bar_shadow"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+
+    <View
+        android:id="@+id/divide"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5"
+        android:background="@drawable/tool_bar_shadow"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

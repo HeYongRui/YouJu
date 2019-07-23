@@ -125,9 +125,9 @@ public class WelfareActivity extends BaseActivity<WelfareContract.Presenter> imp
     }
 
     private void getWelfare(boolean isClearData) {
+        mIsLastPage = false;
         if (isClearData) {
             mPage = 1;
-            mIsLastPage = false;
             mGankAdapter.setNewData(null);
         } else {
             mPage += 1;

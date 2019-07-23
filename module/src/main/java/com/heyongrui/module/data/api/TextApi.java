@@ -4,6 +4,8 @@ package com.heyongrui.module.data.api;
 import com.heyongrui.module.data.dto.DuJiTang2Dto;
 import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
+import com.heyongrui.module.data.dto.PoemDetailDto;
+import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.PoetryDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 
@@ -52,4 +54,23 @@ public interface TextApi {
      */
     @GET("api/recommend/list.do")
     Observable<TodayRecommendPoemDto> getTodayRecommendPoem();
+
+    /**
+     * 获取诗歌完整信息
+     *
+     * @param id   id
+     * @param sign 签名
+     */
+    @GET("api/poem/get.do")
+    Observable<PoemDetailDto> getPoemDetail(@Query("id") int id, @Query("sign") String sign);
+
+    /**
+     * 根据关键词搜索诗歌
+     *
+     * @param keywords 关键词
+     * @param type     搜索类型 1-原文 2-标题 4-作者
+     * @param sign     签名
+     */
+    @GET("api/poem/query.do")
+    Observable<PoemSearchDto> searchPoem(@Query("s") String keywords, @Query("type") int type, @Query("sign") String sign);
 }
