@@ -92,7 +92,7 @@ public class WelfareActivity extends BaseActivity<WelfareContract.Presenter> imp
                 if (mIsLastPage) {
                     refreshLayout.finishLoadMore();
                     refreshLayout.finishRefresh();
-                    refreshLayout.setNoMoreData(false);
+                    refreshLayout.setNoMoreData(true);
                 } else {
                     getWelfare(false);
                 }
@@ -141,7 +141,7 @@ public class WelfareActivity extends BaseActivity<WelfareContract.Presenter> imp
     public void getWelfareSuccess(WelfareDto welfareDto) {
         refreshLayout.finishLoadMore();
         refreshLayout.finishRefresh();
-        refreshLayout.setNoMoreData(true);
+        refreshLayout.setNoMoreData(false);
         List<Module2SectionEntity> addDataList = new ArrayList<>();
         if (welfareDto != null) {
             if (!welfareDto.isError()) {
@@ -165,7 +165,7 @@ public class WelfareActivity extends BaseActivity<WelfareContract.Presenter> imp
     public void getWelfareFail(int errorCode, String errorMsg) {
         refreshLayout.finishLoadMore();
         refreshLayout.finishRefresh();
-        refreshLayout.setNoMoreData(true);
+        refreshLayout.setNoMoreData(false);
         ToastUtils.showShort(errorMsg);
     }
 

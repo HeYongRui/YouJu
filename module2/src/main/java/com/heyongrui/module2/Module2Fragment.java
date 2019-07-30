@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -151,21 +152,26 @@ public class Module2Fragment extends BaseFragment {
         if (isStart) {
             if (poolBall != null) {
                 mSensorManager.registerListener(listerner, mDefaultSensor, SensorManager.SENSOR_DELAY_UI);
-//            poolBall.getBallView().onStart();
+//                poolBall.getBallView().onStart();
             }
             if (fireflyView != null && !fireflyView.isPlaying()) {
-                fireflyView.setVisibility(View.VISIBLE);
-                fireflyView.startAnimation();
+                new Handler().postDelayed(() -> {//延时操作，避免切换页面卡顿
+                    fireflyView.setVisibility(View.VISIBLE);
+                    fireflyView.startAnimation();
+                }, 500);
+
             }
         } else {
             if (poolBall != null) {
-//            poolBall.getBallView().onStop();
+//                poolBall.getBallView().onStop();
                 mSensorManager.unregisterListener(listerner);
             }
             if (fireflyView != null && fireflyView.isPlaying()) {
-                fireflyView.stopAnimation();
-//            fireflyView.setZOrderMediaOverlay(true);
-                fireflyView.setVisibility(View.GONE);
+                new Handler().postDelayed(() -> {//延时操作，避免切换页面画面不连贯
+                    fireflyView.stopAnimation();
+//                    fireflyView.setZOrderMediaOverlay(true);
+                    fireflyView.setVisibility(View.GONE);
+                }, 500);
             }
         }
     }

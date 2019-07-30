@@ -87,7 +87,7 @@ public class PoetrySearchFragment extends BaseFragment {
                                 List<PoemSearchDto.DataBean.PoemSearchBean> searchBeanList = dataBean.getData();
                                 if (searchBeanList != null) {
                                     for (PoemSearchDto.DataBean.PoemSearchBean poemSearchBean : searchBeanList) {
-                                        newDataList.add(new ModuleSectionEntity(ModuleSectionEntity.TODAY_POEM, poemSearchBean));
+                                        newDataList.add(new ModuleSectionEntity(ModuleSectionEntity.POEM, poemSearchBean));
                                     }
                                 }
                             }

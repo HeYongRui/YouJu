@@ -8,6 +8,8 @@ import com.heyongrui.module.data.dto.MenuCardDto;
 import com.heyongrui.module.data.dto.MonoCategoryDto;
 import com.heyongrui.module.data.dto.MonoHistoryTeaDateDto;
 import com.heyongrui.module.data.dto.MonoTeaDto;
+import com.heyongrui.module.data.dto.PoemGroupDetailDto;
+import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 
@@ -28,7 +30,8 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     public static final int TEA_NINE_GRID = 107;
     public static final int MONO_HISTORY_DATE = 108;
     public static final int MONO_CATEGORY = 109;
-    public static final int TODAY_POEM = 110;
+    public static final int POEM = 110;
+    public static final int POEM_GROUP = 111;
 
     private int itemType;
     private int spanSize;
@@ -42,6 +45,8 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     private MonoCategoryDto.MeowsBean meowsBean;
     private TodayRecommendPoemDto.DataBean todayPoemBean;
     private PoemSearchDto.DataBean.PoemSearchBean poemSearchBean;
+    private PoemGroupDto.DataBean groupPoemBean;
+    private PoemGroupDetailDto.DataBean groupPoemDataBean;
 
     public ModuleSectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -78,6 +83,10 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
                 this.todayPoemBean = (TodayRecommendPoemDto.DataBean) object;
             } else if (object instanceof PoemSearchDto.DataBean.PoemSearchBean) {
                 this.poemSearchBean = (PoemSearchDto.DataBean.PoemSearchBean) object;
+            } else if (object instanceof PoemGroupDto.DataBean) {
+                this.groupPoemBean = (PoemGroupDto.DataBean) object;
+            } else if (object instanceof PoemGroupDetailDto.DataBean) {
+                this.groupPoemDataBean = (PoemGroupDetailDto.DataBean) object;
             }
         }
     }
@@ -169,5 +178,21 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
 
     public void setPoemSearchBean(PoemSearchDto.DataBean.PoemSearchBean poemSearchBean) {
         this.poemSearchBean = poemSearchBean;
+    }
+
+    public PoemGroupDto.DataBean getGroupPoemBean() {
+        return groupPoemBean;
+    }
+
+    public void setGroupPoemBean(PoemGroupDto.DataBean groupPoemBean) {
+        this.groupPoemBean = groupPoemBean;
+    }
+
+    public PoemGroupDetailDto.DataBean getGroupPoemDataBean() {
+        return groupPoemDataBean;
+    }
+
+    public void setGroupPoemDataBean(PoemGroupDetailDto.DataBean groupPoemDataBean) {
+        this.groupPoemDataBean = groupPoemDataBean;
     }
 }

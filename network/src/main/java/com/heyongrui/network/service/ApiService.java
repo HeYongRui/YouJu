@@ -31,7 +31,7 @@ public class ApiService {
     private static final TokenInterceptor tokenInterceptor = new TokenInterceptor();
     private static final CacheInterceptor cacheInterceptor = new CacheInterceptor();
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())//SSL证书
+            .sslSocketFactory(TrustManager.getSSLSocketFactory(),TrustManager.trustManager)//SSL证书
             .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
             .addInterceptor(headerInterceptor)
             .addInterceptor(tokenInterceptor)

@@ -2,6 +2,7 @@ package com.heyongrui.module.textword.view;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import com.heyongrui.base.widget.itemdecoration.RecycleViewItemDecoration;
 import com.heyongrui.module.R;
 import com.heyongrui.module.adapter.ModuleSectionAdapter;
 import com.heyongrui.module.adapter.ModuleSectionEntity;
+import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoetryDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 import com.heyongrui.module.textword.contract.PoetryContract;
@@ -49,9 +51,10 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
 
     private SmartRefreshLayout refreshLayout;
     private ModuleSectionAdapter mPoetryAdapter;
-    private int mType;
-    //头部view
-    private ImageView ivCover;
+    private ImageView ivCover;//头部view
+
+    private int mType = 0, mPageNo = 1, mPageSize = 10;
+    private boolean mIsLastPage = true, mIsFirstVisable = true;
 
     public static PoetryFragment getInstance(int type) {
         PoetryFragment fragment = new PoetryFragment();
@@ -80,6 +83,15 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
         initRecyclerView(recyclerView);
     }
 
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        if (mIsFirstVisable) {
+            refreshLayout.autoRefresh();
+            mIsFirstVisable = false;
+        }
+    }
+
     private void initSwipeRefresh(SmartRefreshLayout smartRefreshLayout, StoreHouseHeader storeHouseHeader) {
         storeHouseHeader.setTextColor(ContextCompat.getColor(mContext, R.color.white));
 //        storeHouseHeader.setPrimaryColors(ContextCompat.getColor(this, R.color.colorPrimaryDark));
@@ -94,11 +106,17 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
                 switch (mType) {
                     case 1:
                         refreshLayout.finishLoadMore();
-                        refreshLayout.setNoMoreData(false);
+                        refreshLayout.setNoMoreData(true);
                         break;
                     case 2:
-                        break;
-                    case 3:
+                        if (mIsLastPage) {
+                            refreshLayout.finishLoadMore();
+                            refreshLayout.setNoMoreData(true);
+                        } else {
+                            refreshLayout.setNoMoreData(false);
+                            mPageNo++;
+                            mPresenter.getGroupList(1, mPageNo, mPageSize);
+                        }
                         break;
                 }
             }
@@ -107,12 +125,14 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 switch (mType) {
                     case 1:
-                        refreshLayout.setNoMoreData(false);
+                        refreshLayout.setNoMoreData(true);
                         mPresenter.getTodayRecommendPoem();
                         break;
                     case 2:
-                        break;
-                    case 3:
+                        refreshLayout.setNoMoreData(false);
+                        mIsLastPage = false;
+                        mPageNo = 1;
+                        mPresenter.getGroupList(1, mPageNo, mPageSize);
                         break;
                 }
             }
@@ -137,8 +157,13 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
         });
         mPoetryAdapter.setOnItemClickListener((adapter, view, position) -> {
             TodayRecommendPoemDto.DataBean todayPoemBean = mPoetryAdapter.getData().get(position).getTodayPoemBean();
+            PoemGroupDto.DataBean groupPoemBean = mPoetryAdapter.getData().get(position).getGroupPoemBean();
             if (todayPoemBean != null) {
                 ARouter.getInstance().build(ConfigConstants.PATH_POETRY_DETAIL).withInt("id", todayPoemBean.getPoemId()).navigation();
+            } else if (groupPoemBean != null) {
+                ARouter.getInstance().build(ConfigConstants.PATH_POEMGROUP_DETAIL)
+                        .withString("title", groupPoemBean.getName())
+                        .withString("groupId", groupPoemBean.getGroupId()).navigation();
             }
         });
     }
@@ -149,42 +174,41 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
         if (arguments != null) {
             mType = arguments.getInt("type");
         }
-        switch (mType) {
-            case 1:
-                View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_today_poem, null);
-                ivCover = headerView.findViewById(R.id.iv_cover);
-                TextView tvDate = headerView.findViewById(R.id.tv_date);
-                TextView tvTip = headerView.findViewById(R.id.tv_tip);
-                String cnDate = TimeUtil.getCNDate(new Date());
-                tvDate.setText(cnDate.substring(cnDate.indexOf("年") + 1));
-                UiUtil.setFontStyle(tvDate, "fonts/font_hwzs.ttf");
-                UiUtil.setFontStyle(tvTip, "fonts/font_hwzs.ttf");
-                mPoetryAdapter.setHeaderView(headerView);
-                break;
+        if (mType == 1) {
+            View headerView = LayoutInflater.from(mContext).inflate(R.layout.header_today_poem, null);
+            ivCover = headerView.findViewById(R.id.iv_cover);
+            TextView tvDate = headerView.findViewById(R.id.tv_date);
+            TextView tvTip = headerView.findViewById(R.id.tv_tip);
+            String cnDate = TimeUtil.getCNDate(new Date());
+            tvDate.setText(cnDate.substring(cnDate.indexOf("年") + 1));
+            UiUtil.setFontStyle(tvDate, "fonts/font_hwzs.ttf");
+            UiUtil.setFontStyle(tvTip, "fonts/font_hwzs.ttf");
+            mPoetryAdapter.setHeaderView(headerView);
         }
-        refreshLayout.autoRefresh();
+    }
+
+    private void resetRefreshLayout(boolean noMoreData, String errorMsg) {
+        refreshLayout.finishLoadMore();
+        refreshLayout.finishRefresh();
+        refreshLayout.setNoMoreData(noMoreData);
+        if (!TextUtils.isEmpty(errorMsg)) {
+            ToastUtils.showShort(errorMsg);
+        }
     }
 
     @Override
     public void getPoetrySuccess(PoetryDto poetryDto) {
-        refreshLayout.finishLoadMore();
-        refreshLayout.finishRefresh();
-        refreshLayout.setNoMoreData(true);
+        resetRefreshLayout(true, null);
     }
 
     @Override
     public void getPoetryFail(int errorCode, String errorMsg) {
-        refreshLayout.finishLoadMore();
-        refreshLayout.finishRefresh();
-        refreshLayout.setNoMoreData(true);
-        ToastUtils.showShort(errorMsg);
+        resetRefreshLayout(true, errorMsg);
     }
 
     @Override
     public void getTodayRecommendPoemSuccess(TodayRecommendPoemDto todayRecommendPoemDto) {
-        refreshLayout.finishLoadMore();
-        refreshLayout.finishRefresh();
-        refreshLayout.setNoMoreData(false);
+        resetRefreshLayout(true, null);
         List<ModuleSectionEntity> newDataList = new ArrayList<>();
         if (todayRecommendPoemDto != null) {
             Observable.just(todayRecommendPoemDto.getCover()).map(url -> GlideUtil.getBitmap(mContext, url, false, null, null))
@@ -208,7 +232,7 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
             List<TodayRecommendPoemDto.DataBean> dataBeanList = todayRecommendPoemDto.getData();
             if (dataBeanList != null) {
                 for (TodayRecommendPoemDto.DataBean dataBean : dataBeanList) {
-                    newDataList.add(new ModuleSectionEntity(ModuleSectionEntity.TODAY_POEM, dataBean));
+                    newDataList.add(new ModuleSectionEntity(ModuleSectionEntity.POEM, dataBean));
                 }
             }
         }
@@ -217,9 +241,32 @@ public class PoetryFragment extends BaseFragment<PoetryContract.Presenter> imple
 
     @Override
     public void getTodayRecommendPoemFail(int errorCode, String errorMsg) {
-        refreshLayout.finishLoadMore();
-        refreshLayout.finishRefresh();
-        refreshLayout.setNoMoreData(false);
-        ToastUtils.showShort(errorMsg);
+        resetRefreshLayout(false, errorMsg);
+    }
+
+    @Override
+    public void getGroupListSuccess(PoemGroupDto poemGroupDto) {
+        resetRefreshLayout(false, null);
+        mIsLastPage = true;
+        List<ModuleSectionEntity> newDataList = new ArrayList<>();
+        if (poemGroupDto != null) {
+            List<PoemGroupDto.DataBean> dataBeanList = poemGroupDto.getData();
+            if (dataBeanList != null) {
+                mIsLastPage = dataBeanList.size() < mPageSize ? true : false;
+                for (PoemGroupDto.DataBean dataBean : dataBeanList) {
+                    newDataList.add(new ModuleSectionEntity(ModuleSectionEntity.POEM, dataBean));
+                }
+            }
+        }
+        if (mPageNo == 1) {
+            mPoetryAdapter.replaceData(newDataList);
+        } else {
+            mPoetryAdapter.addData(newDataList);
+        }
+    }
+
+    @Override
+    public void getGroupListFail(int errorCode, String errorMsg) {
+        resetRefreshLayout(false, errorMsg);
     }
 }

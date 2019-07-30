@@ -59,10 +59,9 @@ public class PoetryActivity extends BaseActivity {
 
     private void initTabViewPager(TabLayout tabLayout, ViewPager viewPager) {
         List<BaseFragment> fragments = new ArrayList<>();
-        String[] pageTitleArray = new String[]{getString(R.string.a), getString(R.string.poetry), getString(R.string.green_tea)};
+        String[] pageTitleArray = new String[]{getString(R.string.a), getString(R.string.green_tea)};
         fragments.add(PoetryFragment.getInstance(1));
         fragments.add(PoetryFragment.getInstance(2));
-        fragments.add(PoetryFragment.getInstance(3));
         FragmentPagerAdapter fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -80,6 +79,7 @@ public class PoetryActivity extends BaseActivity {
                 return pageTitleArray[position];
             }
         };
+        viewPager.setOffscreenPageLimit(fragments.size());
         viewPager.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         //遍历重置TabLayout的字体样式

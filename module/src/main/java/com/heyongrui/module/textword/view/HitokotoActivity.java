@@ -15,7 +15,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
 import com.heyongrui.module.R;
-import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
 import com.heyongrui.module.textword.contract.HitokotoContract;
 import com.heyongrui.module.textword.presenter.HitokotoPresenter;
@@ -183,13 +182,10 @@ public class HitokotoActivity extends BaseActivity<HitokotoContract.Presenter> i
     }
 
     @Override
-    public void getDuJiTangSuccess(DuJiTangDto duJiTangDto) {
+    public void getDuJiTangSuccess(String dujitang) {
         mIsLoadDone = true;
-        if (duJiTangDto == null) return;
-        String content = duJiTangDto.getContent();
-        String author = duJiTangDto.getAuthor();
-        tvContent.setText(TextUtils.isEmpty(content) ? "" : content);
-        tvAuthor.setText((TextUtils.isEmpty(author) ? "" : "─" + author));
+        tvContent.setText(TextUtils.isEmpty(dujitang) ? "" : dujitang);
+        tvAuthor.setText("");
     }
 
     @Override

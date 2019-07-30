@@ -3,10 +3,10 @@ package com.heyongrui.module.data.service;
 
 import com.heyongrui.base.utils.StringUtil;
 import com.heyongrui.module.data.api.TextApi;
-import com.heyongrui.module.data.dto.DuJiTang2Dto;
-import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
 import com.heyongrui.module.data.dto.PoemDetailDto;
+import com.heyongrui.module.data.dto.PoemGroupDetailDto;
+import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.PoetryDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
@@ -21,24 +21,6 @@ import io.reactivex.schedulers.Schedulers;
  * 2019/6/25 10:52
  */
 public class TextService {
-
-    /**
-     * 获取毒鸡汤
-     */
-    public Observable<DuJiTangDto> getDuJiTang() {
-        return ApiService.createApi(TextApi.class, "https://soulposion.utilapi.bid/")
-                .getDuJiTang()
-                .compose(RxHelper.rxSchedulerHelper());
-    }
-
-    /**
-     * 获取毒鸡汤
-     */
-    public Observable<DuJiTang2Dto> getDuJiTang2() {
-        return ApiService.createApi(TextApi.class, "https://api.nextrt.com/")
-                .getDuJiTang2()
-                .compose(RxHelper.rxSchedulerHelper());
-    }
 
     /**
      * 获取一言
@@ -99,6 +81,24 @@ public class TextService {
     public Observable<PoemSearchDto> searchPoem(String keywords, int type) {
         return ApiService.createApi(TextApi.class, "http://kkpoem.duowan.com/")
                 .searchPoem(keywords, type, StringUtil.MD5encrypt32BitLowerCase(keywords + "6d767896a2e4b60d"))
+                .compose(RxHelper.rxSchedulerHelper());
+    }
+
+    /**
+     * 分组诗歌
+     */
+    public Observable<PoemGroupDto> groupList(int sort, int pageNo, int pageSize) {
+        return ApiService.createApi(TextApi.class, "http://kkpoembbs.duowan.com/")
+                .groupList(sort, pageNo, pageSize)
+                .compose(RxHelper.rxSchedulerHelper());
+    }
+
+    /**
+     * 分组详情
+     */
+    public Observable<PoemGroupDetailDto> groupDetail(String groupId, int pageNo, int pageSize) {
+        return ApiService.createApi(TextApi.class, "http://kkpoembbs.duowan.com/")
+                .groupDetail(groupId, pageNo, pageSize)
                 .compose(RxHelper.rxSchedulerHelper());
     }
 }

@@ -4,14 +4,14 @@ import android.app.Dialog;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.heyongrui.base.widget.catloadingview.CatLoadingDialog;
-import com.heyongrui.module.data.dto.DuJiTang2Dto;
-import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
 import com.heyongrui.module.data.service.TextService;
 import com.heyongrui.module.textword.contract.HitokotoContract;
 import com.heyongrui.network.configure.ResponseDisposable;
+import com.heyongrui.network.configure.TrustManager;
 
-import java.util.List;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -48,28 +48,11 @@ public class HitokotoPresenter extends HitokotoContract.Presenter {
     @Override
     public void getDuJiTang() {
         showDuJiTangDialog();
-        mRxManager.add(mTextService.getDuJiTang().subscribeWith(
-                new ResponseDisposable<DuJiTangDto>(mContext, false) {
-                    @Override
-                    protected void onSuccess(DuJiTangDto duJiTangDto) {
-                        dismissDuJiTangDialog();
-                        if (mView != null) {
-                            mView.getDuJiTangSuccess(duJiTangDto);
-                        }
-                    }
-
-                    @Override
-                    protected void onFailure(int errorCode, String errorMsg) {
-                        getDuJiTang2("https://api.qinor.cn/soup/", "https://ys.juan8014.cn/yiyan/api.php/");
-                    }
-                }));
-    }
-
-    private void getDuJiTang2(String... requestUrl) {
-        if (requestUrl == null || requestUrl.length == 0) return;
+        String[] requestUrl = new String[]{"https://api.qinor.cn/soup/", "https://ys.juan8014.cn/yiyan/api.php/"};
         mRxManager.add(Observable.just(requestUrl).map(requestUrl1 -> {
             OkHttpClient client = new OkHttpClient().newBuilder()
-                    .hostnameVerifier((hostname, session) -> true)
+                    .sslSocketFactory(TrustManager.getSSLSocketFactory(), TrustManager.trustManager)
+                    .hostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
                     .readTimeout(20, TimeUnit.SECONDS)
                     .writeTimeout(20, TimeUnit.SECONDS)
                     .connectTimeout(10, TimeUnit.SECONDS)
@@ -90,41 +73,10 @@ public class HitokotoPresenter extends HitokotoContract.Presenter {
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResponseDisposable<String>(mContext, false) {
                     @Override
-                    protected void onSuccess(String content) {
+                    protected void onSuccess(String dujitang) {
                         dismissDuJiTangDialog();
-                        DuJiTangDto duJiTangDto = new DuJiTangDto();
-                        duJiTangDto.setContent(content);
-                        duJiTangDto.setAuthor("");
                         if (mView != null) {
-                            mView.getDuJiTangSuccess(duJiTangDto);
-                        }
-                    }
-
-                    @Override
-                    protected void onFailure(int errorCode, String errorMsg) {
-                        getDuJiTang3();
-                    }
-                }));
-    }
-
-    private void getDuJiTang3() {
-        mRxManager.add(mTextService.getDuJiTang2().subscribeWith(
-                new ResponseDisposable<DuJiTang2Dto>(mContext, false) {
-                    @Override
-                    protected void onSuccess(DuJiTang2Dto duJiTang2Dto) {
-                        dismissDuJiTangDialog();
-                        if (duJiTang2Dto == null) return;
-                        List<DuJiTang2Dto.DataBean> data = duJiTang2Dto.getData();
-                        if (data == null || data.isEmpty()) return;
-                        DuJiTang2Dto.DataBean dataBean = data.get(0);
-                        if (dataBean == null) return;
-                        String content = dataBean.getContent();
-                        //将DuJiTang2Dto转换为DuJiTangDto并回调
-                        DuJiTangDto duJiTangDto = new DuJiTangDto();
-                        duJiTangDto.setContent(content);
-                        duJiTangDto.setAuthor("");
-                        if (mView != null) {
-                            mView.getDuJiTangSuccess(duJiTangDto);
+                            mView.getDuJiTangSuccess(dujitang);
                         }
                     }
 

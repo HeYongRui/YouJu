@@ -1,10 +1,10 @@
 package com.heyongrui.module.data.api;
 
 
-import com.heyongrui.module.data.dto.DuJiTang2Dto;
-import com.heyongrui.module.data.dto.DuJiTangDto;
 import com.heyongrui.module.data.dto.HitokotoDto;
 import com.heyongrui.module.data.dto.PoemDetailDto;
+import com.heyongrui.module.data.dto.PoemGroupDetailDto;
+import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.PoetryDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
@@ -15,18 +15,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 public interface TextApi {
-
-    /**
-     * 获取毒鸡汤
-     */
-    @GET("json")
-    Observable<DuJiTangDto> getDuJiTang();
-
-    /**
-     * 获取毒鸡汤2
-     */
-    @GET("V1/Dutang/")
-    Observable<DuJiTang2Dto> getDuJiTang2();
 
     /**
      * 获取一言
@@ -73,4 +61,16 @@ public interface TextApi {
      */
     @GET("api/poem/query.do")
     Observable<PoemSearchDto> searchPoem(@Query("s") String keywords, @Query("type") int type, @Query("sign") String sign);
+
+    /**
+     * 分组诗歌
+     */
+    @GET("api/group/list.do")
+    Observable<PoemGroupDto> groupList(@Query("sort") int sort, @Query("pageNo") int pageNo, @Query("pageSize") int pageSize);
+
+    /**
+     * 分组详情
+     */
+    @GET("api/group/topicList.do")
+    Observable<PoemGroupDetailDto> groupDetail(@Query("groupId") String groupId, @Query("pageNo") int pageNo, @Query("pageSize") int pageSize);
 }

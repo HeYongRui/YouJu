@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoetryDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 import com.heyongrui.module.data.service.TextService;
@@ -76,6 +77,25 @@ public class PoetryPresenter extends PoetryContract.Presenter {
             protected void onFailure(int errorCode, String errorMsg) {
                 if (mView != null) {
                     mView.getTodayRecommendPoemFail(errorCode, errorMsg);
+                }
+            }
+        }));
+    }
+
+    @Override
+    public void getGroupList(int sort, int pageNo, int pageSize) {
+        mRxManager.add(mTextService.groupList(sort, pageNo, pageSize).subscribeWith(new ResponseDisposable<PoemGroupDto>(mContext, true) {
+            @Override
+            protected void onSuccess(PoemGroupDto poemGroupDto) {
+                if (mView != null) {
+                    mView.getGroupListSuccess(poemGroupDto);
+                }
+            }
+
+            @Override
+            protected void onFailure(int errorCode, String errorMsg) {
+                if (mView != null) {
+                    mView.getGroupListFail(errorCode, errorMsg);
                 }
             }
         }));

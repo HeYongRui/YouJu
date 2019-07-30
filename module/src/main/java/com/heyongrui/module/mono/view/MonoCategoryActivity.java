@@ -100,7 +100,7 @@ public class MonoCategoryActivity extends BaseActivity {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 if (mIsLastPage) {
-                    refreshLayout.setNoMoreData(false);
+                    refreshLayout.setNoMoreData(true);
                     refreshLayout.finishLoadMore();
                 } else {
                     getCategory(false);
@@ -109,7 +109,7 @@ public class MonoCategoryActivity extends BaseActivity {
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                refreshLayout.setNoMoreData(true);
+                refreshLayout.setNoMoreData(false);
                 getCategory(true);
             }
         });
@@ -167,7 +167,7 @@ public class MonoCategoryActivity extends BaseActivity {
                     protected void onSuccess(MonoCategoryDto monoCategoryDto) {
                         refreshLayout.finishLoadMore();
                         refreshLayout.finishRefresh();
-                        refreshLayout.setNoMoreData(true);
+                        refreshLayout.setNoMoreData(false);
                         if (monoCategoryDto == null) return;
                         mIsLastPage = monoCategoryDto.isIs_last_page();
                         List<MonoCategoryDto.MeowsBean> meows = monoCategoryDto.getMeows();
@@ -184,7 +184,7 @@ public class MonoCategoryActivity extends BaseActivity {
                     protected void onFailure(int errorCode, String errorMsg) {
                         refreshLayout.finishLoadMore();
                         refreshLayout.finishRefresh();
-                        refreshLayout.setNoMoreData(true);
+                        refreshLayout.setNoMoreData(false);
                         ToastUtils.showShort(errorMsg);
                     }
                 }));

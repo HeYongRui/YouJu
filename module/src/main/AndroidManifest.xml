@@ -15,6 +15,9 @@
             android:name=".textword.view.PoetryDetailActivity"
             android:theme="@style/BaseAppTheme" />
         <activity
+            android:name=".textword.view.PoemGroupDetailActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
             android:name=".kaiyan.view.KaiYanListActivity"
             android:theme="@style/BaseAppTheme" />
         <activity

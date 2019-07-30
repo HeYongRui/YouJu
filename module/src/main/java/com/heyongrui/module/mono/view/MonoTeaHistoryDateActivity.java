@@ -90,7 +90,7 @@ public class MonoTeaHistoryDateActivity extends BaseActivity {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 if (mIsLastPage) {
-                    refreshLayout.setNoMoreData(false);
+                    refreshLayout.setNoMoreData(true);
                     refreshLayout.finishLoadMore();
                 } else {
                     getTeaHistoryDate(false);
@@ -99,7 +99,7 @@ public class MonoTeaHistoryDateActivity extends BaseActivity {
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                refreshLayout.setNoMoreData(true);
+                refreshLayout.setNoMoreData(false);
                 getTeaHistoryDate(true);
             }
         });

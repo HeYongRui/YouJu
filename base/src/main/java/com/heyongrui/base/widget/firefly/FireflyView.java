@@ -106,6 +106,7 @@ public class FireflyView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void startAnimation() {
+        if (mIsPlaying) return;
         mIsPlaying = true;
         new Thread(() -> {
             while (mIsPlaying) {

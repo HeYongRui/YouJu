@@ -35,19 +35,15 @@ public class HeaderInterceptor implements Interceptor {
         switch (method) {
             case "POST":
                 originalRequest = requestBuilder
-                        .addHeader("Cookie", "wdj_auth=_V3V0VDSEFUX29TV2R4dHhiLVlSRlNzcHJwQ1Z4SGtyMVN1VzBfMTUwNjc1NDgxNDI1MToxNTcyNjc3ODA3MzA3OmE1ZjZiYzU3ZTE4NjQ1YWQ5ZWNlMmExYjgxYzE0OWVl")
                         .addHeader("Accept-Charset", "utf-8")
-                        .addHeader("HTTP-AUTHORIZATION", "f1cbda8fa5a711e7b87f5254001b74f1")
                         .addHeader("User-Agent", getUserAgent()).post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded;charset=UTF-8"),
                                 URLDecoder.decode(bodyToString(originalRequest.body()), "UTF-8")))
                         .build();
                 break;
             case "GET":
                 originalRequest = requestBuilder
-                        .addHeader("Cookie", "wdj_auth=_V3V0VDSEFUX29TV2R4dHhiLVlSRlNzcHJwQ1Z4SGtyMVN1VzBfMTUwNjc1NDgxNDI1MToxNTcyNjc3ODA3MzA3OmE1ZjZiYzU3ZTE4NjQ1YWQ5ZWNlMmExYjgxYzE0OWVl")
                         .addHeader("Content-Type", "application/json;charset=UTF-8")
                         .addHeader("Accept-Charset", "utf-8")
-                        .addHeader("HTTP-AUTHORIZATION", "f1cbda8fa5a711e7b87f5254001b74f1")
 //                    .addHeader("Accept-Encoding", "gzip")
                         .addHeader("User-Agent", getUserAgent()).get()
                         .build();
@@ -57,7 +53,7 @@ public class HeaderInterceptor implements Interceptor {
     }
 
     private String getUserAgent() {
-        StringBuilder ua = new StringBuilder("findmacau.com");
+        StringBuilder ua = new StringBuilder();
         ua.append('/' + AppUtils.getAppInfo(AppUtils.getAppPackageName()).getVersionName() + '_'
                 + AppUtils.getAppInfo(AppUtils.getAppPackageName()).getVersionCode());
         ua.append("/Android");

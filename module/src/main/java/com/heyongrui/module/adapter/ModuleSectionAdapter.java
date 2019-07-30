@@ -46,6 +46,8 @@ import com.heyongrui.module.data.dto.MenuCardDto;
 import com.heyongrui.module.data.dto.MonoCategoryDto;
 import com.heyongrui.module.data.dto.MonoHistoryTeaDateDto;
 import com.heyongrui.module.data.dto.MonoTeaDto;
+import com.heyongrui.module.data.dto.PoemGroupDetailDto;
+import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 import com.heyongrui.module.mono.view.MonoTeaActivity;
@@ -61,7 +63,7 @@ import java.util.List;
  */
 public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<ModuleSectionEntity, BaseViewHolder> {
 
-    private Typeface typeFace;
+    private Typeface poemTypeFace;
 
     public ModuleSectionAdapter(List<ModuleSectionEntity> data) {
         this(0, data);
@@ -78,7 +80,8 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
         addItemType(ModuleSectionEntity.TEA_NINE_GRID, R.layout.recycle_item_monotea_nine_grid);
         addItemType(ModuleSectionEntity.MONO_HISTORY_DATE, R.layout.recycle_item_history_date);
         addItemType(ModuleSectionEntity.MONO_CATEGORY, R.layout.recycle_item_monocategory);
-        addItemType(ModuleSectionEntity.TODAY_POEM, R.layout.recycle_item_today_poem);
+        addItemType(ModuleSectionEntity.POEM, R.layout.recycle_item_poem);
+        addItemType(ModuleSectionEntity.POEM_GROUP, R.layout.recycle_item_poem_group);
     }
 
     @Override
@@ -503,22 +506,23 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
                 }
             }
             break;
-            case ModuleSectionEntity.TODAY_POEM: {
+            case ModuleSectionEntity.POEM: {
                 UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 TextView tvName = helper.getView(R.id.tv_name);
                 TextView tvAuthor = helper.getView(R.id.tv_author);
                 TextView tvContent = helper.getView(R.id.tv_content);
 
-                if (null == typeFace) {
-                    typeFace = Typeface.createFromAsset(mContext.getAssets(), "fonts/font_hwzs.ttf");
+                if (null == poemTypeFace) {
+                    poemTypeFace = Typeface.createFromAsset(mContext.getAssets(), "fonts/font_hwzs.ttf");
                 }
-                tvName.setTypeface(typeFace);
-                tvAuthor.setTypeface(typeFace);
-                tvContent.setTypeface(typeFace);
+                tvName.setTypeface(poemTypeFace);
+                tvAuthor.setTypeface(poemTypeFace);
+                tvContent.setTypeface(poemTypeFace);
 
                 String name = "", dynasty = "", author = "", content = "";
                 TodayRecommendPoemDto.DataBean todayPoemBean = item.getTodayPoemBean();
                 PoemSearchDto.DataBean.PoemSearchBean poemSearchBean = item.getPoemSearchBean();
+                PoemGroupDto.DataBean groupPoemBean = item.getGroupPoemBean();
                 if (todayPoemBean != null) {
                     name = todayPoemBean.getMingcheng();
                     dynasty = todayPoemBean.getChaodai();
@@ -528,10 +532,29 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
                     name = poemSearchBean.getMingcheng();
                     author = poemSearchBean.getZuozhe();
                     content = poemSearchBean.getZhaiyao();
+                } else if (groupPoemBean != null) {
+                    name = groupPoemBean.getName();
+                    author = groupPoemBean.getCreatedNickname();
+                    content = groupPoemBean.getDescription();
                 }
                 tvName.setText(name);
                 tvAuthor.setText(TextUtils.isEmpty(dynasty) ? author : dynasty + "/" + author);
                 tvContent.setText(content);
+            }
+            break;
+            case ModuleSectionEntity.POEM_GROUP: {
+                TextView tvContent = helper.getView(R.id.tv_content);
+                if (null == poemTypeFace) {
+                    poemTypeFace = Typeface.createFromAsset(mContext.getAssets(), "fonts/font_hwzs.ttf");
+                }
+                tvContent.setTypeface(poemTypeFace);
+
+                String content = "";
+                PoemGroupDetailDto.DataBean groupPoemDataBean = item.getGroupPoemDataBean();
+                if (groupPoemDataBean != null) {
+                    content = groupPoemDataBean.getDescription();
+                }
+                tvContent.setText(TextUtils.isEmpty(content) ? "" : content);
             }
             break;
         }
