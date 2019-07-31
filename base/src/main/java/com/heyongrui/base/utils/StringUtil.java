@@ -256,7 +256,7 @@ public class StringUtil {
 
     public static boolean isNumber(String string) {
         if (StringUtils.isTrimEmpty(string)) return false;
-        Pattern pattern = Pattern.compile("[0-9]*");
+        Pattern pattern = Pattern.compile("-[0-9]+(.[0-9]+)?|[0-9]+(.[0-9]+)?");
         return pattern.matcher(string).matches();
     }
 

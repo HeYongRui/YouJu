@@ -2,6 +2,7 @@ package com.heyongrui.module.adapter;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.entity.SectionMultiEntity;
+import com.heyongrui.module.data.dto.DouBanDto;
 import com.heyongrui.module.data.dto.GarbageCardBean;
 import com.heyongrui.module.data.dto.KaiYanItemBean;
 import com.heyongrui.module.data.dto.MenuCardDto;
@@ -32,6 +33,7 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     public static final int MONO_CATEGORY = 109;
     public static final int POEM = 110;
     public static final int POEM_GROUP = 111;
+    public static final int DOUBAN_MOVIE = 112;
 
     private int itemType;
     private int spanSize;
@@ -47,6 +49,7 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     private PoemSearchDto.DataBean.PoemSearchBean poemSearchBean;
     private PoemGroupDto.DataBean groupPoemBean;
     private PoemGroupDetailDto.DataBean groupPoemDataBean;
+    private DouBanDto.SubjectsBean subjectsBean;
 
     public ModuleSectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -87,6 +90,8 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
                 this.groupPoemBean = (PoemGroupDto.DataBean) object;
             } else if (object instanceof PoemGroupDetailDto.DataBean) {
                 this.groupPoemDataBean = (PoemGroupDetailDto.DataBean) object;
+            } else if (object instanceof DouBanDto.SubjectsBean) {
+                this.subjectsBean = (DouBanDto.SubjectsBean) object;
             }
         }
     }
@@ -194,5 +199,13 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
 
     public void setGroupPoemDataBean(PoemGroupDetailDto.DataBean groupPoemDataBean) {
         this.groupPoemDataBean = groupPoemDataBean;
+    }
+
+    public DouBanDto.SubjectsBean getSubjectsBean() {
+        return subjectsBean;
+    }
+
+    public void setSubjectsBean(DouBanDto.SubjectsBean subjectsBean) {
+        this.subjectsBean = subjectsBean;
     }
 }

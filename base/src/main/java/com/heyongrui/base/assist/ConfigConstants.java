@@ -36,6 +36,7 @@ public class ConfigConstants {
     public static final String PATH_POEMGROUP_DETAIL = "/module/poemGroupDetail";
     public static final String PATH_KAIYAN_LIST = "/module/kaiyanList";
     public static final String PATH_KAIYAN_DETAIL = "/module/kaiyanDetail";
+    public static final String PATH_DOUBAN = "/module/douban";
     public static final String PATH_GARBAGE_CLASSIFY = "/module/garbageClassify";
     public static final String PATH_H5 = "/module/h5";
     public static final String PATH_MODULE_PROVIDER = "/module/main/service";

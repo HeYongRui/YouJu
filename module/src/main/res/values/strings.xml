@@ -59,6 +59,11 @@
     <string name="harmful_include_content">废电池、油漆桶、荧光灯管、废药品及其包装物等</string>
     <string name="harmful_standard_title">有害垃圾投放要求</string>
     <string name="harmful_standard_content">投放时请注意轻放；易破损的请连带包装或包裹后轻放；如易挥发，请密封后投放</string>
+    <string name="movie">电影</string>
+    <string name="tv">电视剧</string>
+    <string name="heat">热度</string>
+    <string name="time">时间</string>
+    <string name="evaluate">评价</string>
     <string-array name="weekdays">
         <item>星期日</item>
         <item>星期一</item>

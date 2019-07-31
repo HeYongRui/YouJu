@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,12 +33,14 @@ import com.heyongrui.base.glide.GlideApp;
 import com.heyongrui.base.glide.transformations.RoundedCornersTransformation;
 import com.heyongrui.base.utils.DrawableUtil;
 import com.heyongrui.base.utils.GlideUtil;
+import com.heyongrui.base.utils.StringUtil;
 import com.heyongrui.base.utils.TimeUtil;
 import com.heyongrui.base.utils.UiUtil;
 import com.heyongrui.base.widget.ninegridimageview.NineGridLayout;
 import com.heyongrui.base.widget.ninegridimageview.NineGridViewHolder;
 import com.heyongrui.base.widget.ninegridimageview.RatioImageView;
 import com.heyongrui.module.R;
+import com.heyongrui.module.data.dto.DouBanDto;
 import com.heyongrui.module.data.dto.GarbageCardBean;
 import com.heyongrui.module.data.dto.KaiYanDataBean;
 import com.heyongrui.module.data.dto.KaiYanHeaderBean;
@@ -82,6 +85,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
         addItemType(ModuleSectionEntity.MONO_CATEGORY, R.layout.recycle_item_monocategory);
         addItemType(ModuleSectionEntity.POEM, R.layout.recycle_item_poem);
         addItemType(ModuleSectionEntity.POEM_GROUP, R.layout.recycle_item_poem_group);
+        addItemType(ModuleSectionEntity.DOUBAN_MOVIE, R.layout.recycle_item_douban_movie);
     }
 
     @Override
@@ -555,6 +559,32 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
                     content = groupPoemDataBean.getDescription();
                 }
                 tvContent.setText(TextUtils.isEmpty(content) ? "" : content);
+            }
+            break;
+            case ModuleSectionEntity.DOUBAN_MOVIE: {
+                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                ImageView ivCover = helper.getView(R.id.iv_cover);
+                TextView tvName = helper.getView(R.id.tv_name);
+                RatingBar ratingBar = helper.getView(R.id.rating_bar);
+                TextView tvRate = helper.getView(R.id.tv_rate);
+
+                DouBanDto.SubjectsBean subjectsBean = item.getSubjectsBean();
+                String cover = "", name = "", rate = "";
+                if (subjectsBean != null) {
+                    cover = subjectsBean.getCover();
+                    cover.replace("webp", "jpg");
+                    name = subjectsBean.getTitle();
+                    rate = subjectsBean.getRate();
+                    if (StringUtil.isNumber(rate)) {
+                        int numStars = 5;
+                        float rateF = Float.parseFloat(rate);
+                        ratingBar.setNumStars(numStars);
+                        ratingBar.setRating(numStars * rateF / 10);
+                    }
+                }
+                GlideUtil.loadImage(mContext, cover, ivCover, ContextCompat.getDrawable(mContext, R.drawable.placeholder));
+                tvName.setText(name);
+                tvRate.setText(rate);
             }
             break;
         }

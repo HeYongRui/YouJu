@@ -71,6 +71,9 @@ public class ModuleFragment extends BaseFragment {
                 case 7://垃圾分类
                     ARouter.getInstance().build(ConfigConstants.PATH_GARBAGE_CLASSIFY).navigation();
                     break;
+                case 8://电影
+                    ARouter.getInstance().build(ConfigConstants.PATH_DOUBAN).navigation();
+                    break;
             }
         });
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.tea), R.drawable.ic_tea, 1)));
@@ -80,6 +83,7 @@ public class ModuleFragment extends BaseFragment {
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.music), R.drawable.ic_music_disc, 5)));
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.kaiyan), R.drawable.ic_kaiyan, 6)));
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.garbage_classification2), R.drawable.ic_ashcan, 7)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.movie), R.drawable.ic_movie, 8)));
         monoAdapter.replaceData(dataList);
     }
 }

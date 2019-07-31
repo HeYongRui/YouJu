@@ -20,4 +20,5 @@
     <color name="transparentShadowColor">#44000000</color>
     <color name="mapStrokeColor">#d6e3ef</color>
     <color name="mapFillColor">#250090ff</color>
+    <color name="orangeColor">#FFAD2F</color>
 </resources>

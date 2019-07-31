@@ -42,6 +42,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme" />
         <activity
+            android:name=".douban.view.DouBanActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
             android:name=".dailylife.view.GarbageClassificationActivity"
             android:theme="@style/BaseAppTheme" />
         <activity
