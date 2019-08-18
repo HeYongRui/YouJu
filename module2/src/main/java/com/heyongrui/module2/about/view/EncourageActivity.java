@@ -1,6 +1,5 @@
 package com.heyongrui.module2.about.view;
 
-import android.Manifest;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -13,6 +12,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
 import com.heyongrui.base.utils.DialogUtil;
@@ -20,7 +21,8 @@ import com.heyongrui.base.utils.DrawableUtil;
 import com.heyongrui.module2.R;
 import com.heyongrui.module2.utils.AliPay;
 import com.heyongrui.module2.utils.WXPay;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.util.List;
 
 @Route(path = ConfigConstants.PATH_ENCOURAGE)
 public class EncourageActivity extends BaseActivity {
@@ -43,15 +45,19 @@ public class EncourageActivity extends BaseActivity {
             if (id == R.id.iv_back) {
                 finish();
             } else if (id == R.id.btn_wx_encourage) {
-                new RxPermissions(this).request(
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        .subscribe(granted -> {
-                            if (granted) {
+                PermissionUtils.permission(PermissionConstants.STORAGE)
+                        .rationale(shouldRequest -> shouldRequest.again(true))
+                        .callback(new PermissionUtils.FullCallback() {
+                            @Override
+                            public void onGranted(List<String> permissionsGranted) {
                                 WXPay.startWeZhi(EncourageActivity.this, findViewById(R.id.iv_wx_qrcode));
-                            } else {
+                            }
+
+                            @Override
+                            public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
                                 DialogUtil.showPermissionDialog(EncourageActivity.this, getString(com.heyongrui.base.R.string.read_write_permisson));
                             }
-                        });
+                        }).request();
             } else if (id == R.id.btn_ali_encourage) {
                 AliPay.startAlipayClient(this, "fkx00263qmoxalrjiwqgo21");
             }

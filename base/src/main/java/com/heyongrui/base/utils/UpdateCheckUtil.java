@@ -1,6 +1,5 @@
 package com.heyongrui.base.utils;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.NotificationChannel;
@@ -22,11 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 
+import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.heyongrui.base.R;
 import com.heyongrui.base.widget.catloadingview.CatLoadingDialog;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +36,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -132,15 +133,19 @@ public class UpdateCheckUtil {
                     public void onYes(Dialog dialog) {
                         dialog.dismiss();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//6.0加入了动态权限
-                            mCompositeDisposable.add(new RxPermissions(mActivity).request(
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                                    .subscribe(granted -> {
-                                        if (granted) {
+                            PermissionUtils.permission(PermissionConstants.STORAGE)
+                                    .rationale(shouldRequest -> shouldRequest.again(true))
+                                    .callback(new PermissionUtils.FullCallback() {
+                                        @Override
+                                        public void onGranted(List<String> permissionsGranted) {
                                             startDownload(updateUrl, authority, app_name);
-                                        } else {
+                                        }
+
+                                        @Override
+                                        public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
                                             DialogUtil.showPermissionDialog(mActivity, mActivity.getString(R.string.read_write_permisson));
                                         }
-                                    }));
+                                    }).request();
                         } else {
                             startDownload(updateUrl, authority, app_name);
                         }
@@ -270,23 +275,12 @@ public class UpdateCheckUtil {
         try {
             Intent[] intent = {new Intent(Intent.ACTION_VIEW)};
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                //适配8.0
-                //先获取是否有安装未知来源应用的权限
+                //先获取是否有安装未知来源应用的权限（适配8.0）
                 boolean haveInstallPermission = activity.getPackageManager().canRequestPackageInstalls();
                 if (!haveInstallPermission) {//没有权限
-                    RxPermissions rxPermissions = new RxPermissions(activity);
-                    rxPermissions
-                            .request(Manifest.permission.REQUEST_INSTALL_PACKAGES)
-                            .subscribe(granted -> {
-                                if (granted) {
-                                    intent[0] = buildInstallIntent(activity, intent[0], authority, app_name);
-                                } else {
-                                    ToastUtils.showShort(activity.getString(R.string.install_permisson));
-                                    startInstallPermissionSettingActivity(activity);
-//                                        DialogUtil.showPermissionDialog(activity, activity.getString(R.string.install_permisson));
-                                    return;
-                                }
-                            });
+                    ToastUtils.showShort(activity.getString(R.string.install_permisson));
+                    startInstallPermissionSettingActivity(activity);
+                    return;
                 } else {//授过权，可以自动安装
                     intent[0] = buildInstallIntent(activity, intent[0], authority, app_name);
                 }

@@ -90,10 +90,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+        super.onDestroy();
     }
 
     protected boolean needRegisterNetworkChangeObserver() {
@@ -135,6 +135,14 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
             e.printStackTrace();
         }
         return isTranslucentOrFloating;
+    }
+
+    protected void addOnClickListeners(View.OnClickListener onClickListener, View... views) {
+        if (views != null) {
+            for (View view : views) {
+                view.setOnClickListener(onClickListener);
+            }
+        }
     }
 
     protected void addOnClickListeners(View.OnClickListener onClickListener, @IdRes int... ids) {

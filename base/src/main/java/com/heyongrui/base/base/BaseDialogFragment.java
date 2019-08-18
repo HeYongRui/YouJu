@@ -51,6 +51,10 @@ public abstract class BaseDialogFragment<T extends BasePresenter> extends Dialog
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mPresenter = setPresenter();
+        if (mPresenter != null) {
+            if (this instanceof BaseView) mPresenter.attchView(mContext, (BaseView) this);
+        }
         mView = inflater.inflate(getLayoutId(), container, false);
         initView(savedInstanceState);
         return mView;
@@ -60,10 +64,6 @@ public abstract class BaseDialogFragment<T extends BasePresenter> extends Dialog
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = setPresenter();
-        if (mPresenter != null) {
-            if (this instanceof BaseView) mPresenter.attchView(mContext, (BaseView) this);
-        }
         if (isImmersionBarEnabled()) {
             initImmersionBar();
         }
@@ -72,10 +72,10 @@ public abstract class BaseDialogFragment<T extends BasePresenter> extends Dialog
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+        super.onDestroy();
     }
 
     @Override

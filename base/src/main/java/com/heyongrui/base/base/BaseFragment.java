@@ -9,14 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.heyongrui.base.assist.NetStateChangeObserver;
 import com.heyongrui.base.assist.NetStateChangeReceiver;
-
-import java.lang.reflect.Field;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -59,6 +56,10 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mInflater = inflater;
+        mPresenter = setPresenter();
+        if (mPresenter != null) {
+            if (this instanceof BaseView) mPresenter.attchView(mContext, (BaseView) this);
+        }
         if (mView == null) {
             mView = inflater.inflate(getLayoutId(), container, false);
             initView(savedInstanceState);
@@ -79,10 +80,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = setPresenter();
-        if (mPresenter != null) {
-            if (this instanceof BaseView) mPresenter.attchView(mContext, (BaseView) this);
-        }
         initData(savedInstanceState);
     }
 
@@ -110,23 +107,10 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
         }
-    }
-
-    public void onDetach() {
-        super.onDetach();
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        super.onDestroy();
     }
 
     /**
@@ -142,6 +126,14 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
 
     @Override
     public void onNetConnected(NetworkUtils.NetworkType networkType) {//网络连接
+    }
+
+    protected void addOnClickListeners(View.OnClickListener onClickListener, View... views) {
+        if (views != null) {
+            for (View view : views) {
+                view.setOnClickListener(onClickListener);
+            }
+        }
     }
 
     protected void addOnClickListeners(View.OnClickListener onClickListener, @IdRes int... ids) {
