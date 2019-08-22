@@ -6,11 +6,9 @@ import android.text.TextUtils;
 import com.blankj.utilcode.util.AppUtils;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.UUID;
 
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -29,25 +27,19 @@ public class HeaderInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
-        String host = originalRequest.url().host();
+        //添加统一请求头部
         Request.Builder requestBuilder = originalRequest.newBuilder();
+        requestBuilder
+                .addHeader("Accept-Charset", "utf-8")
+                .addHeader("User-Agent", getUserAgent());
+        //判断不同请求方式，进一步自定义操作处理
         String method = originalRequest.method();
-        switch (method) {
-            case "POST":
-                originalRequest = requestBuilder
-                        .addHeader("Accept-Charset", "utf-8")
-                        .addHeader("User-Agent", getUserAgent()).post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded;charset=UTF-8"),
-                                URLDecoder.decode(bodyToString(originalRequest.body()), "UTF-8")))
-                        .build();
-                break;
-            case "GET":
-                originalRequest = requestBuilder
-                        .addHeader("Content-Type", "application/json;charset=UTF-8")
-                        .addHeader("Accept-Charset", "utf-8")
-//                    .addHeader("Accept-Encoding", "gzip")
-                        .addHeader("User-Agent", getUserAgent()).get()
-                        .build();
-                break;
+        if (TextUtils.equals("POST", method)) {
+            originalRequest = requestBuilder.build();
+        } else if (TextUtils.equals("GET", method)) {
+            originalRequest = requestBuilder
+                    .addHeader("Content-Type", "application/json;charset=UTF-8")
+                    .build();
         }
         return chain.proceed(originalRequest);
     }

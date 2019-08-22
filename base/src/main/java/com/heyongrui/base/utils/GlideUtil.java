@@ -14,6 +14,8 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -44,6 +46,26 @@ public class GlideUtil {
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.NONE);
             GlideApp.with(context).load(resource).apply(options).into(imageView);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 加载带有头部的图片
+     */
+    public static void loadImageWithHeader(Context context, String url, String headerKey, String headerValue, ImageView imageView, @Nullable Drawable placeholder) {
+        try {
+            RequestOptions options = new RequestOptions()
+                    .placeholder(placeholder)
+                    .error(placeholder)
+                    .dontAnimate()
+                    .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE);
+            GlideUrl glideUrl = new GlideUrl(url, new LazyHeaders.Builder()
+                    .addHeader(headerKey, headerValue)
+                    .build());
+            GlideApp.with(context).load(glideUrl).apply(options).into(imageView);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
