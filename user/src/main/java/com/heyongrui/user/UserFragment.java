@@ -30,12 +30,13 @@ public class UserFragment extends BaseFragment {
             public void onClick(View view) {
                 int id = view.getId();
                 if (id == R.id.tv_user) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("test", "this is value");
-                    ARouter.getInstance().build(ConfigConstants.PATH_USER)
-                            .withBundle("bundle", bundle)
-                            .withString("key3", "888")
-                            .navigation();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("test", "this is value");
+//                    ARouter.getInstance().build(ConfigConstants.PATH_USER)
+//                            .withBundle("bundle", bundle)
+//                            .withString("key3", "888")
+//                            .navigation();
+                    ARouter.getInstance().build(ConfigConstants.PATH_KOTLIN).navigation();
                 }
             }
         }, R.id.tv_user);

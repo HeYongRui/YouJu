@@ -22,6 +22,7 @@ public class ConfigConstants {
     public static final String PATH_MAIN = "/main/activity";
     public static final String PATH_HOME_PROVIDER = "/home/main/service";
     //user模块路由路径
+    public static final String PATH_KOTLIN = "/user/kotlin";
     public static final String PATH_LOGIN = "/user/login";
     public static final String PATH_USER = "/user/activity";
     public static final String PATH_USER_PROVIDER = "/user/main/service";

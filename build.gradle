@@ -11,6 +11,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:' + versions.gradlePlugin
         classpath 'com.meituan.android.walle:plugin:' + versions.walle
         classpath 'com.alibaba:arouter-register:' + versions.arouterRegister
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:" + versions.kotlinVersion
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

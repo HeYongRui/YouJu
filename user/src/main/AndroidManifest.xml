@@ -4,9 +4,12 @@
     <application>
         <activity
             android:name=".UserActivity"
-            android:theme="@style/BaseAppTheme"></activity>
+            android:theme="@style/BaseAppTheme" />
         <activity
             android:name=".LoginActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".KotlinActivity"
             android:theme="@style/BaseAppTheme" />
     </application>
 

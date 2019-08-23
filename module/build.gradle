@@ -3,6 +3,9 @@ if (rootProject.ext.isRunAloneModule) {
 } else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -17,12 +20,16 @@ android {
         versionName versions.publishVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
     }
 
     signingConfigs {
@@ -85,7 +92,7 @@ dependencies {
     implementation project(':base')
     implementation project(':network')
     //Arouter路由
-    annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    kapt "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
     //视频框架
     implementation "cn.jzvd:jiaozivideoplayer:${versions.jiaozivideoplayer}"
 

@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'walle'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -13,11 +16,16 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
     }
 
     signingConfigs {
@@ -82,7 +90,7 @@ dependencies {
     //美团walle打包
     implementation "com.meituan.android.walle:library:${versions.walle}"
     //Arouter路由
-    annotationProcessor "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    kapt "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
