@@ -92,9 +92,8 @@ dependencies {
     api "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
     //Glide图片加载
     api "com.github.bumptech.glide:glide:${versions.glide}"
-    annotationProcessor "androidx.annotation:annotation:${versions.androidxAnnotation}"
-    annotationProcessor "com.github.bumptech.glide:compiler:${versions.glide}"
     kapt "com.github.bumptech.glide:compiler:${versions.glide}"
+    kapt "androidx.annotation:annotation:${versions.androidxAnnotation}"
     //状态栏管理
     api "com.gyf.immersionbar:immersionbar:${versions.immersionbar}"
     api "com.gyf.immersionbar:immersionbar-components:${versions.immersionbar}"

@@ -1,5 +1,7 @@
 package com.heyongrui.user
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -26,6 +28,8 @@ class KotlinActivity<T : BasePresenter<out BaseView<*>>?> : BaseActivity<T>(), V
         bg.setOnClickListener(this);
         iv.loadCircle("https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2551393832.jpg")
         iv2.loadCircle("https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2563780504.jpg")
+        iv3.loadCircle(ColorDrawable(Color.BLACK))
+        iv4.loadCircle(ColorDrawable(Color.GRAY))
     }
 
     fun ImageView.loadCircle(resource: Any) {
@@ -42,9 +46,11 @@ class KotlinActivity<T : BasePresenter<out BaseView<*>>?> : BaseActivity<T>(), V
         if (id == R.id.bg) {
             if (-1 == currentState) {
                 motionLayout.transitionToEnd();
+                motionLayout2.transitionToEnd();
                 currentState = 1;
             } else if (1 == currentState) {
                 motionLayout.transitionToStart();
+                motionLayout2.transitionToStart();
                 currentState = -1;
             }
         }

@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@id/end"
-        motion:constraintSetStart="@id/start"
-        motion:duration="1500"
-        motion:motionInterpolator="easeInOut">
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="2000"
+        app:motionInterpolator="easeInOut">
 
         <OnSwipe
-            motion:dragDirection="dragDown"
-            motion:touchAnchorId="@+id/iv"
-            motion:touchAnchorSide="bottom" />
+            app:dragDirection="dragDown"
+            app:touchAnchorId="@+id/iv"
+            app:touchAnchorSide="bottom" />
 
         <OnClick
-            motion:clickAction="toggle"
-            motion:targetId="@id/iv" />
+            app:clickAction="toggle"
+            app:targetId="@id/iv" />
 
         <KeyFrameSet>
             <KeyPosition
-                motion:framePosition="25"
-                motion:keyPositionType="pathRelative"
-                motion:motionTarget="@id/iv"
-                motion:pathMotionArc="startVertical"
-                motion:percentX="0.25"
-                motion:percentY="-0.25"
-                motion:transitionEasing="accelerate" />
+                app:framePosition="25"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.25"
+                app:percentY="-0.25"
+                app:transitionEasing="accelerate" />
 
             <KeyPosition
-                motion:framePosition="50"
-                motion:keyPositionType="pathRelative"
-                motion:motionTarget="@id/iv"
-                motion:pathMotionArc="flip"
-                motion:percentX="0.5"
-                motion:percentY="0.0"
-                motion:transitionEasing="accelerate" />
+                app:framePosition="50"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv"
+                app:pathMotionArc="flip"
+                app:percentX="0.5"
+                app:percentY="0.0"
+                app:transitionEasing="accelerate" />
 
             <KeyPosition
-                motion:framePosition="75"
-                motion:keyPositionType="pathRelative"
-                motion:motionTarget="@id/iv"
-                motion:pathMotionArc="startVertical"
-                motion:percentX="0.75"
-                motion:percentY="0.25"
-                motion:transitionEasing="accelerate" />
+                app:framePosition="75"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.75"
+                app:percentY="0.25"
+                app:transitionEasing="accelerate" />
 
             <!--<KeyCycle-->
             <!--app:curveFit="spline"-->
@@ -58,51 +57,51 @@
             <KeyAttribute
                 android:scaleX="2"
                 android:scaleY="2"
-                motion:framePosition="25"
-                motion:motionTarget="@id/iv"
-                motion:transitionEasing="accelerate" />
+                app:framePosition="25"
+                app:motionTarget="@id/iv"
+                app:transitionEasing="accelerate" />
 
             <KeyAttribute
                 android:rotation="-90"
                 android:scaleX="0.5"
                 android:scaleY="0.5"
-                motion:framePosition="50"
-                motion:motionTarget="@id/iv"
-                motion:transitionEasing="accelerate" />
+                app:framePosition="50"
+                app:motionTarget="@id/iv"
+                app:transitionEasing="accelerate" />
 
             <KeyAttribute
                 android:scaleX="2"
                 android:scaleY="2"
-                motion:framePosition="75"
-                motion:motionTarget="@id/iv"
-                motion:transitionEasing="accelerate" />
+                app:framePosition="75"
+                app:motionTarget="@id/iv"
+                app:transitionEasing="accelerate" />
 
             <KeyPosition
-                motion:framePosition="25"
-                motion:keyPositionType="pathRelative"
-                motion:motionTarget="@id/iv2"
-                motion:pathMotionArc="startVertical"
-                motion:percentX="0.25"
-                motion:percentY="0.25"
-                motion:transitionEasing="decelerate" />
+                app:framePosition="25"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv2"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.25"
+                app:percentY="0.25"
+                app:transitionEasing="decelerate" />
 
             <KeyPosition
-                motion:framePosition="50"
-                motion:keyPositionType="pathRelative"
-                motion:motionTarget="@id/iv2"
-                motion:pathMotionArc="flip"
-                motion:percentX="0.5"
-                motion:percentY="0.0"
-                motion:transitionEasing="decelerate" />
+                app:framePosition="50"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv2"
+                app:pathMotionArc="flip"
+                app:percentX="0.5"
+                app:percentY="0.0"
+                app:transitionEasing="decelerate" />
 
             <KeyPosition
-                motion:framePosition="75"
-                motion:keyPositionType="pathRelative"
-                motion:motionTarget="@id/iv2"
-                motion:pathMotionArc="startVertical"
-                motion:percentX="0.75"
-                motion:percentY="-0.25"
-                motion:transitionEasing="decelerate" />
+                app:framePosition="75"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv2"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.75"
+                app:percentY="-0.25"
+                app:transitionEasing="decelerate" />
 
             <!--<KeyCycle-->
             <!--app:curveFit="spline"-->
@@ -116,25 +115,25 @@
             <KeyAttribute
                 android:scaleX="2"
                 android:scaleY="2"
-                motion:framePosition="25"
-                motion:motionTarget="@id/iv2"
-                motion:transitionEasing="decelerate" />
+                app:framePosition="25"
+                app:motionTarget="@id/iv2"
+                app:transitionEasing="decelerate" />
 
 
             <KeyAttribute
                 android:rotation="-90"
                 android:scaleX="0.5"
                 android:scaleY="0.5"
-                motion:framePosition="50"
-                motion:motionTarget="@id/iv2"
-                motion:transitionEasing="decelerate" />
+                app:framePosition="50"
+                app:motionTarget="@id/iv2"
+                app:transitionEasing="decelerate" />
 
             <KeyAttribute
                 android:scaleX="2"
                 android:scaleY="2"
-                motion:framePosition="75"
-                motion:motionTarget="@id/iv2"
-                motion:transitionEasing="decelerate" />
+                app:framePosition="75"
+                app:motionTarget="@id/iv2"
+                app:transitionEasing="decelerate" />
 
         </KeyFrameSet>
 
@@ -147,23 +146,23 @@
             android:layout_height="100dp"
             android:layout_marginTop="@dimen/dp_30"
             android:rotation="0"
+            app:drawPath="pathRelative"
             app:layout_constraintEnd_toEndOf="parent"
-            motion:drawPath="pathRelative"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:pathMotionArc="startHorizontal">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:pathMotionArc="startHorizontal">
             <!--<CustomAttribute-->
-                <!--app:attributeName="backgroundColor"-->
-                <!--app:customColorValue="@color/orangeColor" />-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/orangeColor" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="warmth"-->
-            <!--motion:customFloatValue="1" />-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="1" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="contrast"-->
-            <!--motion:customFloatValue="1" />-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="1" />-->
             <CustomAttribute
-                motion:attributeName="saturation"
-                motion:customFloatValue="1" />
+                app:attributeName="saturation"
+                app:customFloatValue="1" />
         </Constraint>
 
         <Constraint
@@ -172,23 +171,23 @@
             android:layout_height="100dp"
             android:layout_marginBottom="@dimen/dp_30"
             android:rotation="-180"
+            app:drawPath="pathRelative"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            motion:drawPath="pathRelative"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:pathMotionArc="startHorizontal">
+            app:pathMotionArc="startHorizontal">
             <!--<CustomAttribute-->
-                <!--app:attributeName="backgroundColor"-->
-                <!--app:customColorValue="@color/gray" />-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/gray" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="warmth"-->
-            <!--motion:customFloatValue="0" />-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="0" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="contrast"-->
-            <!--motion:customFloatValue="0" />-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="0" />-->
             <CustomAttribute
-                motion:attributeName="saturation"
-                motion:customFloatValue="0" />
+                app:attributeName="saturation"
+                app:customFloatValue="0" />
         </Constraint>
     </ConstraintSet>
 
@@ -199,23 +198,23 @@
             android:layout_height="100dp"
             android:layout_marginBottom="@dimen/dp_30"
             android:rotation="-180"
+            app:drawPath="pathRelative"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            motion:drawPath="pathRelative"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:pathMotionArc="startVertical">
+            app:pathMotionArc="startVertical">
             <!--<CustomAttribute-->
-                <!--app:attributeName="backgroundColor"-->
-                <!--app:customColorValue="@color/gray" />-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/gray" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="warmth"-->
-            <!--motion:customFloatValue="0" />-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="0" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="contrast"-->
-            <!--motion:customFloatValue="0" />-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="0" />-->
             <CustomAttribute
-                motion:attributeName="saturation"
-                motion:customFloatValue="0" />
+                app:attributeName="saturation"
+                app:customFloatValue="0" />
         </Constraint>
 
         <Constraint
@@ -224,23 +223,23 @@
             android:layout_height="100dp"
             android:layout_marginTop="@dimen/dp_30"
             android:rotation="0"
+            app:drawPath="pathRelative"
             app:layout_constraintEnd_toEndOf="parent"
-            motion:drawPath="pathRelative"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:pathMotionArc="startHorizontal">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:pathMotionArc="startHorizontal">
             <!--<CustomAttribute-->
-                <!--app:attributeName="backgroundColor"-->
-                <!--app:customColorValue="@color/orangeColor" />-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/orangeColor" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="warmth"-->
-            <!--motion:customFloatValue="1" />-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="1" />-->
             <!--<CustomAttribute-->
-            <!--motion:attributeName="contrast"-->
-            <!--motion:customFloatValue="1" />-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="1" />-->
             <CustomAttribute
-                motion:attributeName="saturation"
-                motion:customFloatValue="1" />
+                app:attributeName="saturation"
+                app:customFloatValue="1" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

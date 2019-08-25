@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="2000"
+        app:motionInterpolator="easeInOut">
+
+        <OnSwipe
+            app:dragDirection="dragDown"
+            app:touchAnchorId="@+id/iv3"
+            app:touchAnchorSide="bottom" />
+
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@id/iv3" />
+
+        <KeyFrameSet>
+            <KeyPosition
+                app:framePosition="10"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv3"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.75"
+                app:percentY="0.75"
+                app:transitionEasing="accelerate" />
+
+            <KeyPosition
+                app:framePosition="15"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv3"
+                app:pathMotionArc="startHorizontal"
+                app:percentX="0.5"
+                app:percentY="1.0"
+                app:transitionEasing="decelerate" />
+
+            <KeyPosition
+                app:framePosition="50"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv3"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.0"
+                app:percentY="0.5"
+                app:transitionEasing="decelerate" />
+
+            <KeyPosition
+                app:framePosition="90"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv3"
+                app:pathMotionArc="startHorizontal"
+                app:percentX="0.5"
+                app:percentY="0.0"
+                app:transitionEasing="accelerate" />
+
+            <KeyPosition
+                app:framePosition="95"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv3"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.625"
+                app:percentY="0.125"
+                app:transitionEasing="accelerate" />
+
+            <!--<KeyCycle-->
+            <!--app:curveFit="spline"-->
+            <!--app:framePosition="50"-->
+            <!--app:motionTarget="@id/iv"-->
+            <!--app:waveOffset="0"-->
+            <!--app:wavePeriod="1"-->
+            <!--app:waveShape="triangle"-->
+            <!--app:waveVariesBy="path" />-->
+
+            <!--<KeyAttribute-->
+            <!--android:scaleX="2"-->
+            <!--android:scaleY="2"-->
+            <!--app:framePosition="25"-->
+            <!--app:motionTarget="@id/iv3"-->
+            <!--app:transitionEasing="accelerate" />-->
+
+            <!--<KeyAttribute-->
+            <!--android:rotation="-90"-->
+            <!--android:scaleX="0.5"-->
+            <!--android:scaleY="0.5"-->
+            <!--app:framePosition="50"-->
+            <!--app:motionTarget="@id/iv3"-->
+            <!--app:transitionEasing="accelerate" />-->
+
+            <!--<KeyAttribute-->
+            <!--android:scaleX="2"-->
+            <!--android:scaleY="2"-->
+            <!--app:framePosition="75"-->
+            <!--app:motionTarget="@id/iv3"-->
+            <!--app:transitionEasing="accelerate" />-->
+
+            <KeyPosition
+                app:framePosition="20"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv4"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.25"
+                app:percentY="0.25"
+                app:transitionEasing="decelerate" />
+
+            <KeyPosition
+                app:framePosition="50"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv4"
+                app:pathMotionArc="startHorizontal"
+                app:percentX="0.5"
+                app:percentY="0.0"
+                app:transitionEasing="accelerate" />
+
+            <KeyPosition
+                app:framePosition="70"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv4"
+                app:pathMotionArc="startVertical"
+                app:percentX="1.0"
+                app:percentY="0.5"
+                app:transitionEasing="accelerate" />
+
+            <KeyPosition
+                app:framePosition="80"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv4"
+                app:pathMotionArc="startHorizontal"
+                app:percentX="0.5"
+                app:percentY="1.0"
+                app:transitionEasing="decelerate" />
+
+            <KeyPosition
+                app:framePosition="90"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@id/iv4"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.375"
+                app:percentY="0.875"
+                app:transitionEasing="decelerate" />
+
+            <!--<KeyCycle-->
+            <!--app:curveFit="spline"-->
+            <!--app:framePosition="50"-->
+            <!--app:motionTarget="@id/iv2"-->
+            <!--app:waveOffset="0"-->
+            <!--app:wavePeriod="1"-->
+            <!--app:waveShape="triangle"-->
+            <!--app:waveVariesBy="path" />-->
+
+            <!--<KeyAttribute-->
+            <!--android:scaleX="2"-->
+            <!--android:scaleY="2"-->
+            <!--app:framePosition="25"-->
+            <!--app:motionTarget="@id/iv4"-->
+            <!--app:transitionEasing="decelerate" />-->
+
+
+            <!--<KeyAttribute-->
+            <!--android:rotation="-90"-->
+            <!--android:scaleX="0.5"-->
+            <!--android:scaleY="0.5"-->
+            <!--app:framePosition="50"-->
+            <!--app:motionTarget="@id/iv4"-->
+            <!--app:transitionEasing="decelerate" />-->
+
+            <!--<KeyAttribute-->
+            <!--android:scaleX="2"-->
+            <!--android:scaleY="2"-->
+            <!--app:framePosition="75"-->
+            <!--app:motionTarget="@id/iv4"-->
+            <!--app:transitionEasing="decelerate" />-->
+
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/iv3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:rotation="0"
+            app:drawPath="path"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:pathMotionArc="startHorizontal"
+            app:transitionEasing="accelerate">
+            <!--<CustomAttribute-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/orangeColor" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="1" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="1" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="saturation"-->
+            <!--app:customFloatValue="1" />-->
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/iv4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:rotation="-180"
+            app:drawPath="path"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:pathMotionArc="startHorizontal"
+            app:transitionEasing="decelerate">
+            <!--<CustomAttribute-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/gray" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="0" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="0" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="saturation"-->
+            <!--app:customFloatValue="0" />-->
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/iv3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:rotation="-180"
+            app:drawPath="path"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25"
+            app:pathMotionArc="startVertical"
+            app:transitionEasing="decelerate">
+            <!--<CustomAttribute-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/gray" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="0" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="0" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="saturation"-->
+            <!--app:customFloatValue="0" />-->
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/iv4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:rotation="0"
+            app:drawPath="path"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.75"
+            app:pathMotionArc="startHorizontal"
+            app:transitionEasing="accelerate">
+            <!--<CustomAttribute-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/orangeColor" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="1" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="1" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="saturation"-->
+            <!--app:customFloatValue="1" />-->
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>
