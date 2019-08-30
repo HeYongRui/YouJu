@@ -12,8 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.heyongrui.base.app.BaseApplication;
 import com.heyongrui.base.assist.NetStateChangeObserver;
 import com.heyongrui.base.assist.NetStateChangeReceiver;
+import com.heyongrui.base.dagger.AppComponent;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -33,6 +35,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeInjector();
         TAG = this.getClass().getSimpleName();
         mActivity = getActivity();
         mContext = getContext();
@@ -46,21 +49,14 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         }
     }
 
-    public void initImmersionBar() {
-    }
-
-    private boolean isImmersionBarEnabled() {
-        return true;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mInflater = inflater;
         mPresenter = setPresenter();
-        if (mPresenter != null) {
-            if (this instanceof BaseView) mPresenter.attchView(mContext, (BaseView) this);
+        if (null != mPresenter && this instanceof BaseView) {
+            mPresenter.attchView(mContext, (BaseView) this);
         }
-        if (mView == null) {
+        if (null == mView) {
             mView = inflater.inflate(getLayoutId(), container, false);
             initView(savedInstanceState);
         } else {
@@ -107,10 +103,60 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
 
     @Override
     public void onDestroy() {
-        if (mPresenter != null) {
+        if (null != mPresenter) {
             mPresenter.detachView();
         }
         super.onDestroy();
+    }
+
+    protected void addOnClickListeners(View.OnClickListener onClickListener, View... views) {
+        if (views != null) {
+            for (View view : views) {
+                view.setOnClickListener(onClickListener);
+            }
+        }
+    }
+
+    protected void addOnClickListeners(View.OnClickListener onClickListener, @IdRes int... ids) {
+        if (null == mView) return;
+        if (ids != null) {
+            for (@IdRes int id : ids) {
+                mView.findViewById(id).setOnClickListener(onClickListener);
+            }
+        }
+    }
+
+    protected void addOnLongClickListeners(View.OnLongClickListener onClickListener, @IdRes int... ids) {
+        if (null == mView) return;
+        if (ids != null) {
+            for (@IdRes int id : ids) {
+                mView.findViewById(id).setOnLongClickListener(onClickListener);
+            }
+        }
+    }
+
+    protected AppComponent getAppComponent() {
+        return BaseApplication.getAppComponent();
+    }
+
+    protected void initializeInjector() {
+    }
+
+    protected T setPresenter() {
+        return null;
+    }
+
+    protected abstract int getLayoutId();
+
+    protected abstract void initView(Bundle savedInstanceState);
+
+    protected abstract void initData(Bundle savedInstanceState);
+
+    protected void initImmersionBar() {
+    }
+
+    protected boolean isImmersionBarEnabled() {
+        return true;
     }
 
     /**
@@ -127,41 +173,4 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     @Override
     public void onNetConnected(NetworkUtils.NetworkType networkType) {//网络连接
     }
-
-    protected void addOnClickListeners(View.OnClickListener onClickListener, View... views) {
-        if (views != null) {
-            for (View view : views) {
-                view.setOnClickListener(onClickListener);
-            }
-        }
-    }
-
-    protected void addOnClickListeners(View.OnClickListener onClickListener, @IdRes int... ids) {
-        if (mView == null) return;
-        if (ids != null) {
-            for (@IdRes int id : ids) {
-                mView.findViewById(id).setOnClickListener(onClickListener);
-            }
-        }
-    }
-
-    protected void addOnLongClickListeners(View.OnLongClickListener onClickListener, @IdRes int... ids) {
-        if (mView == null) return;
-        if (ids != null) {
-            for (@IdRes int id : ids) {
-                mView.findViewById(id).setOnLongClickListener(onClickListener);
-            }
-        }
-    }
-
-
-    protected abstract int getLayoutId();
-
-    protected T setPresenter() {
-        return null;
-    }
-
-    protected abstract void initView(Bundle savedInstanceState);
-
-    protected abstract void initData(Bundle savedInstanceState);
 }

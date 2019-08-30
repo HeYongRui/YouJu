@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.heyongrui.base.app.BaseApplication;
 import com.heyongrui.base.assist.NetStateChangeObserver;
 import com.heyongrui.base.assist.NetStateChangeReceiver;
+import com.heyongrui.base.dagger.AppComponent;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -28,7 +30,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 public abstract class BaseActivity<T extends BasePresenter> extends SupportActivity implements NetStateChangeObserver {
 
-    protected String TAG = "BaseFragment";
+    protected String TAG = "BaseActivity";
     protected T mPresenter;
 
     @Override
@@ -39,6 +41,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
             Log.i("onCreate", "onCreate fixOrientation when Oreo, result = " + result);
         }
         super.onCreate(savedInstanceState);
+        initializeInjector();
         if (isImmersionBarEnabled()) {
             initImmersionBar();
         }
@@ -49,10 +52,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         }
         ARouter.getInstance().inject(this);
         mPresenter = setPresenter();
-        if (mPresenter != null) {
-            if (this instanceof BaseView) {
-                mPresenter.attchView(this, (BaseView) this);
-            }
+        if (null != mPresenter && this instanceof BaseView) {
+            mPresenter.attchView(this, (BaseView) this);
         }
         init(savedInstanceState);
         if (!NetworkUtils.isConnected()) {
@@ -90,22 +91,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
 
     @Override
     protected void onDestroy() {
-        if (mPresenter != null) {
+        if (null != mPresenter) {
             mPresenter.detachView();
         }
         super.onDestroy();
-    }
-
-    protected boolean needRegisterNetworkChangeObserver() {
-        return false;
-    }
-
-    @Override
-    public void onNetDisconnected() {
-    }
-
-    @Override
-    public void onNetConnected(NetworkUtils.NetworkType networkType) {
     }
 
     protected boolean fixOrientation() {
@@ -161,6 +150,20 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         }
     }
 
+    protected AppComponent getAppComponent() {
+        return BaseApplication.getAppComponent();
+    }
+
+    protected void initializeInjector() {
+    }
+
+    protected boolean isImmersionBarEnabled() {//是否启用沉浸式
+        return true;
+    }
+
+    protected void initImmersionBar() {
+    }
+
     protected abstract int getLayoutId();
 
     protected T setPresenter() {
@@ -169,10 +172,19 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
 
     protected abstract void init(Bundle savedInstanceState);
 
-    protected boolean isImmersionBarEnabled() {//是否启用沉浸式
-        return true;
+
+    /**
+     * 是否需要注册网络变化的Observer,如果不需要监听网络变化,则返回false;否则返回true.默认返回false
+     */
+    protected boolean needRegisterNetworkChangeObserver() {
+        return false;
     }
 
-    protected void initImmersionBar() {
+    @Override
+    public void onNetDisconnected() {//网络断开
+    }
+
+    @Override
+    public void onNetConnected(NetworkUtils.NetworkType networkType) {//网络连接
     }
 }

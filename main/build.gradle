@@ -92,6 +92,8 @@ dependencies {
     implementation project(':network')
     //Arouter路由
     kapt "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    //dagger
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"
 
     testImplementation 'junit:junit:4.12'

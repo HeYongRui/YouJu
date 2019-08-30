@@ -13,9 +13,16 @@ import com.blankj.utilcode.util.Utils;
 import com.heyongrui.base.BuildConfig;
 import com.heyongrui.base.assist.AppManager;
 import com.heyongrui.base.assist.NetStateChangeReceiver;
+import com.heyongrui.base.dagger.AppComponent;
+import com.heyongrui.base.dagger.AppModule;
+import com.heyongrui.base.dagger.DaggerAppComponent;
 import com.tencent.smtt.sdk.QbSdk;
 
 public class BaseApplication extends Application {
+
+    private static BaseApplication instance;
+    private static AppComponent appComponent;
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -25,6 +32,8 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
+        initializeInjector();
         //工具类初始化
         Utils.init(this);
         //初始化Arouter
@@ -92,5 +101,24 @@ public class BaseApplication extends Application {
                 AppManager.getInstance().removeActivity(activity);
             }
         });
+    }
+
+    public static BaseApplication getInstance() {
+        return instance;
+    }
+
+    public static Context getContext() {
+        return getInstance().getApplicationContext();
+    }
+
+    public static AppComponent getAppComponent() {
+        return appComponent;
+    }
+
+    //初始化component
+    private void initializeInjector() {
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 }

@@ -77,6 +77,9 @@ dependencies {
     api "com.alibaba:arouter-annotation:${versions.arouterAnnotation}"
     api "com.alibaba:arouter-api:${versions.arouterApi}"
     kapt "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    //dagger
+    api "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     //解决dex超出方法数限制的问题
     api "com.android.support:multidex:${versions.multidex}"
     //工具类

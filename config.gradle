@@ -28,6 +28,7 @@ ext {
             arouterAnnotation : '1.0.6',
             arouterCompiler   : '1.2.2',
             arouterRegister   : '1.0.2',
+            dagger            : '2.24',
             retrofit          : '2.6.1',
             okhttp            : '4.0.1',
             rxjava            : '2.2.10',

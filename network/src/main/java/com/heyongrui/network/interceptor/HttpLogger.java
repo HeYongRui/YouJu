@@ -1,6 +1,6 @@
 package com.heyongrui.network.interceptor;
 
-import com.blankj.utilcode.util.LogUtils;
+import android.util.Log;
 
 /**
  * Created by lambert on 2017/7/28.
@@ -12,6 +12,7 @@ public class HttpLogger implements HttpLogInterceptor.Logger {
 
     @Override
     public void log(String message) {
+//        Log.i("HttpLogger", message);
         if (message.startsWith("--> POST") || message.startsWith("--> GET")) {
             mMessage.setLength(0);
         }
@@ -21,7 +22,7 @@ public class HttpLogger implements HttpLogInterceptor.Logger {
         }
         mMessage.append(message.concat("\n"));
         if (message.startsWith("<-- END HTTP")) {
-            LogUtils.i(mMessage.toString());
+            Log.i("HttpLogger", mMessage.toString());
         }
     }
 

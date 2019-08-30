@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.FloatRange;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
 
 import com.bumptech.glide.load.DataSource;
@@ -198,6 +199,7 @@ public class GlideUtil {
     /**
      * 通过图片URL获得Bitmap(需在子线程中运行)
      */
+    @WorkerThread
     public static Bitmap getBitmap(Context context, Object resource, boolean is_circle, Integer width, Integer height) {
         Bitmap bitmap = null;
         try {

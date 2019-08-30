@@ -93,6 +93,8 @@ dependencies {
     implementation project(':network')
     //Arouter路由
     kapt "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+    //dagger
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     //视频框架
     implementation "cn.jzvd:jiaozivideoplayer:${versions.jiaozivideoplayer}"
 

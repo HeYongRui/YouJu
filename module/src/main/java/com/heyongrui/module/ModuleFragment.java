@@ -6,16 +6,24 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.heyongrui.base.assist.AppData;
 import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseFragment;
 import com.heyongrui.module.adapter.ModuleSectionAdapter;
 import com.heyongrui.module.adapter.ModuleSectionEntity;
+import com.heyongrui.module.dagger.DaggerModuleComponent;
+import com.heyongrui.module.dagger.ModuleModule;
 import com.heyongrui.module.data.dto.MenuCardDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class ModuleFragment extends BaseFragment {
+
+    @Inject
+    AppData mAppData;
 
     public static ModuleFragment getInstance() {
         ModuleFragment fragment = new ModuleFragment();
@@ -32,6 +40,17 @@ public class ModuleFragment extends BaseFragment {
     }
 
     @Override
+    protected void initializeInjector() {
+        super.initializeInjector();
+        DaggerModuleComponent
+                .builder()
+                .appComponent(getAppComponent())
+                .moduleModule(new ModuleModule(this))
+                .build()
+                .inject(this);
+    }
+
+    @Override
     protected void initView(Bundle savedInstanceState) {
         RecyclerView recyclerView = mView.findViewById(R.id.recycler_view);
         initRecyclerView(recyclerView);
@@ -39,7 +58,6 @@ public class ModuleFragment extends BaseFragment {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-
     }
 
     private void initRecyclerView(RecyclerView recyclerView) {
