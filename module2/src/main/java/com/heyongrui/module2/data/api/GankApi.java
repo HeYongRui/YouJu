@@ -12,6 +12,6 @@ import retrofit2.http.Path;
 
 public interface GankApi {
 
-    @GET("data/福利/{per_page}/{page}")
-    Observable<WelfareDto> getWelfare(@Path("per_page") int per_page, @Path("page") int page);
+    @GET("data/{category}/{per_page}/{page}")
+    Observable<WelfareDto> getGankCategory(@Path("category") String category, @Path("per_page") int per_page, @Path("page") int page);
 }

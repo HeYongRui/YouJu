@@ -21,7 +21,13 @@ public class GankService {
 
     public Observable<WelfareDto> getWelfare(int perPage, int page) {
         return ApiService.createApi(GankApi.class, BASE_URL_GANK)
-                .getWelfare(perPage, page)
+                .getGankCategory("福利", perPage, page)
+                .compose(RxHelper.rxSchedulerHelper());
+    }
+
+    public Observable<WelfareDto> getAndroid(int perPage, int page) {
+        return ApiService.createApi(GankApi.class, BASE_URL_GANK)
+                .getGankCategory("Android", perPage, page)
                 .compose(RxHelper.rxSchedulerHelper());
     }
 }

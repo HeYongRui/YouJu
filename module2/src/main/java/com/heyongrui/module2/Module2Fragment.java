@@ -125,6 +125,9 @@ public class Module2Fragment extends BaseFragment {
                     case 1://福利
                         ARouter.getInstance().build(ConfigConstants.PATH_WELFARE).navigation();
                         break;
+                    case 2://Android
+                        ARouter.getInstance().build(ConfigConstants.PATH_GANK).withInt("type", 1).navigation();
+                        break;
                     case 9://关于
                         ARouter.getInstance().build(ConfigConstants.PATH_ABOUT).navigation();
                         break;
