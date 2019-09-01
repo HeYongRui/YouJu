@@ -16,6 +16,7 @@ import java.util.GregorianCalendar;
  */
 
 public class TimeUtil {
+    public final static String ISO8601 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     public final static String SEC = "yyyy-MM-dd HH:mm:ss";
     public final static String MIN = "yyyy-MM-dd HH:mm";
     public final static String MIN_TWO = "MM-dd HH:mm";
@@ -44,6 +45,23 @@ public class TimeUtil {
         SimpleDateFormat sdf = new SimpleDateFormat(targetDateType);
         String datestring = sdf.format(date);
         return datestring;
+    }
+
+    /**
+     * 将原始格式的时间转化为新时间的格式
+     */
+    public static String getDateString(String originalTime, String originalFormat, String targetFormat) {
+        if (TextUtils.isEmpty(originalTime) || TextUtils.isEmpty(originalFormat) || TextUtils.isEmpty(targetFormat))
+            return "";
+        String targetTime = "";
+        try {
+            SimpleDateFormat sdfSource = new SimpleDateFormat(originalFormat);//原始的日期格式
+            SimpleDateFormat sdfTarget = new SimpleDateFormat(targetFormat);//新日期格式
+            targetTime = sdfTarget.format(sdfSource.parse(originalTime));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return targetTime;
     }
 
     /**

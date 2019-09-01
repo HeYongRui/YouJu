@@ -2,7 +2,7 @@ package com.heyongrui.module2.adapter;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.entity.SectionMultiEntity;
-import com.heyongrui.module2.data.dto.WelfareDto;
+import com.heyongrui.module2.data.dto.GankDto;
 
 import java.util.List;
 
@@ -11,14 +11,15 @@ import java.util.List;
  * 2019/6/25 18:13
  */
 public class Module2SectionEntity extends SectionMultiEntity implements MultiItemEntity {
-
+    
     public static final int WELFARE = 100;
+    public static final int GANK = 101;
 
     private int itemType;
     private int spanSize;
 
     private Object object;
-    private WelfareDto.WelfareBean welfareBean;
+    private GankDto.GankBean gankBean;
 
     public Module2SectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -39,8 +40,8 @@ public class Module2SectionEntity extends SectionMultiEntity implements MultiIte
 //                if (o instanceof BannerDto) {
 //                    this.bannerDtoList = (List<BannerDto>) object;
 //                }
-            } else if (object instanceof WelfareDto.WelfareBean) {
-                this.welfareBean = (WelfareDto.WelfareBean) object;
+            } else if (object instanceof GankDto.GankBean) {
+                this.gankBean = (GankDto.GankBean) object;
             }
         }
     }
@@ -70,11 +71,11 @@ public class Module2SectionEntity extends SectionMultiEntity implements MultiIte
         this.object = object;
     }
 
-    public WelfareDto.WelfareBean getWelfareBean() {
-        return welfareBean;
+    public GankDto.GankBean getGankBean() {
+        return gankBean;
     }
 
-    public void setWelfareBean(WelfareDto.WelfareBean welfareBean) {
-        this.welfareBean = welfareBean;
+    public void setGankBean(GankDto.GankBean gankBean) {
+        this.gankBean = gankBean;
     }
 }

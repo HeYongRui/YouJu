@@ -6,10 +6,10 @@ import java.util.List;
  * Created by Mr.He on 2019/3/10.
  */
 
-public class WelfareDto {
+public class GankDto {
 
     private boolean error;
-    private List<WelfareBean> results;
+    private List<GankBean> results;
 
     public boolean isError() {
         return error;
@@ -19,15 +19,15 @@ public class WelfareDto {
         this.error = error;
     }
 
-    public List<WelfareBean> getResults() {
+    public List<GankBean> getResults() {
         return results;
     }
 
-    public void setResults(List<WelfareBean> results) {
+    public void setResults(List<GankBean> results) {
         this.results = results;
     }
 
-    public static class WelfareBean {
+    public static class GankBean {
 
         private String _id;
         private String createdAt;

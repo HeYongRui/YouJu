@@ -106,6 +106,8 @@ public class UpdateCheckUtil {
                             boolean is_force_update = jsonObject.getBoolean("ignore_able");
                             showUpdateDialog(mActivity, "V " + update_ver_name + "\n" + update_content, update_url,
                                     is_force_update, authority, appName);
+                        } else {
+                            ToastUtils.showShort(R.string.latest_tip);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

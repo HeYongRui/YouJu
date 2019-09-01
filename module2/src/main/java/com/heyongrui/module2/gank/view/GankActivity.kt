@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.heyongrui.base.assist.ConfigConstants
@@ -13,7 +14,7 @@ import com.heyongrui.base.utils.DrawableUtil
 import com.heyongrui.module2.R
 import com.heyongrui.module2.adapter.Module2SectionAdapter
 import com.heyongrui.module2.adapter.Module2SectionEntity
-import com.heyongrui.module2.data.dto.WelfareDto
+import com.heyongrui.module2.data.dto.GankDto
 import com.heyongrui.module2.gank.contract.GankContract
 import com.heyongrui.module2.gank.presenter.GankPresenter
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -25,8 +26,8 @@ import java.util.*
 class GankActivity : BaseActivity<GankContract.Presenter>(), GankContract.View, View.OnClickListener, BaseQuickAdapter.OnItemClickListener, OnRefreshLoadMoreListener {
 
     @JvmField
-    @Autowired(name = "type")
-    var mType: Int = 0
+    @Autowired(name = "category")
+    var mCategory: String = ""
 
     private val mPerPage = 10
     private var mPage = 1
@@ -60,51 +61,76 @@ class GankActivity : BaseActivity<GankContract.Presenter>(), GankContract.View, 
         val tintDrawable = DrawableUtil.tintDrawable(this@GankActivity, R.drawable.ic_back, ContextCompat.getColor(this@GankActivity, R.color.background))
         iv_back.setImageDrawable(tintDrawable)
 
+        tv_title.text = mCategory
+
         mPresenter.initSwipeRefresh(refresh_layout, store_house_header, this@GankActivity)
         mGankAdapter = mPresenter.initRecyclerView(rlv_gank, this@GankActivity)
 
         refresh_layout.autoRefresh()
     }
 
-    private fun loadData() {
-        mPresenter.getAndroid(mPerPage, mPage)
-    }
-
     override fun onLoadMore(refreshLayout: RefreshLayout) {
+        if (mIsLastPage) {
+            resetRefreshLayout(true, true, true)
+        } else {
+            loadData(false)
+        }
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        loadData()
+        loadData(true)
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-
+        val gankBean = mGankAdapter.data.get(position).gankBean
+        ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", gankBean.url).navigation()
     }
 
-    override fun getAndroidSuccess(welfareDto: WelfareDto) {
+    override fun getGankCategorySuccess(gankDto: GankDto) {
         resetRefreshLayout(true, true, false)
         val addDataList = ArrayList<Module2SectionEntity>()
-        if (welfareDto != null) {
-            if (!welfareDto.isError) {
-                val welfareBeanList = welfareDto.results
-                if (welfareBeanList != null && !welfareBeanList.isEmpty()) {
-                    if (welfareBeanList.size < mPerPage) {
-                        mIsLastPage = true
+        if (!gankDto.isError) {
+            val gankBeanList = gankDto.results
+            mIsLastPage = gankBeanList.size < mPerPage
+            for (gankBean in gankBeanList) {
+                var itemType: Int = Module2SectionEntity.GANK
+                when (gankBean.type) {
+                    "Android" -> {
+                        itemType = Module2SectionEntity.GANK
                     }
-                    for (welfareBean in welfareBeanList) {
-                        addDataList.add(Module2SectionEntity(Module2SectionEntity.WELFARE, welfareBean))
+                    "iOS" -> {
                     }
-                } else {
-                    mIsLastPage = true
+                    "休息视频" -> {
+                    }
+                    "拓展资源" -> {
+                    }
+                    "前端" -> {
+                    }
+                    "all" -> {
+                    }
                 }
+                addDataList.add(Module2SectionEntity(itemType, gankBean))
             }
         }
-        mGankAdapter.replaceData(addDataList)
+        if (1 == mPage) {
+            mGankAdapter.replaceData(addDataList)
+        } else {
+            mGankAdapter.addData(addDataList)
+        }
     }
 
-    override fun getAndroidFail(errorCode: Int, errorMsg: String) {
+    override fun getGankCategoryFail(errorCode: Int, errorMsg: String) {
         ToastUtils.showShort(errorMsg)
         resetRefreshLayout(true, true, false)
+    }
+
+    private fun loadData(isClearData: Boolean) {
+        if (isClearData) {
+            mPage = 1
+        } else {
+            mPage += 1
+        }
+        mPresenter.getGankCategory(mCategory, mPerPage, mPage)
     }
 
     private fun resetRefreshLayout(isFinishLoadMore: Boolean, isFinishRefresh: Boolean, noMoreData: Boolean) {

@@ -3,11 +3,11 @@ package com.heyongrui.module2.gank.contract;
 import com.heyongrui.base.base.BasePresenter;
 import com.heyongrui.base.base.BaseView;
 import com.heyongrui.base.widget.imagewatcher.ImageWatcherHelper;
-import com.heyongrui.module2.data.dto.WelfareDto;
+import com.heyongrui.module2.data.dto.GankDto;
 
 public interface WelfareContract {
     interface View extends BaseView {
-        void getWelfareSuccess(WelfareDto welfareDto);
+        void getWelfareSuccess(GankDto gankDto);
 
         void getWelfareFail(int errorCode, String errorMsg);
     }

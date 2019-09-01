@@ -5,6 +5,7 @@
     <string name="update_url">https://raw.githubusercontent.com/HeYongRui/YouJu/master/app/version_update.json</string>
     <string name="update_title">更新提示</string>
     <string name="update_error">更新失败</string>
+    <string name="latest_tip">已是最新版本</string>
     <string name="update">更新</string>
     <string name="downloading">下载中...</string>
     <string name="doing_download">正在下载</string>

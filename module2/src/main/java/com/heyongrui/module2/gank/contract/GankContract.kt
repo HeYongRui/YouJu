@@ -5,16 +5,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.heyongrui.base.base.BasePresenter
 import com.heyongrui.base.base.BaseView
 import com.heyongrui.module2.adapter.Module2SectionAdapter
-import com.heyongrui.module2.data.dto.WelfareDto
+import com.heyongrui.module2.data.dto.GankDto
 import com.scwang.smartrefresh.header.StoreHouseHeader
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 
 interface GankContract {
     interface View : BaseView<Any> {
-        fun getAndroidSuccess(welfareDto: WelfareDto)
+        fun getGankCategorySuccess(gankDto: GankDto)
 
-        fun getAndroidFail(errorCode: Int, errorMsg: String)
+        fun getGankCategoryFail(errorCode: Int, errorMsg: String)
     }
 
     abstract class Presenter : BasePresenter<View>() {
@@ -22,6 +22,6 @@ interface GankContract {
 
         abstract fun initRecyclerView(recyclerView: RecyclerView, listener: BaseQuickAdapter.OnItemClickListener): Module2SectionAdapter
 
-        abstract fun getAndroid(perPage: Int, page: Int)
+        abstract fun getGankCategory(category: String, perPage: Int, page: Int)
     }
 }

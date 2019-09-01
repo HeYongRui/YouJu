@@ -12,7 +12,7 @@ import com.heyongrui.module2.adapter.Module2SectionAdapter
 import com.heyongrui.module2.adapter.Module2SectionEntity
 import com.heyongrui.module2.dagger.DaggerModule2Component
 import com.heyongrui.module2.dagger.Module2Module
-import com.heyongrui.module2.data.dto.WelfareDto
+import com.heyongrui.module2.data.dto.GankDto
 import com.heyongrui.module2.data.service.GankService
 import com.heyongrui.module2.gank.contract.GankContract
 import com.heyongrui.network.configure.ResponseDisposable
@@ -46,8 +46,8 @@ class GankPresenter : GankContract.Presenter() {
         val moduleSectionAdapter = Module2SectionAdapter(data)
         recyclerView.layoutManager = LinearLayoutManager(mContext)
         moduleSectionAdapter.bindToRecyclerView(recyclerView)
-        val dp10 = ConvertUtils.dp2px(10f)
-        recyclerView.addItemDecoration(RecycleViewItemDecoration(mContext, dp10))
+        val dp1 = ConvertUtils.dp2px(1f)
+        recyclerView.addItemDecoration(RecycleViewItemDecoration(mContext, dp1))
         moduleSectionAdapter.setSpanSizeLookup({ gridLayoutManager, position -> data[position].getSpanSize() })
         if (null != listener) {
             moduleSectionAdapter.setOnItemClickListener(listener)
@@ -55,18 +55,18 @@ class GankPresenter : GankContract.Presenter() {
         return moduleSectionAdapter
     }
 
-    override fun getAndroid(perPage: Int, page: Int) {
-        mRxManager.add(mGankService.getAndroid(perPage, page).subscribeWith(
-                object : ResponseDisposable<WelfareDto>(mContext, true) {
-                    override fun onSuccess(welfareDto: WelfareDto) {
+    override fun getGankCategory(category: String, perPage: Int, page: Int) {
+        mRxManager.add(mGankService.getGankCategory(category, perPage, page).subscribeWith(
+                object : ResponseDisposable<GankDto>(mContext, true) {
+                    override fun onSuccess(gankDto: GankDto) {
                         if (mView != null) {
-                            mView.getAndroidSuccess(welfareDto)
+                            mView.getGankCategorySuccess(gankDto)
                         }
                     }
 
                     override fun onFailure(errorCode: Int, errorMsg: String) {
                         if (mView != null) {
-                            mView.getAndroidFail(errorCode, errorMsg)
+                            mView.getGankCategoryFail(errorCode, errorMsg)
                         }
                     }
                 }))

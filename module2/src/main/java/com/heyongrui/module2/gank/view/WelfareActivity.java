@@ -20,7 +20,7 @@ import com.heyongrui.base.widget.imagewatcher.ImageWatcherHelper;
 import com.heyongrui.module2.R;
 import com.heyongrui.module2.adapter.Module2SectionAdapter;
 import com.heyongrui.module2.adapter.Module2SectionEntity;
-import com.heyongrui.module2.data.dto.WelfareDto;
+import com.heyongrui.module2.data.dto.GankDto;
 import com.heyongrui.module2.gank.contract.WelfareContract;
 import com.heyongrui.module2.gank.presenter.WelfarePresenter;
 import com.scwang.smartrefresh.header.StoreHouseHeader;
@@ -138,20 +138,20 @@ public class WelfareActivity extends BaseActivity<WelfareContract.Presenter> imp
     }
 
     @Override
-    public void getWelfareSuccess(WelfareDto welfareDto) {
+    public void getWelfareSuccess(GankDto gankDto) {
         refreshLayout.finishLoadMore();
         refreshLayout.finishRefresh();
         refreshLayout.setNoMoreData(false);
         List<Module2SectionEntity> addDataList = new ArrayList<>();
-        if (welfareDto != null) {
-            if (!welfareDto.isError()) {
-                List<WelfareDto.WelfareBean> welfareBeanList = welfareDto.getResults();
-                if (welfareBeanList != null && !welfareBeanList.isEmpty()) {
-                    if (welfareBeanList.size() < mPerPage) {
+        if (gankDto != null) {
+            if (!gankDto.isError()) {
+                List<GankDto.GankBean> gankBeanList = gankDto.getResults();
+                if (gankBeanList != null && !gankBeanList.isEmpty()) {
+                    if (gankBeanList.size() < mPerPage) {
                         mIsLastPage = true;
                     }
-                    for (WelfareDto.WelfareBean welfareBean : welfareBeanList) {
-                        addDataList.add(new Module2SectionEntity(Module2SectionEntity.WELFARE, welfareBean));
+                    for (GankDto.GankBean gankBean : gankBeanList) {
+                        addDataList.add(new Module2SectionEntity(Module2SectionEntity.WELFARE, gankBean));
                     }
                 } else {
                     mIsLastPage = true;

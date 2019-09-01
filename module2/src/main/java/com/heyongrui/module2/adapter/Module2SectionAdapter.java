@@ -1,12 +1,15 @@
 package com.heyongrui.module2.adapter;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -15,8 +18,10 @@ import com.bumptech.glide.request.transition.Transition;
 import com.chad.library.adapter.base.BaseSectionMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.heyongrui.base.glide.GlideApp;
+import com.heyongrui.base.utils.TimeUtil;
+import com.heyongrui.base.utils.UiUtil;
 import com.heyongrui.module2.R;
-import com.heyongrui.module2.data.dto.WelfareDto;
+import com.heyongrui.module2.data.dto.GankDto;
 
 import java.util.List;
 
@@ -34,6 +39,7 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
     public Module2SectionAdapter(int sectionHeadResId, List<Module2SectionEntity> data) {
         super(sectionHeadResId, data);
         addItemType(Module2SectionEntity.WELFARE, R.layout.recycle_item_welfare);
+        addItemType(Module2SectionEntity.GANK, R.layout.recycle_item_android);
     }
 
     @Override
@@ -49,9 +55,9 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
             case Module2SectionEntity.WELFARE: {
                 ConstraintLayout content = helper.getView(R.id.content);
                 ImageView coverIv = helper.getView(R.id.iv);
-                WelfareDto.WelfareBean welfareBean = item.getWelfareBean();
-                if (welfareBean == null) return;
-                String url = welfareBean.getUrl();
+                GankDto.GankBean gankBean = item.getGankBean();
+                if (gankBean == null) return;
+                String url = gankBean.getUrl();
                 RequestOptions options = new RequestOptions()
                         .placeholder(R.drawable.placeholder)
                         .error(R.drawable.placeholder_fail)
@@ -67,6 +73,25 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
                         coverIv.setImageBitmap(resource);
                     }
                 });
+            }
+            break;
+            case Module2SectionEntity.GANK: {
+                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                TextView tvTitle = helper.getView(R.id.tv_title);
+                TextView tvType = helper.getView(R.id.tv_type);
+                TextView tvDate = helper.getView(R.id.tv_date);
+
+                String title = "", type = "", date = "";
+                GankDto.GankBean gankBean = item.getGankBean();
+                if (null != gankBean) {
+                    title = gankBean.getDesc();
+                    type = gankBean.getType();
+                    String publishedAt = gankBean.getPublishedAt();
+                    date = TimeUtil.getDateString(publishedAt, TimeUtil.ISO8601, TimeUtil.DAY_ONE);
+                }
+                tvTitle.setText(TextUtils.isEmpty(title) ? "" : title);
+                tvType.setText(TextUtils.isEmpty(type) ? "" : type);
+                tvDate.setText(TextUtils.isEmpty(date) ? "" : date);
             }
             break;
         }

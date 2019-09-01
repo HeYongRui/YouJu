@@ -126,7 +126,16 @@ public class Module2Fragment extends BaseFragment {
                         ARouter.getInstance().build(ConfigConstants.PATH_WELFARE).navigation();
                         break;
                     case 2://Android
-                        ARouter.getInstance().build(ConfigConstants.PATH_GANK).withInt("type", 1).navigation();
+                        ARouter.getInstance().build(ConfigConstants.PATH_GANK).withString("category", "Android").navigation();
+                        break;
+                    case 3://IOS
+                        ARouter.getInstance().build(ConfigConstants.PATH_GANK).withString("category", "iOS").navigation();
+                        break;
+                    case 5://前端
+                        ARouter.getInstance().build(ConfigConstants.PATH_GANK).withString("category", "前端").navigation();
+                        break;
+                    case 6://拓展资源
+                        ARouter.getInstance().build(ConfigConstants.PATH_GANK).withString("category", "拓展资源").navigation();
                         break;
                     case 9://关于
                         ARouter.getInstance().build(ConfigConstants.PATH_ABOUT).navigation();
