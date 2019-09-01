@@ -13,6 +13,7 @@ import com.heyongrui.module2.adapter.Module2SectionEntity
 import com.heyongrui.module2.dagger.DaggerModule2Component
 import com.heyongrui.module2.dagger.Module2Module
 import com.heyongrui.module2.data.dto.GankDto
+import com.heyongrui.module2.data.dto.GankResponse
 import com.heyongrui.module2.data.service.GankService
 import com.heyongrui.module2.gank.contract.GankContract
 import com.heyongrui.network.configure.ResponseDisposable
@@ -57,10 +58,10 @@ class GankPresenter : GankContract.Presenter() {
 
     override fun getGankCategory(category: String, perPage: Int, page: Int) {
         mRxManager.add(mGankService.getGankCategory(category, perPage, page).subscribeWith(
-                object : ResponseDisposable<GankDto>(mContext, true) {
-                    override fun onSuccess(gankDto: GankDto) {
+                object : ResponseDisposable<GankResponse<List<GankDto>>>(mContext, true) {
+                    override fun onSuccess(gankDtoList: GankResponse<List<GankDto>>) {
                         if (mView != null) {
-                            mView.getGankCategorySuccess(gankDto)
+                            gankDtoList.results?.let { mView.getGankCategorySuccess(it) }
                         }
                     }
 

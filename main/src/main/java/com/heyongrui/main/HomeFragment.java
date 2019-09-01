@@ -27,8 +27,7 @@ public class HomeFragment extends BaseFragment {
         addOnClickListeners(view -> {
             int id = view.getId();
             if (id == R.id.tv_home) {
-//                    ARouter.getInstance().build(ConfigConstants.PATH_USER).withBoolean(ConfigConstants.IS_NEED_INTERCEPT, true).navigation();
-                ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://ys.juan8014.cn/yin/").navigation();
+                ARouter.getInstance().build(ConfigConstants.PATH_USER).withBoolean(ConfigConstants.IS_NEED_INTERCEPT, true).navigation();
             }
         }, R.id.tv_home);
     }

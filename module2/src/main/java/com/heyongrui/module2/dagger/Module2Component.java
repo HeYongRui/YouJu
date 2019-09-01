@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import com.heyongrui.base.dagger.AppComponent;
 import com.heyongrui.base.dagger.PerActivity;
 import com.heyongrui.module2.gank.presenter.GankPresenter;
+import com.heyongrui.module2.gank.presenter.LeisureReadPresenter;
 
 import dagger.Component;
 
@@ -24,4 +25,6 @@ public interface Module2Component {
     Fragment getFragment();
 
     void inject(GankPresenter gankPresenter);
+
+    void inject(LeisureReadPresenter leisureReadPresenter);
 }

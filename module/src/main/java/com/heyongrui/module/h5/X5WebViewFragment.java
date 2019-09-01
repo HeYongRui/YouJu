@@ -64,8 +64,10 @@ public class X5WebViewFragment extends BaseFragment {
             int id = view.getId();
             if (id == R.id.iv_back) {
                 backLogic();
+            } else if (id == R.id.iv_close) {
+                mActivity.finish();
             }
-        }, R.id.iv_back);
+        }, R.id.iv_back, R.id.iv_close);
     }
 
     @Override

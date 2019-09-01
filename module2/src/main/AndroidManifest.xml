@@ -14,5 +14,8 @@
         <activity
             android:name=".gank.view.GankActivity"
             android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".gank.view.LeisureReadActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 </manifest>

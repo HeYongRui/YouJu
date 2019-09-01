@@ -82,6 +82,7 @@ public class ModuleFragment extends BaseFragment {
                 case 4://探索
                     break;
                 case 5://音乐
+                    ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://ys.juan8014.cn/yin/").navigation();
                     break;
                 case 6://开眼
                     ARouter.getInstance().build(ConfigConstants.PATH_KAIYAN_LIST).withInt("type", 1).navigation();

@@ -1,114 +1,89 @@
 package com.heyongrui.module2.data.dto;
 
-import java.util.List;
-
 /**
  * Created by Mr.He on 2019/3/10.
  */
 
 public class GankDto {
+    private String _id;
+    private String createdAt;
+    private String desc;
+    private String publishedAt;
+    private String source;
+    private String type;
+    private String url;
+    private boolean used;
+    private String who;
 
-    private boolean error;
-    private List<GankBean> results;
-
-    public boolean isError() {
-        return error;
+    public String get_id() {
+        return _id;
     }
 
-    public void setError(boolean error) {
-        this.error = error;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
-    public List<GankBean> getResults() {
-        return results;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setResults(List<GankBean> results) {
-        this.results = results;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public static class GankBean {
+    public String getDesc() {
+        return desc;
+    }
 
-        private String _id;
-        private String createdAt;
-        private String desc;
-        private String publishedAt;
-        private String source;
-        private String type;
-        private String url;
-        private boolean used;
-        private String who;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
-        public String get_id() {
-            return _id;
-        }
+    public String getPublishedAt() {
+        return publishedAt;
+    }
 
-        public void set_id(String _id) {
-            this._id = _id;
-        }
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
 
-        public String getCreatedAt() {
-            return createdAt;
-        }
+    public String getSource() {
+        return source;
+    }
 
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
-        }
+    public void setSource(String source) {
+        this.source = source;
+    }
 
-        public String getDesc() {
-            return desc;
-        }
+    public String getType() {
+        return type;
+    }
 
-        public void setDesc(String desc) {
-            this.desc = desc;
-        }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-        public String getPublishedAt() {
-            return publishedAt;
-        }
+    public String getUrl() {
+        return url;
+    }
 
-        public void setPublishedAt(String publishedAt) {
-            this.publishedAt = publishedAt;
-        }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-        public String getSource() {
-            return source;
-        }
+    public boolean isUsed() {
+        return used;
+    }
 
-        public void setSource(String source) {
-            this.source = source;
-        }
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
 
-        public String getType() {
-            return type;
-        }
+    public String getWho() {
+        return who;
+    }
 
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public boolean isUsed() {
-            return used;
-        }
-
-        public void setUsed(boolean used) {
-            this.used = used;
-        }
-
-        public String getWho() {
-            return who;
-        }
-
-        public void setWho(String who) {
-            this.who = who;
-        }
+    public void setWho(String who) {
+        this.who = who;
     }
 }

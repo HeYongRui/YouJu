@@ -5,9 +5,11 @@ import com.heyongrui.base.base.BaseView;
 import com.heyongrui.base.widget.imagewatcher.ImageWatcherHelper;
 import com.heyongrui.module2.data.dto.GankDto;
 
+import java.util.List;
+
 public interface WelfareContract {
     interface View extends BaseView {
-        void getWelfareSuccess(GankDto gankDto);
+        void getWelfareSuccess(List<GankDto> gankDtoList);
 
         void getWelfareFail(int errorCode, String errorMsg);
     }

@@ -8,6 +8,6 @@
     android:padding="@dimen/dp_10"
     android:singleLine="true"
     android:textColor="@color/text_color"
-    android:textSize="@dimen/sp_14">
+    android:textSize="@dimen/sp_16">
 
 </TextView>

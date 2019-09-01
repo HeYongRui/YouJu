@@ -12,7 +12,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 
 interface GankContract {
     interface View : BaseView<Any> {
-        fun getGankCategorySuccess(gankDto: GankDto)
+        fun getGankCategorySuccess(gankDtoList: List<GankDto>)
 
         fun getGankCategoryFail(errorCode: Int, errorMsg: String)
     }

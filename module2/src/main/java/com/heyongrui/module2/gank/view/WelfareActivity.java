@@ -138,25 +138,20 @@ public class WelfareActivity extends BaseActivity<WelfareContract.Presenter> imp
     }
 
     @Override
-    public void getWelfareSuccess(GankDto gankDto) {
+    public void getWelfareSuccess(List<GankDto> gankDtoList) {
         refreshLayout.finishLoadMore();
         refreshLayout.finishRefresh();
         refreshLayout.setNoMoreData(false);
         List<Module2SectionEntity> addDataList = new ArrayList<>();
-        if (gankDto != null) {
-            if (!gankDto.isError()) {
-                List<GankDto.GankBean> gankBeanList = gankDto.getResults();
-                if (gankBeanList != null && !gankBeanList.isEmpty()) {
-                    if (gankBeanList.size() < mPerPage) {
-                        mIsLastPage = true;
-                    }
-                    for (GankDto.GankBean gankBean : gankBeanList) {
-                        addDataList.add(new Module2SectionEntity(Module2SectionEntity.WELFARE, gankBean));
-                    }
-                } else {
-                    mIsLastPage = true;
-                }
+        if (gankDtoList != null && !gankDtoList.isEmpty()) {
+            if (gankDtoList.size() < mPerPage) {
+                mIsLastPage = true;
             }
+            for (GankDto gankBean : gankDtoList) {
+                addDataList.add(new Module2SectionEntity(Module2SectionEntity.WELFARE, gankBean));
+            }
+        } else {
+            mIsLastPage = true;
         }
         mGankAdapter.addData(addDataList);
     }

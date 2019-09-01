@@ -14,9 +14,12 @@ import com.heyongrui.base.widget.imagewatcher.ImageWatcher;
 import com.heyongrui.base.widget.imagewatcher.ImageWatcherHelper;
 import com.heyongrui.module2.adapter.Module2SectionEntity;
 import com.heyongrui.module2.data.dto.GankDto;
+import com.heyongrui.module2.data.dto.GankResponse;
 import com.heyongrui.module2.data.service.GankService;
 import com.heyongrui.module2.gank.contract.WelfareContract;
 import com.heyongrui.network.configure.ResponseDisposable;
+
+import java.util.List;
 
 public class WelfarePresenter extends WelfareContract.Presenter {
 
@@ -35,9 +38,9 @@ public class WelfarePresenter extends WelfareContract.Presenter {
                 public void load(Context context, Object o, ImageWatcher.LoadCallback lc) {
                     if (o == null) return;
                     if (o instanceof Module2SectionEntity) {
-                        GankDto.GankBean gankBean = ((Module2SectionEntity) o).getGankBean();
-                        if (gankBean == null) return;
-                        String url = gankBean.getUrl();
+                        GankDto gankDto = ((Module2SectionEntity) o).getGankDto();
+                        if (gankDto == null) return;
+                        String url = gankDto.getUrl();
                         GlideApp.with(context).load(url)
                                 .into(new SimpleTarget<Drawable>() {
                                     @Override
@@ -65,11 +68,11 @@ public class WelfarePresenter extends WelfareContract.Presenter {
     @Override
     public void getWelfare(int perPage, int page) {
         mRxManager.add(mGankService.getGankCategory("福利", perPage, page).subscribeWith(
-                new ResponseDisposable<GankDto>(mContext, true) {
+                new ResponseDisposable<GankResponse<List<GankDto>>>(mContext, true) {
                     @Override
-                    protected void onSuccess(GankDto gankDto) {
+                    protected void onSuccess(GankResponse<List<GankDto>> gankDto) {
                         if (mView != null) {
-                            mView.getWelfareSuccess(gankDto);
+                            mView.getWelfareSuccess(gankDto.getResults());
                         }
                     }
 

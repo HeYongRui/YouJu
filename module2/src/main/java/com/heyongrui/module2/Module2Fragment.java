@@ -137,6 +137,9 @@ public class Module2Fragment extends BaseFragment {
                     case 6://拓展资源
                         ARouter.getInstance().build(ConfigConstants.PATH_GANK).withString("category", "拓展资源").navigation();
                         break;
+                    case 8://瞎推荐
+                        ARouter.getInstance().build(ConfigConstants.PATH_LEISURE_READ).navigation();
+                        break;
                     case 9://关于
                         ARouter.getInstance().build(ConfigConstants.PATH_ABOUT).navigation();
                         break;

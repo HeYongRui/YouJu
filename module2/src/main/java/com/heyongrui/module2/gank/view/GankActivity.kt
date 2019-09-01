@@ -82,35 +82,32 @@ class GankActivity : BaseActivity<GankContract.Presenter>(), GankContract.View, 
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-        val gankBean = mGankAdapter.data.get(position).gankBean
+        val gankBean = mGankAdapter.data.get(position).gankDto
         ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", gankBean.url).navigation()
     }
 
-    override fun getGankCategorySuccess(gankDto: GankDto) {
+    override fun getGankCategorySuccess(gankDtoList: List<GankDto>) {
         resetRefreshLayout(true, true, false)
         val addDataList = ArrayList<Module2SectionEntity>()
-        if (!gankDto.isError) {
-            val gankBeanList = gankDto.results
-            mIsLastPage = gankBeanList.size < mPerPage
-            for (gankBean in gankBeanList) {
-                var itemType: Int = Module2SectionEntity.GANK
-                when (gankBean.type) {
-                    "Android" -> {
-                        itemType = Module2SectionEntity.GANK
-                    }
-                    "iOS" -> {
-                    }
-                    "休息视频" -> {
-                    }
-                    "拓展资源" -> {
-                    }
-                    "前端" -> {
-                    }
-                    "all" -> {
-                    }
+        mIsLastPage = gankDtoList.size < mPerPage
+        for (gankBean in gankDtoList) {
+            var itemType: Int = Module2SectionEntity.GANK
+            when (gankBean.type) {
+                "Android" -> {
+                    itemType = Module2SectionEntity.GANK
                 }
-                addDataList.add(Module2SectionEntity(itemType, gankBean))
+                "iOS" -> {
+                }
+                "休息视频" -> {
+                }
+                "拓展资源" -> {
+                }
+                "前端" -> {
+                }
+                "all" -> {
+                }
             }
+            addDataList.add(Module2SectionEntity(itemType, gankBean))
         }
         if (1 == mPage) {
             mGankAdapter.replaceData(addDataList)

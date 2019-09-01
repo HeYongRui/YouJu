@@ -22,6 +22,7 @@ import com.heyongrui.base.utils.TimeUtil;
 import com.heyongrui.base.utils.UiUtil;
 import com.heyongrui.module2.R;
 import com.heyongrui.module2.data.dto.GankDto;
+import com.heyongrui.module2.data.dto.LeisureReadDto;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
         super(sectionHeadResId, data);
         addItemType(Module2SectionEntity.WELFARE, R.layout.recycle_item_welfare);
         addItemType(Module2SectionEntity.GANK, R.layout.recycle_item_android);
+        addItemType(Module2SectionEntity.LEISURE_READ, R.layout.recycle_item_leisure_read);
     }
 
     @Override
@@ -55,9 +57,9 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
             case Module2SectionEntity.WELFARE: {
                 ConstraintLayout content = helper.getView(R.id.content);
                 ImageView coverIv = helper.getView(R.id.iv);
-                GankDto.GankBean gankBean = item.getGankBean();
-                if (gankBean == null) return;
-                String url = gankBean.getUrl();
+                GankDto gankDto = item.getGankDto();
+                if (gankDto == null) return;
+                String url = gankDto.getUrl();
                 RequestOptions options = new RequestOptions()
                         .placeholder(R.drawable.placeholder)
                         .error(R.drawable.placeholder_fail)
@@ -82,16 +84,47 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
                 TextView tvDate = helper.getView(R.id.tv_date);
 
                 String title = "", type = "", date = "";
-                GankDto.GankBean gankBean = item.getGankBean();
-                if (null != gankBean) {
-                    title = gankBean.getDesc();
-                    type = gankBean.getType();
-                    String publishedAt = gankBean.getPublishedAt();
+                GankDto gankDto = item.getGankDto();
+                if (null != gankDto) {
+                    title = gankDto.getDesc();
+                    type = gankDto.getType();
+                    String publishedAt = gankDto.getPublishedAt();
                     date = TimeUtil.getDateString(publishedAt, TimeUtil.ISO8601, TimeUtil.DAY_ONE);
                 }
                 tvTitle.setText(TextUtils.isEmpty(title) ? "" : title);
                 tvType.setText(TextUtils.isEmpty(type) ? "" : type);
                 tvDate.setText(TextUtils.isEmpty(date) ? "" : date);
+            }
+            break;
+            case Module2SectionEntity.LEISURE_READ: {
+                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                ConstraintLayout content = helper.getView(R.id.content);
+                ImageView ivCover = helper.getView(R.id.iv_cover);
+                TextView tvTitle = helper.getView(R.id.tv_title);
+
+                String cover = "", title = "";
+                LeisureReadDto leisureReadDto = item.getLeisureReadDto();
+                if (null != leisureReadDto) {
+                    cover = leisureReadDto.getCover();
+                    title = leisureReadDto.getTitle();
+                }
+
+                RequestOptions options = new RequestOptions()
+                        .placeholder(R.drawable.placeholder)
+                        .error(R.drawable.placeholder_fail)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE);
+                GlideApp.with(mContext).asBitmap().load(cover).apply(options).into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        float ratio = (float) resource.getWidth() / resource.getHeight();
+                        ConstraintSet constraintSet = new ConstraintSet();
+                        constraintSet.clone(content);
+                        constraintSet.setDimensionRatio(ivCover.getId(), ratio + "");
+                        constraintSet.applyTo(content);
+                        ivCover.setImageBitmap(resource);
+                    }
+                });
+                tvTitle.setText(TextUtils.isEmpty(title) ? "" : title);
             }
             break;
         }
