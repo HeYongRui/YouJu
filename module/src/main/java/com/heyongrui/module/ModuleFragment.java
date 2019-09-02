@@ -80,6 +80,7 @@ public class ModuleFragment extends BaseFragment {
                     ARouter.getInstance().build(ConfigConstants.PATH_POETRY).navigation();
                     break;
                 case 4://探索
+                    ARouter.getInstance().build(ConfigConstants.PATH_SMART_ROBOT).navigation();
                     break;
                 case 5://音乐
                     ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://ys.juan8014.cn/yin/").navigation();

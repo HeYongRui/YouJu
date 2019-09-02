@@ -59,6 +59,9 @@
         <activity
             android:name=".h5.X5WebViewActivity"
             android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".textword.view.SmartRobotActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 
 </manifest>

@@ -101,4 +101,14 @@ public class TextService {
                 .groupDetail(groupId, pageNo, pageSize)
                 .compose(RxHelper.rxSchedulerHelper());
     }
+
+    /**
+     * 智能机器人(天气、翻译、藏头诗、笑话、歌词、计算、域名信息/备案/收录查询、IP查询、手机号码归属、人工智能聊天)
+     * {"result":0,"content":"内容"}
+     */
+    public Observable<Object> smartRobot(String conversationContent) {
+        return ApiService.createApi(TextApi.class, "http://api.qingyunke.com/")
+                .smartRobot(conversationContent)
+                .compose(RxHelper.rxSchedulerHelper());
+    }
 }

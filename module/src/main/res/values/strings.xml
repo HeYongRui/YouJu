@@ -12,6 +12,9 @@
     <string name="music">音乐</string>
     <string name="garbage_classification2">垃圾分类</string>
     <string name="hitokoto_title">一言</string>
+    <string name="smart_robot">智能机器人</string>
+    <string name="chat_input_tip">请输入聊天内容</string>
+    <string name="chat">聊天</string>
     <string name="poetry">诗词</string>
     <string name="a">一首</string>
     <string name="original">原文</string>

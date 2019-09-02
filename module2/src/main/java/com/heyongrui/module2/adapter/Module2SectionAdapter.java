@@ -11,8 +11,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.chad.library.adapter.base.BaseSectionMultiItemQuickAdapter;
@@ -60,11 +58,8 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
                 GankDto gankDto = item.getGankDto();
                 if (gankDto == null) return;
                 String url = gankDto.getUrl();
-                RequestOptions options = new RequestOptions()
-                        .placeholder(R.drawable.placeholder)
-                        .error(R.drawable.placeholder_fail)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE);
-                GlideApp.with(mContext).asBitmap().load(url).apply(options).into(new SimpleTarget<Bitmap>() {
+                coverIv.setImageResource(R.drawable.placeholder);
+                GlideApp.with(mContext).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         float ratio = (float) resource.getWidth() / resource.getHeight();
@@ -108,12 +103,8 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
                     cover = leisureReadDto.getCover();
                     title = leisureReadDto.getTitle();
                 }
-
-                RequestOptions options = new RequestOptions()
-                        .placeholder(R.drawable.placeholder)
-                        .error(R.drawable.placeholder_fail)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE);
-                GlideApp.with(mContext).asBitmap().load(cover).apply(options).into(new SimpleTarget<Bitmap>() {
+                ivCover.setImageResource(R.drawable.placeholder);
+                GlideApp.with(mContext).asBitmap().load(cover).into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         float ratio = (float) resource.getWidth() / resource.getHeight();

@@ -31,6 +31,7 @@ public class ConfigConstants {
     public static final String PATH_MONO_TEA_HISTORY_DATE = "/module/monoTeaHistoryDate";
     public static final String PATH_MONO_CATEGORY = "/module/monoCategory";
     public static final String PATH_HITOKOTO = "/module/hitokoto";
+    public static final String PATH_SMART_ROBOT = "/module/smartRobot";
     public static final String PATH_POETRY = "/module/poetry";
     public static final String PATH_POETRY_SEARCH = "/module/poetrySearch";
     public static final String PATH_POETRY_DETAIL = "/module/poetryDetail";

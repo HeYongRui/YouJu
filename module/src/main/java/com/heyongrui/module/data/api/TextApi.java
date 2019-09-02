@@ -73,4 +73,11 @@ public interface TextApi {
      */
     @GET("api/group/topicList.do")
     Observable<PoemGroupDetailDto> groupDetail(@Query("groupId") String groupId, @Query("pageNo") int pageNo, @Query("pageSize") int pageSize);
+
+    /**
+     * 智能机器人(天气、翻译、藏头诗、笑话、歌词、计算、域名信息/备案/收录查询、IP查询、手机号码归属、人工智能聊天)
+     * {"result":0,"content":"内容"}
+     */
+    @GET("api.php?key=free&appid=0")
+    Observable<Object> smartRobot(@Query("msg") String msg);
 }

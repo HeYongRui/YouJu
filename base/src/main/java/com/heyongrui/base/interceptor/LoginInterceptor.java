@@ -14,8 +14,9 @@ import com.heyongrui.base.assist.ConfigConstants;
 import java.util.Random;
 
 import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
 
 @Interceptor(priority = 5, name = "login")
 public class LoginInterceptor implements IInterceptor {
@@ -34,17 +35,32 @@ public class LoginInterceptor implements IInterceptor {
                 //主线程跳转登录页面（走绿色通道，不走拦截器）
                 Single.just(postcard)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<Postcard>() {
+                        .subscribe(new SingleObserver<Postcard>() {
                             @Override
-                            public void accept(Postcard postcard) throws Exception {
-                                String targetPath = postcard.getPath();
-                                if (TextUtils.isEmpty(targetPath)) return;
-                                Bundle bundle = postcard.getExtras();
-                                bundle.putString(ConfigConstants.PATH_TARGET, targetPath);
+                            public void onSubscribe(Disposable d) {
+                            }
+
+                            @Override
+                            public void onSuccess(Postcard postcard) {
+                                Bundle bundle = null;
+                                if (null != postcard) {
+                                    String targetPath = postcard.getPath();
+                                    bundle = postcard.getExtras();
+                                    if (!TextUtils.isEmpty(targetPath)) {
+                                        if (!TextUtils.equals(ConfigConstants.PATH_LOGIN, targetPath)) {
+                                            bundle.putString(ConfigConstants.PATH_TARGET, targetPath);
+                                        }
+                                    }
+                                }
                                 ARouter.getInstance().build(ConfigConstants.PATH_LOGIN)
                                         .with(bundle)
                                         .greenChannel()
                                         .navigation();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
                             }
                         });
                 callback.onInterrupt(null);
