@@ -143,6 +143,8 @@ public class RxBus {
                                     e.printStackTrace();
                                 }
                             }
+                        }, throwable -> {
+                            throwable.printStackTrace();
                         });
 
                 subscriptions.add(subscription);

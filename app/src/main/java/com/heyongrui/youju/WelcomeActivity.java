@@ -92,7 +92,9 @@ public class WelcomeActivity extends BaseActivity {
     private void startMainActivity() {//开始缩放动画
         rxManager.add(Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> startAnim()));
+                .subscribe(aLong -> startAnim(), throwable -> {
+                    throwable.printStackTrace();
+                }));
     }
 
     private void startDownloadCover() {//随机下载封面图

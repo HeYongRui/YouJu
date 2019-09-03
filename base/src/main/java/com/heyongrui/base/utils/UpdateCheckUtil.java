@@ -79,8 +79,14 @@ public class UpdateCheckUtil {
             catLoadingDialog.show();
             //构建网络请求
             mCompositeDisposable.add(Observable.just(updateCheckUrl).map(requestUrl -> {
-                Request request = new Request.Builder().url(requestUrl).build();
-                return client.newCall(request).execute();
+                Response execute = null;
+                try {
+                    Request request = new Request.Builder().url(requestUrl).build();
+                    execute = client.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return execute;
             }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(response -> {
                 //网络请求返回结果解析
                 if (catLoadingDialog != null && catLoadingDialog.isShowing()) {
@@ -114,8 +120,16 @@ public class UpdateCheckUtil {
                         ToastUtils.showShort(R.string.update_error);
                     }
                 } else {
+                    if (catLoadingDialog != null && catLoadingDialog.isShowing()) {
+                        catLoadingDialog.dismiss();
+                    }
                     ToastUtils.showShort(R.string.update_error);
                 }
+            }, throwable -> {
+                if (catLoadingDialog != null && catLoadingDialog.isShowing()) {
+                    catLoadingDialog.dismiss();
+                }
+                ToastUtils.showShort(R.string.update_error);
             }));
         } catch (Exception e) {
             e.printStackTrace();
