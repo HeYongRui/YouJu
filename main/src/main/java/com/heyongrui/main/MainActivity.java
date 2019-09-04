@@ -54,10 +54,12 @@ public class MainActivity extends BaseActivity {
             }
             //初始化关联BottomTabBar
             int tabTitleId = 0, tabIconId = 0;
-            Bundle arguments = baseFragment.getArguments();
-            if (arguments != null) {
-                tabTitleId = arguments.getInt("tabTitleId");
-                tabIconId = arguments.getInt("tabIconId");
+            if (null != baseFragment) {
+                Bundle arguments = baseFragment.getArguments();
+                if (arguments != null) {
+                    tabTitleId = arguments.getInt("tabTitleId");
+                    tabIconId = arguments.getInt("tabIconId");
+                }
             }
             tabTitleId = tabTitleId == 0 ? R.string.app_name : tabTitleId;
             tabIconId = tabIconId == 0 ? R.drawable.placeholder : tabIconId;

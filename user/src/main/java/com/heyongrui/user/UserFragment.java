@@ -36,7 +36,7 @@ public class UserFragment extends BaseFragment {
 //                            .withBundle("bundle", bundle)
 //                            .withString("key3", "888")
 //                            .navigation();
-                    ARouter.getInstance().build(ConfigConstants.PATH_KOTLIN).navigation();
+                    ARouter.getInstance().build(ConfigConstants.PATH_USER).withBoolean(ConfigConstants.IS_NEED_INTERCEPT, true).navigation();
                 }
             }
         }, R.id.tv_user);

@@ -12,7 +12,7 @@ public class HomeFragment extends BaseFragment {
         HomeFragment fragment = new HomeFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("tabIconId", R.drawable.icon_mono);
-        bundle.putInt("tabTitleId", R.string.gank);
+        bundle.putInt("tabTitleId", R.string.app_name);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -27,7 +27,7 @@ public class HomeFragment extends BaseFragment {
         addOnClickListeners(view -> {
             int id = view.getId();
             if (id == R.id.tv_home) {
-                ARouter.getInstance().build(ConfigConstants.PATH_USER).withBoolean(ConfigConstants.IS_NEED_INTERCEPT, true).navigation();
+                ARouter.getInstance().build(ConfigConstants.PATH_KOTLIN).navigation();
             }
         }, R.id.tv_home);
     }

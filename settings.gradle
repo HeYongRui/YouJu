@@ -1,1 +1,1 @@
-include ':app', ':base', ':network', ':main', ':user', ':module', ':module2'
+include ':app', ':base', ':network', ':main', ':user', ':module', ':module2', ':iflytek'

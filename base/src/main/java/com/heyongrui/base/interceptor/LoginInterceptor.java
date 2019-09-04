@@ -46,10 +46,8 @@ public class LoginInterceptor implements IInterceptor {
                                 if (null != postcard) {
                                     String targetPath = postcard.getPath();
                                     bundle = postcard.getExtras();
-                                    if (!TextUtils.isEmpty(targetPath)) {
-                                        if (!TextUtils.equals(ConfigConstants.PATH_LOGIN, targetPath)) {
-                                            bundle.putString(ConfigConstants.PATH_TARGET, targetPath);
-                                        }
+                                    if (null != bundle && !TextUtils.isEmpty(targetPath) && !TextUtils.equals(ConfigConstants.PATH_LOGIN, targetPath)) {
+                                        bundle.putString(ConfigConstants.PATH_TARGET, targetPath);
                                     }
                                 }
                                 ARouter.getInstance().build(ConfigConstants.PATH_LOGIN)

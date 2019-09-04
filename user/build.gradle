@@ -13,6 +13,7 @@ android {
     defaultConfig {
         if (rootProject.ext.isRunAloneUser) {
             applicationId "com.heyongrui.user"
+            multiDexEnabled true
         }
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk

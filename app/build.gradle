@@ -14,6 +14,7 @@ android {
         versionCode versions.publishVersionCode
         versionName versions.publishVersion
         multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         kapt {
@@ -86,6 +87,9 @@ dependencies {
     }
     if (!rootProject.ext.isRunAloneModule2) {
         implementation project(':module2')
+    }
+    if (!rootProject.ext.isRunAloneIflytek) {
+        implementation project(':iflytek')
     }
     //美团walle打包
     implementation "com.meituan.android.walle:library:${versions.walle}"

@@ -24,7 +24,7 @@
             android:value="portrait|landscape" />
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.heyongrui.base.fileProvider"
+            android:authorities="${applicationId}.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

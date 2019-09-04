@@ -43,7 +43,7 @@ public class AboutActivity extends BaseActivity {
                 if (mUpdateCheckUtil == null) {
                     mUpdateCheckUtil = new UpdateCheckUtil(this);
                 }
-                mUpdateCheckUtil.checkUpdate(getString(R.string.update_url), "com.heyongrui.base.fileProvider", getString(R.string.app_name));
+                mUpdateCheckUtil.checkUpdate(getString(R.string.update_url), AppUtils.getAppPackageName() + ".fileProvider", getString(R.string.app_name));
             } else if (id == R.id.cl_encourage) {
                 ARouter.getInstance().build(ConfigConstants.PATH_ENCOURAGE).navigation();
             }
@@ -59,7 +59,7 @@ public class AboutActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == UpdateCheckUtil.REQUEST_CODE_APP_INSTALL) {
             if (mUpdateCheckUtil != null) {
-                mUpdateCheckUtil.installApp(this, "com.heyongrui.base.fileProvider", getString(R.string.app_name));
+                mUpdateCheckUtil.installApp(this, AppUtils.getAppPackageName() + ".fileProvider", getString(R.string.app_name));
             }
         }
     }

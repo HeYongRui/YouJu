@@ -32,7 +32,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/smart_robot"
+            android:text="@string/fool_robot"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,8 +59,11 @@
         android:id="@+id/et_input"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@null"
         android:hint="@string/chat_input_tip"
         android:imeOptions="actionSearch"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
         android:singleLine="true"
         android:textColor="@color/text_color"
         android:textColorHint="@color/text_color_hint"
@@ -72,27 +75,43 @@
 
     <ImageView
         android:id="@+id/iv_clear"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dp_30"
         android:layout_height="0dp"
-        android:padding="@dimen/dp_10"
+        android:padding="@dimen/dp_4"
         android:scaleType="centerCrop"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/bg_input"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/btn_chat"
+        app:layout_constraintEnd_toStartOf="@+id/iv_voice"
         app:layout_constraintTop_toTopOf="@+id/bg_input"
+        tools:tint="@color/colorPrimaryDark"
         tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_voice"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="0dp"
+        android:padding="@dimen/dp_2"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/ic_btn_speak_now"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_input"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@+id/bg_input"
+        app:layout_constraintTop_toTopOf="@+id/bg_input"
+        tools:tint="@color/colorPrimaryDark" />
 
     <Button
         android:id="@+id/btn_chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="@string/chat"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_14"
-        app:layout_constraintBottom_toBottomOf="@+id/et_input"
-        app:layout_constraintEnd_toEndOf="@+id/bg_input" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bg_input" />
 
     <TextView
         android:id="@+id/tv_content"
@@ -108,7 +127,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bg_input"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chat"
         app:layout_constraintVertical_bias="0.1"
         tools:text="@string/app_name" />
 

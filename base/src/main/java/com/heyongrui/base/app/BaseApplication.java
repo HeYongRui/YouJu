@@ -46,6 +46,7 @@ public class BaseApplication extends Application {
         //注册网络状态监听器
         NetStateChangeReceiver.registerReceiver(this);
         registerActivityLife();
+        modulesApplicationInit();
     }
 
     private void initX5Webview() {
@@ -120,5 +121,23 @@ public class BaseApplication extends Application {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
+    }
+
+    private void modulesApplicationInit() {
+        for (String moduleImpl : ModuleConfig.MODULESLIST) {
+            try {
+                Class<?> clazz = Class.forName(moduleImpl);
+                Object obj = clazz.newInstance();
+                if (obj instanceof BaseApplicationImpl) {
+                    ((BaseApplicationImpl) obj).onCreate(this);
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

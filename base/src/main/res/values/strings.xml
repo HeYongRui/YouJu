@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">base</string>
     <string name="exit_tip">再按一次退出程序</string>
-    <string name="app_intro">“优聚”是一款集多种优秀资源和实用功能的APP，打破传统限制，融合多元，发现更多、更优秀、更有趣的东西。后续也会加入更多新的功能。也欢迎各位提出意见。</string>
+    <string name="app_intro">“优聚”是一款集多个平台的资讯内容、复合型优秀资源和实用功能的APP，打破传统限制，融合多元，发现更多、更优秀、更有趣的东西。后续也会加入更多新的功能。也欢迎各位提出意见。</string>
     <string name="update_url">https://raw.githubusercontent.com/HeYongRui/YouJu/master/app/version_update.json</string>
     <string name="update_title">更新提示</string>
     <string name="update_error">更新失败</string>
@@ -15,6 +15,7 @@
     <string name="cancel">取消</string>
     <string name="permisson_title">权限提示</string>
     <string name="read_write_permisson">此功能需要开启读写权限</string>
+    <string name="related_permisson">此功能需要开启相关权限</string>
     <string name="install_permisson">请开启安装权限</string>
     <string name="system_title">系统提示</string>
     <string name="go_setting">设定</string>

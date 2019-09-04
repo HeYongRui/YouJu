@@ -25,6 +25,7 @@ allprojects {
         mavenCentral()
         maven { url 'https://maven.google.com' }
         maven { url 'https://jitpack.io' }
+        maven { url 'http://libmsc.xfyun.cn/repository/maven-releases/' }
     }
 }
 

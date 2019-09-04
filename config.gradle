@@ -3,6 +3,7 @@ ext {
     isRunAloneUser = false;//user模块是否可以单独运行
     isRunAloneModule = false;//module模块是否可以单独运行
     isRunAloneModule2 = false;//module2模块是否可以单独运行
+    isRunAloneIflytek = false;//科大讯飞模块是否可以单独运行
     //版本号控制
     versions = [
             //Project
