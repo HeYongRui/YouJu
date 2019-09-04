@@ -17,6 +17,9 @@
 此项目属于业余时间练手的项目，接口数据来源均来自网络，如果存在侵权情况，请第一时间告知。本项目仅做学习交流使用，API数据内容所有权归原作公司所有，请勿用于其他用途！！
 
 ### Demo
-[下载 Demo](https://github.com/HeYongRui/YouJu/tree/master/apk/app-debug.apk)体验
+[下载 Demo](https://www.pgyer.com/pIzQ)体验
 
 ### 截图
+![image](https://raw.githubusercontent.com/HeYongRui/YouJu/master/screenshot/1.png) ![image](https://raw.githubusercontent.com/HeYongRui/YouJu/master/screenshot/2.png)![image](https://raw.githubusercontent.com/HeYongRui/YouJu/master/screenshot/3.png) 
+![image](https://raw.githubusercontent.com/HeYongRui/YouJu/master/screenshot/4.png) ![image](https://raw.githubusercontent.com/HeYongRui/YouJu/master/screenshot/5.png)![image](https://raw.githubusercontent.com/HeYongRui/YouJu/master/screenshot/6.png) 
+![image](https://raw.githubusercontent.com/HeYongRui/YouJu/master/screenshot/7.png) 
