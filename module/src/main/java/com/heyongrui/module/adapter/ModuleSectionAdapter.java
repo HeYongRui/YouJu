@@ -53,6 +53,7 @@ import com.heyongrui.module.data.dto.PoemGroupDetailDto;
 import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
+import com.heyongrui.module.data.dto.ZhiHuDailyNewsDto;
 import com.heyongrui.module.mono.view.MonoTeaActivity;
 
 import java.util.Calendar;
@@ -86,13 +87,19 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
         addItemType(ModuleSectionEntity.POEM, R.layout.recycle_item_poem);
         addItemType(ModuleSectionEntity.POEM_GROUP, R.layout.recycle_item_poem_group);
         addItemType(ModuleSectionEntity.DOUBAN_MOVIE, R.layout.recycle_item_douban_movie);
+        addItemType(ModuleSectionEntity.ZHIHU_NEWS, R.layout.recycle_item_zhihu_news);
     }
 
     @Override
     protected void convertHead(BaseViewHolder helper, ModuleSectionEntity item) {
-//        TextView tvHeadSection = helper.getView(R.id.tv_head_section);
-//        tvHeadSection.setText(item.header);
-//        tvHeadSection.setVisibility(item.isShow() ? View.VISIBLE : View.GONE);
+        switch (item.getItemType()) {
+            case ModuleSectionEntity.ZHIHU_NEWS:
+                TextView tvHeadSection = helper.getView(android.R.id.text1);
+                if (null != tvHeadSection) {
+                    tvHeadSection.setText(TextUtils.isEmpty(item.header) ? "" : item.header);
+                }
+                break;
+        }
     }
 
     @Override
@@ -585,6 +592,24 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
                 GlideUtil.loadImage(mContext, cover, ivCover, ContextCompat.getDrawable(mContext, R.drawable.placeholder));
                 tvName.setText(name);
                 tvRate.setText(rate);
+            }
+            break;
+            case ModuleSectionEntity.ZHIHU_NEWS: {
+                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                TextView tvTitle = helper.getView(R.id.tv_title);
+                ImageView ivCover = helper.getView(R.id.iv_cover);
+
+                String title = "", cover = "";
+                ZhiHuDailyNewsDto.StoryBean storyBean = item.getStoryBean();
+                if (null != storyBean) {
+                    title = storyBean.getTitle();
+                    List<String> images = storyBean.getImages();
+                    if (null != images && !images.isEmpty()) {
+                        cover = images.get(0);
+                    }
+                }
+                tvTitle.setText(TextUtils.isEmpty(title) ? "" : title);
+                GlideUtil.loadImage(mContext, cover, ivCover, ContextCompat.getDrawable(mContext, R.drawable.placeholder));
             }
             break;
         }

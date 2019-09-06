@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:tint="@color/white" />
 
-        <Spinner
+        <com.heyongrui.base.widget.ReSpinner
             android:id="@+id/spinner_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

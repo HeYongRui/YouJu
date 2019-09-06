@@ -3,7 +3,7 @@ ext {
     isRunAloneUser = false;//user模块是否可以单独运行
     isRunAloneModule = false;//module模块是否可以单独运行
     isRunAloneModule2 = false;//module2模块是否可以单独运行
-    isRunAloneIflytek = false;//科大讯飞模块是否可以单独运行
+    isRunAloneIflytek = true;//科大讯飞模块是否可以单独运行
     //版本号控制
     versions = [
             //Project
@@ -43,5 +43,6 @@ ext {
             tagcloudlib       : '1.2.0',
             jiaozivideoplayer : '7.0.4',
             ahbottomnavigation: '2.3.4',
+            banner            : '2.3.16',
     ]
 }

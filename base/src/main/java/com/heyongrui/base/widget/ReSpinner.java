@@ -90,11 +90,13 @@ public class ReSpinner extends AppCompatSpinner {
                 onReItemSelected(adapterView, view, i, l);
             } else {//初始默认不选中
                 if (isFirst) {
-                    view.setVisibility(View.INVISIBLE);
+                    if (null != view) {
+                        view.setVisibility(View.INVISIBLE);
+                    }
                     isFirst = false;
                     onReItemSelected(adapterView, view, -1, -1);
                 } else {
-                    if (view.getVisibility() != View.VISIBLE) {
+                    if (null != view && view.getVisibility() != View.VISIBLE) {
                         view.setVisibility(View.VISIBLE);
                     }
                     onReItemSelected(adapterView, view, i, l);

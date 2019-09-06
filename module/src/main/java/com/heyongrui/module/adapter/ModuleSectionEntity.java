@@ -13,6 +13,7 @@ import com.heyongrui.module.data.dto.PoemGroupDetailDto;
 import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoemSearchDto;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
+import com.heyongrui.module.data.dto.ZhiHuDailyNewsDto;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     public static final int POEM = 110;
     public static final int POEM_GROUP = 111;
     public static final int DOUBAN_MOVIE = 112;
+    public static final int ZHIHU_NEWS = 113;
 
     private int itemType;
     private int spanSize;
@@ -50,6 +52,7 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
     private PoemGroupDto.DataBean groupPoemBean;
     private PoemGroupDetailDto.DataBean groupPoemDataBean;
     private DouBanDto.SubjectsBean subjectsBean;
+    private ZhiHuDailyNewsDto.StoryBean storyBean;
 
     public ModuleSectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -92,6 +95,8 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
                 this.groupPoemDataBean = (PoemGroupDetailDto.DataBean) object;
             } else if (object instanceof DouBanDto.SubjectsBean) {
                 this.subjectsBean = (DouBanDto.SubjectsBean) object;
+            } else if (object instanceof ZhiHuDailyNewsDto.StoryBean) {
+                this.storyBean = (ZhiHuDailyNewsDto.StoryBean) object;
             }
         }
     }
@@ -207,5 +212,13 @@ public class ModuleSectionEntity extends SectionMultiEntity implements MultiItem
 
     public void setSubjectsBean(DouBanDto.SubjectsBean subjectsBean) {
         this.subjectsBean = subjectsBean;
+    }
+
+    public ZhiHuDailyNewsDto.StoryBean getStoryBean() {
+        return storyBean;
+    }
+
+    public void setStoryBean(ZhiHuDailyNewsDto.StoryBean storyBean) {
+        this.storyBean = storyBean;
     }
 }

@@ -10,6 +10,7 @@ import com.heyongrui.module.ModuleFragment;
 import com.heyongrui.module.douban.presenter.DouBanPresenter;
 import com.heyongrui.module.douban.view.DouBanActivity;
 import com.heyongrui.module.textword.view.SmartRobotActivity;
+import com.heyongrui.module.zhihu.presenter.ZhiHuDailyNewsPresenter;
 
 import dagger.Component;
 
@@ -33,4 +34,6 @@ public interface ModuleComponent {
     void inject(ModuleFragment moduleFragment);
 
     void inject(SmartRobotActivity smartRobotActivity);
+
+    void inject(ZhiHuDailyNewsPresenter zhiHuDailyNewsPresenter);
 }

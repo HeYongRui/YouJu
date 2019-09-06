@@ -30,5 +30,6 @@
     <string name="clean_success">清理成功</string>
     <string name="complete">完成</string>
     <string name="no_search_content">没有搜索到相关内容</string>
+    <string name="no_app_support_tip">手机暂无应用支持打开此文件</string>
     <string name="add">添加</string>
 </resources>
