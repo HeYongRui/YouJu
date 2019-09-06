@@ -6,8 +6,10 @@ import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 
+import com.heyongrui.base.assist.RxManager;
 import com.heyongrui.base.dagger.PerActivity;
 import com.heyongrui.module2.data.service.GankService;
+import com.heyongrui.module2.data.service.ModuleService;
 
 import dagger.Module;
 import dagger.Provides;
@@ -58,5 +60,16 @@ public class Module2Module {
     @PerActivity
     GankService provideGankService() {
         return new GankService();
+    }
+
+    @Provides
+    @PerActivity
+    ModuleService provideModuleService() {
+        return new ModuleService();
+    }
+
+    @Provides
+    RxManager provideRxManager() {
+        return new RxManager();
     }
 }

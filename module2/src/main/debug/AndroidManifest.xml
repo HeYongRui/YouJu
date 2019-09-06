@@ -33,6 +33,9 @@
         <activity
             android:name=".gank.view.LeisureReadActivity"
             android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".grocery.view.TodayHistoryActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 
 </manifest>

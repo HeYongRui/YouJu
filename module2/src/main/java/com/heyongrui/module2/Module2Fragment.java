@@ -131,6 +131,9 @@ public class Module2Fragment extends BaseFragment {
                     case 3://IOS
                         ARouter.getInstance().build(ConfigConstants.PATH_GANK).withString("category", "iOS").navigation();
                         break;
+                    case 4://历史上的今天
+                        ARouter.getInstance().build(ConfigConstants.PATH_TODAY_HISTORY).navigation();
+                        break;
                     case 5://前端
                         ARouter.getInstance().build(ConfigConstants.PATH_GANK).withString("category", "前端").navigation();
                         break;
@@ -154,7 +157,8 @@ public class Module2Fragment extends BaseFragment {
         gankMenuDtos.add(new GankMenuDto(getString(R.string.welfare), R.drawable.ic_welfare, 1));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.android), R.drawable.ic_android, 2));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.ios), R.drawable.ic_ios, 3));
-        gankMenuDtos.add(new GankMenuDto(getString(R.string.rest_video), R.drawable.ic_video, 4));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.today_history), R.drawable.ic_history_today, 4));
+//        gankMenuDtos.add(new GankMenuDto(getString(R.string.rest_video), R.drawable.ic_video, 4));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.front_end), R.drawable.ic_js, 5));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.expand), R.drawable.ic_expand, 6));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.app), R.drawable.ic_app, 7));

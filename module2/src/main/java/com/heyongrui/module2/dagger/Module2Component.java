@@ -8,6 +8,7 @@ import com.heyongrui.base.dagger.AppComponent;
 import com.heyongrui.base.dagger.PerActivity;
 import com.heyongrui.module2.gank.presenter.GankPresenter;
 import com.heyongrui.module2.gank.presenter.LeisureReadPresenter;
+import com.heyongrui.module2.grocery.view.TodayHistoryActivity;
 
 import dagger.Component;
 
@@ -27,4 +28,6 @@ public interface Module2Component {
     void inject(GankPresenter gankPresenter);
 
     void inject(LeisureReadPresenter leisureReadPresenter);
+
+    void inject(TodayHistoryActivity todayHistoryActivity);
 }

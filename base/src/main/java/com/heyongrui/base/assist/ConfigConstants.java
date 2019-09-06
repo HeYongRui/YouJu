@@ -50,6 +50,7 @@ public class ConfigConstants {
     public static final String PATH_WELFARE = "/module2/welfare";
     public static final String PATH_ABOUT = "/module2/about";
     public static final String PATH_ENCOURAGE = "/module2/encourage";
+    public static final String PATH_TODAY_HISTORY = "/module2/todayHistory";
     //科大讯飞Iflytek模块路径
     public static final String PATH_VOICE_DICATION_PROVIDER = "/iflytek/service";
 }

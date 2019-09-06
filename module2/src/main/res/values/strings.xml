@@ -6,6 +6,7 @@
     <string name="android">Android</string>
     <string name="ios">iOS</string>
     <string name="rest_video">休息视频</string>
+    <string name="today_history">历史上的今天</string>
     <string name="front_end">前端</string>
     <string name="expand">拓展</string>
     <string name="app">App</string>
