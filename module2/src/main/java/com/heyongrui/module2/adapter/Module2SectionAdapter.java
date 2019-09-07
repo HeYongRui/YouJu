@@ -2,6 +2,7 @@ package com.heyongrui.module2.adapter;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.heyongrui.base.utils.TimeUtil;
 import com.heyongrui.base.utils.UiUtil;
 import com.heyongrui.module2.R;
 import com.heyongrui.module2.data.dto.GankDto;
+import com.heyongrui.module2.data.dto.HistoryTodayDto;
 import com.heyongrui.module2.data.dto.LeisureReadDto;
 
 import java.util.List;
@@ -40,6 +42,7 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
         addItemType(Module2SectionEntity.WELFARE, R.layout.recycle_item_welfare);
         addItemType(Module2SectionEntity.GANK, R.layout.recycle_item_android);
         addItemType(Module2SectionEntity.LEISURE_READ, R.layout.recycle_item_leisure_read);
+        addItemType(Module2SectionEntity.TODAY_HISTORY, R.layout.recycle_item_today_history);
     }
 
     @Override
@@ -116,6 +119,48 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
                     }
                 });
                 tvTitle.setText(TextUtils.isEmpty(title) ? "" : title);
+            }
+            break;
+            case Module2SectionEntity.TODAY_HISTORY: {
+                View dashTop = helper.getView(R.id.dash_top);
+                TextView tvDate = helper.getView(R.id.tv_date);
+                TextView tvContent = helper.getView(R.id.tv_content);
+                View dashBottom = helper.getView(R.id.dash_bottom);
+
+                int layoutPosition = helper.getLayoutPosition();
+                if (layoutPosition == 0) {
+                    dashTop.setVisibility(View.GONE);
+                    dashBottom.setVisibility(View.VISIBLE);
+                } else if (layoutPosition == getData().size() - 1) {
+                    dashTop.setVisibility(View.VISIBLE);
+                    dashBottom.setVisibility(View.GONE);
+                } else {
+                    dashTop.setVisibility(View.VISIBLE);
+                    dashBottom.setVisibility(View.VISIBLE);
+                }
+
+                String content = "";
+                StringBuilder date = null;
+                HistoryTodayDto.HistoryTodayBean historyTodayBean = item.getHistoryTodayBean();
+                if (null != historyTodayBean) {
+                    content = historyTodayBean.getEvent();
+                    String dateOrigin = historyTodayBean.getDate();
+                    if (!TextUtils.isEmpty(dateOrigin)) {
+                        try {
+                            date = new StringBuilder(dateOrigin);
+                            date.insert(4, "\n");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                if (null == date || TextUtils.isEmpty(date)) {
+                    tvDate.setText("");
+                } else {
+                    tvDate.setText(date);
+                }
+                tvContent.setText(TextUtils.isEmpty(content) ? "" : content);
             }
             break;
         }

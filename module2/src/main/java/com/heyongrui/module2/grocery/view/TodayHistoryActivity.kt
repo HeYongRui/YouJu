@@ -1,13 +1,11 @@
 package com.heyongrui.module2.grocery.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.heyongrui.base.app.BaseApplication
@@ -17,7 +15,6 @@ import com.heyongrui.base.base.BaseActivity
 import com.heyongrui.base.base.BasePresenter
 import com.heyongrui.base.utils.DrawableUtil
 import com.heyongrui.base.utils.TimeUtil
-import com.heyongrui.base.widget.itemdecoration.RecycleViewItemDecoration
 import com.heyongrui.module2.R
 import com.heyongrui.module2.adapter.Module2SectionAdapter
 import com.heyongrui.module2.adapter.Module2SectionEntity
@@ -29,6 +26,7 @@ import com.heyongrui.network.configure.ResponseDisposable
 import kotlinx.android.synthetic.main.activity_today_history.*
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @Route(path = ConfigConstants.PATH_TODAY_HISTORY)
 class TodayHistoryActivity : BaseActivity<BasePresenter<*>>(),
@@ -79,8 +77,6 @@ class TodayHistoryActivity : BaseActivity<BasePresenter<*>>(),
         val moduleSectionAdapter = Module2SectionAdapter(data)
         recyclerView.layoutManager = LinearLayoutManager(this@TodayHistoryActivity)
         moduleSectionAdapter.bindToRecyclerView(recyclerView)
-        val dp1 = ConvertUtils.dp2px(1f)
-        recyclerView.addItemDecoration(RecycleViewItemDecoration(this@TodayHistoryActivity, dp1, Color.TRANSPARENT))
         moduleSectionAdapter.setSpanSizeLookup({ gridLayoutManager, position -> data[position].getSpanSize() })
         if (null != listener) {
             moduleSectionAdapter.setOnItemClickListener(listener)
@@ -107,5 +103,16 @@ class TodayHistoryActivity : BaseActivity<BasePresenter<*>>(),
 
     fun setData(historyTodayDto: HistoryTodayDto) {
         if (!adapterIsInit()) return
+        var dataList = ArrayList<Module2SectionEntity>()
+        if (historyTodayDto != null) {
+            var todayBeanList: List<HistoryTodayDto.HistoryTodayBean> = historyTodayDto.result
+            if (todayBeanList != null) {
+                todayBeanList = todayBeanList.reversed()
+                for (historyTodayBean in todayBeanList) {
+                    dataList.add(Module2SectionEntity(Module2SectionEntity.TODAY_HISTORY, historyTodayBean))
+                }
+            }
+        }
+        mTodayHistoryAdapter.replaceData(dataList)
     }
 }

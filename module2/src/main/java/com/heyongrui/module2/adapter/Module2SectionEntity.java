@@ -3,6 +3,7 @@ package com.heyongrui.module2.adapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.entity.SectionMultiEntity;
 import com.heyongrui.module2.data.dto.GankDto;
+import com.heyongrui.module2.data.dto.HistoryTodayDto;
 import com.heyongrui.module2.data.dto.LeisureReadDto;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Module2SectionEntity extends SectionMultiEntity implements MultiIte
     public static final int WELFARE = 100;
     public static final int GANK = 101;
     public static final int LEISURE_READ = 102;
+    public static final int TODAY_HISTORY = 103;
 
     private int itemType;
     private int spanSize;
@@ -23,6 +25,7 @@ public class Module2SectionEntity extends SectionMultiEntity implements MultiIte
     private Object object;
     private GankDto gankDto;
     private LeisureReadDto leisureReadDto;
+    private HistoryTodayDto.HistoryTodayBean historyTodayBean;
 
     public Module2SectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -47,6 +50,8 @@ public class Module2SectionEntity extends SectionMultiEntity implements MultiIte
                 this.gankDto = (GankDto) object;
             } else if (object instanceof LeisureReadDto) {
                 this.leisureReadDto = (LeisureReadDto) object;
+            } else if (object instanceof HistoryTodayDto.HistoryTodayBean) {
+                this.historyTodayBean = (HistoryTodayDto.HistoryTodayBean) object;
             }
         }
     }
@@ -90,5 +95,13 @@ public class Module2SectionEntity extends SectionMultiEntity implements MultiIte
 
     public void setLeisureReadDto(LeisureReadDto leisureReadDto) {
         this.leisureReadDto = leisureReadDto;
+    }
+
+    public HistoryTodayDto.HistoryTodayBean getHistoryTodayBean() {
+        return historyTodayBean;
+    }
+
+    public void setHistoryTodayBean(HistoryTodayDto.HistoryTodayBean historyTodayBean) {
+        this.historyTodayBean = historyTodayBean;
     }
 }
