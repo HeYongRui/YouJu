@@ -4,6 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.heyongrui.base.widget.tickerview.TickerView
+        android:id="@+id/ticker_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="￥69.65"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/sp_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:ticker_animationDuration="1000"
+        app:ticker_defaultCharacterList="alphabet" />
+
+    <com.heyongrui.base.widget.numberruntextview.NumberRunningTextView
+        android:id="@+id/number_run_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="58"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/sp_30"
+        app:duration="1500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ticker_view" />
+
     <TextView
         android:id="@+id/tv_home"
         android:layout_width="wrap_content"
