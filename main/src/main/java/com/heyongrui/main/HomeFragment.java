@@ -2,7 +2,7 @@ package com.heyongrui.main;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.heyongrui.base.assist.ConfigConstants;
@@ -38,8 +38,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.tv_home) {
+        if (id == R.id.btn_motion) {
             ARouter.getInstance().build(ConfigConstants.PATH_KOTLIN).navigation();
+        } else if (id == R.id.btn_planet_ball) {
+            ARouter.getInstance().build(ConfigConstants.PATH_PLANET_BALL).navigation();
         } else if (id == R.id.ticker_view) {
             if (tickerCount < 5) {
                 tickerView.setCharacterLists(TickerUtils.provideNumberList());
@@ -63,9 +65,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     protected void initView(Bundle savedInstanceState) {
         tickerView = mView.findViewById(R.id.ticker_view);
         numberRunTv = mView.findViewById(R.id.number_run_tv);
-        TextView tvHome = mView.findViewById(R.id.tv_home);
+        Button btnMotion = mView.findViewById(R.id.btn_motion);
+        Button btnPlanetBall = mView.findViewById(R.id.btn_planet_ball);
 
-        addOnClickListeners(this, tvHome, tickerView, numberRunTv);
+        addOnClickListeners(this, tickerView, numberRunTv, btnMotion, btnPlanetBall);
     }
 
     @Override

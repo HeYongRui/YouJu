@@ -5,6 +5,8 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/BaseAppTheme"></activity>
-
+        <activity
+            android:name=".planetball.view.PlanetBallActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 </manifest>

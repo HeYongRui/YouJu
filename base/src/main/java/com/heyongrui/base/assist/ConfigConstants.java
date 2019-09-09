@@ -20,6 +20,7 @@ public class ConfigConstants {
 
     //main模块路由路径
     public static final String PATH_MAIN = "/main/activity";
+    public static final String PATH_PLANET_BALL = "/main/planetBall";
     public static final String PATH_HOME_PROVIDER = "/home/main/service";
     //user模块路由路径
     public static final String PATH_KOTLIN = "/user/kotlin";

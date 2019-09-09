@@ -96,8 +96,6 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
     //dagger
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-    //3D球形控件
-    implementation "com.moxun:tagcloudlib:${versions.tagcloudlib}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

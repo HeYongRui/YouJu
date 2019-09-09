@@ -95,4 +95,19 @@
         <!-- 浮点粒子的移动速率 默认5 越大移动越慢 -->
         <attr name="firefly_move_rate" format="integer"></attr>
     </declare-styleable>
+    <!--3D行星球-->
+    <declare-styleable name="PlanetBallView">
+        <attr name="autoScrollMode">
+            <enum name="disable" value="0" />
+            <enum name="decelerate" value="1" />
+            <enum name="uniform" value="2" />
+        </attr>
+        <attr name="manualScroll" format="boolean" />
+        <attr name="radiusPercent" format="float" />
+        <attr name="scrollSpeed" format="float" />
+        <attr name="lightColor" format="color" />
+        <attr name="darkColor" format="color" />
+        <attr name="startAngleX" format="float" />
+        <attr name="startAngleY" format="float" />
+    </declare-styleable>
 </resources>

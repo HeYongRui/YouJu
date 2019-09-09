@@ -40,7 +40,6 @@ ext {
             immersionbar      : '3.0.0-beta05',
             baseRlvAdapter    : '2.9.49-androidx',
             smartRefreshLayout: '1.1.0-andx-15',
-            tagcloudlib       : '1.2.0',
             jiaozivideoplayer : '7.0.4',
             ahbottomnavigation: '2.3.4',
             banner            : '2.3.16',
