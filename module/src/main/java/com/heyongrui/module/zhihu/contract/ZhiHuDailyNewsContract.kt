@@ -24,8 +24,6 @@ interface ZhiHuDailyNewsContract {
 
         abstract fun initRecyclerView(recyclerView: RecyclerView, listener: BaseQuickAdapter.OnItemClickListener): ModuleSectionAdapter
 
-        abstract fun getHeaderView(): Banner
-
         abstract fun setBannerData(banner: Banner, bannersBeanList: List<*>?)
 
         abstract fun getZhiHuNewsLatest()

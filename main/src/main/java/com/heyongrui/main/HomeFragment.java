@@ -65,7 +65,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         numberRunTv = mView.findViewById(R.id.number_run_tv);
         TextView tvHome = mView.findViewById(R.id.tv_home);
 
-        addOnClickListeners(this, tvHome);
+        addOnClickListeners(this, tvHome, tickerView, numberRunTv);
     }
 
     @Override

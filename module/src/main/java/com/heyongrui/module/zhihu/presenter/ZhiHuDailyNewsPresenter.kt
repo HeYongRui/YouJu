@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ConvertUtils
-import com.blankj.utilcode.util.ScreenUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.heyongrui.base.app.BaseApplication
@@ -72,15 +71,6 @@ class ZhiHuDailyNewsPresenter : ZhiHuDailyNewsContract.Presenter() {
         return moduleSectionAdapter
     }
 
-    override fun getHeaderView(): Banner {
-        var banner = Banner(mContext)
-        val height = ScreenUtils.getScreenWidth() / 2
-        banner.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
-        banner.setDelayTime(5000)
-        banner.setAutoPlay(true)
-        return banner
-    }
-
     override fun setBannerData(banner: Banner, bannersBeanList: List<*>?) {
         if (bannersBeanList == null || bannersBeanList.isEmpty()) return
         banner.setPages(bannersBeanList, object : BannerViewHolder<Any> {
@@ -103,9 +93,12 @@ class ZhiHuDailyNewsPresenter : ZhiHuDailyNewsContract.Presenter() {
             }
 
         })
-        banner.setBannerAnimation(Transformer.Tablet)
-        banner.setIndicatorGravity(BannerConfig.CENTER)
-        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+        banner.setBannerAnimation(Transformer.Scale);
+        banner.setIndicatorGravity(BannerConfig.CENTER);
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+//        banner.setBannerAnimation(Transformer.Tablet)
+//        banner.setIndicatorGravity(BannerConfig.CENTER)
+//        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
         banner.setOnBannerClickListener { datas, position ->
             var item = datas[position]
             if (item != null) {

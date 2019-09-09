@@ -1,6 +1,7 @@
 package com.heyongrui.module.zhihu.view
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -96,10 +97,11 @@ class ZhiHuDailyNewsActivity : BaseActivity<ZhiHuDailyNewsContract.Presenter>(),
         if (TimeUtil.isSameDay(Date(), mCalendar.time)) {
             mZhiHuAdapter.replaceData(addDataList)
             if (!isInitBanner()) {
-                mBanner = mPresenter.getHeaderView()
+                val headerView = LayoutInflater.from(this@ZhiHuDailyNewsActivity).inflate(R.layout.layout_banner, null)
+                mBanner = headerView.findViewById(R.id.banner)
+                mZhiHuAdapter.setHeaderView(headerView)
             }
             mPresenter?.setBannerData(mBanner, zhiHuDailyNewsDto?.top_stories)
-            mZhiHuAdapter.setHeaderView(mBanner)
         } else {
             mZhiHuAdapter.addData(addDataList)
         }
