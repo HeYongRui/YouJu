@@ -102,7 +102,7 @@ public class PlanetModel {
 
     public void setScale(float scale) {
         this.scale = scale;
-        if (this.mView != null) {
+        if (null != this.mView && this.mView instanceof PlanetView) {
             ((PlanetView) this.mView).setScale(scale);
         }
     }

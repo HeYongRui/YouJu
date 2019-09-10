@@ -110,4 +110,19 @@
         <attr name="startAngleX" format="float" />
         <attr name="startAngleY" format="float" />
     </declare-styleable>
+    <!--折疊文本-->
+    <declare-styleable name="CollapsedTextView">
+        <attr name="collapsedLines" format="integer" />
+        <attr name="expandedText" format="string" />
+        <attr name="collapsedText" format="string" />
+        <attr name="expandedDrawable" format="reference" />
+        <attr name="collapsedDrawable" format="reference" />
+        <attr name="tipsGravity">
+            <flag name="end" value="0" />
+            <flag name="bottom" value="1" />
+        </attr>
+        <attr name="tipsColor" format="reference|color" />
+        <attr name="tipsUnderline" format="boolean" />
+        <attr name="tipsClickable" format="boolean" />
+    </declare-styleable>
 </resources>

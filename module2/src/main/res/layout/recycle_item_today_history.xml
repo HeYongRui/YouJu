@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dash_top"
         tools:text="2019\n09-07" />
 
-    <TextView
+    <com.heyongrui.base.widget.CollapsedTextView
         android:id="@+id/tv_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,9 +38,16 @@
         android:layout_marginLeft="@dimen/dp_30"
         android:textColor="@color/text_color"
         android:textSize="@dimen/sp_14"
+        app:collapsedLines="3"
+        app:collapsedText="@string/collapse"
+        app:expandedText="@string/unfold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_date"
         app:layout_constraintTop_toTopOf="@+id/tv_date"
+        app:tipsClickable="true"
+        app:tipsColor="@color/colorAccent"
+        app:tipsGravity="end"
+        app:tipsUnderline="false"
         tools:text="@string/app_name" />
 
     <View

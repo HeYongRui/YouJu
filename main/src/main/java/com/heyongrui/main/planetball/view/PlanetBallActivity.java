@@ -1,14 +1,18 @@
 package com.heyongrui.main.planetball.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
+import com.heyongrui.base.widget.firefly.FireflyView;
 import com.heyongrui.base.widget.planetball.adapter.PlanetAdapter;
 import com.heyongrui.base.widget.planetball.view.PlanetBallView;
 import com.heyongrui.base.widget.planetball.view.PlanetView;
@@ -19,6 +23,10 @@ import java.util.Random;
 
 @Route(path = ConfigConstants.PATH_PLANET_BALL)
 public class PlanetBallActivity extends BaseActivity {
+
+    private FireflyView fireflyView;
+    private Handler mHandler = new Handler();
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_planet_ball;
@@ -27,7 +35,13 @@ public class PlanetBallActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         PlanetBallView planetBall = findViewById(R.id.planet_ball);
-        planetBall.setAdapter(new PlanetAdapter() {
+        initPlanetBallView(planetBall);
+
+        fireflyView = findViewById(R.id.firefly);
+    }
+
+    private void initPlanetBallView(PlanetBallView planetBallView) {
+        planetBallView.setAdapter(new PlanetAdapter() {
             @Override
             public int getCount() {
                 return 50;
@@ -35,11 +49,8 @@ public class PlanetBallActivity extends BaseActivity {
 
             @Override
             public View getView(Context context, int position, ViewGroup parent) {
-                PlanetView planetView = new PlanetView(context);
-                planetView.setSign(getRandomNick());
-
                 int starColor = position % 2 == 0 ? PlanetView.COLOR_FEMALE : PlanetView.COLOR_MALE;
-                boolean hasShadow = false;
+                boolean isShining = false;
 
                 String str = "";
                 if (position % 12 == 0) {
@@ -52,15 +63,22 @@ public class PlanetBallActivity extends BaseActivity {
                     str = "最新人";
                     starColor = PlanetView.COLOR_MOST_NEW;
                 } else if (position % 18 == 0) {
-                    hasShadow = true;
+                    isShining = true;
                     str = "最闪耀";
                 } else {
                     str = "描述";
                 }
+
+                PlanetView planetView = new PlanetView(context);
+                int[] textColor = new int[]{0x33333333, getRandomColor(), getRandomColor(), 0x33333333};
+                float[] colorPosition = new float[]{0.0f, 0.15f, 0.85f, 1.0f};
+                planetView.setTextColor(textColor, colorPosition);
                 planetView.setStarColor(starColor);
-                planetView.setHasShadow(hasShadow);
+                String nickName = getRandomNick();
+                planetView.setSign(nickName);
+                planetView.setHasShadow(isShining);
                 planetView.setMatch(position * 2 + "%", str);
-                if (hasShadow) {
+                if (isShining) {
                     planetView.setMatchColor(starColor);
                 } else {
                     planetView.setMatchColor(PlanetView.COLOR_MOST_ACTIVE);
@@ -71,6 +89,7 @@ public class PlanetBallActivity extends BaseActivity {
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(starWidth, starHeight);
                 planetView.setPadding(0, starPaddingTop, 0, 0);
                 planetView.setLayoutParams(layoutParams);
+                planetView.setOnClickListener(view -> ToastUtils.showShort(nickName + "\n" + position * 2 + "%"));
                 return planetView;
             }
 
@@ -92,9 +111,18 @@ public class PlanetBallActivity extends BaseActivity {
     }
 
     /**
+     * 获取随机颜色
+     */
+    private int getRandomColor() {
+        Random random = new Random();
+        int r = random.nextInt(256);
+        int g = random.nextInt(256);
+        int b = random.nextInt(256);
+        return Color.argb(255, r, g, b);
+    }
+
+    /**
      * 获取随机昵称
-     *
-     * @return 随机昵称
      */
     private String getRandomNick() {
         Random random = new Random();
@@ -108,8 +136,6 @@ public class PlanetBallActivity extends BaseActivity {
 
     /**
      * 获取随机单个汉字
-     *
-     * @return 随机单个汉字
      */
     private String getRandomSingleCharacter() {
         String str = "";
@@ -129,4 +155,48 @@ public class PlanetBallActivity extends BaseActivity {
         return str;
     }
 
+    /**
+     * 控制萤火虫粒子动画是否播放
+     */
+    private void toggleAnimationEffect(boolean isStart) {
+        if (isStart) {
+            if (fireflyView != null && !fireflyView.isPlaying()) {
+                fireflyView.setVisibility(View.VISIBLE);
+                fireflyView.startAnimation();
+            }
+        } else {
+            if (fireflyView != null && fireflyView.isPlaying()) {
+                fireflyView.stopAnimation();
+//                    fireflyView.setZOrderMediaOverlay(true);
+                fireflyView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (null != mHandler) {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler.postDelayed(() -> toggleAnimationEffect(true), 1000);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != mHandler) {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler.postDelayed(() -> toggleAnimationEffect(false), 1000);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (null != mHandler) {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler = null;
+        }
+        super.onDestroy();
+    }
 }

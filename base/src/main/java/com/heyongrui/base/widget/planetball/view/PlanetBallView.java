@@ -406,13 +406,16 @@ public class PlanetBallView extends ViewGroup implements Runnable, PlanetAdapter
                 int left = (int) (centerX + planetModel.getLoc2DX()) - child.getMeasuredWidth() / 2;
                 int top = (int) (centerY + planetModel.getLoc2DY()) - child.getMeasuredHeight() / 2;
                 // 从View的Tag里取出位置之前的位置信息，平移新旧位置差值
-                int[] originLocation = (int[]) child.getTag();
-                if (originLocation != null && originLocation.length > 0) {
-                    child.setTranslationX((float) (left - originLocation[0]));
-                    child.setTranslationY((float) (top - originLocation[1]));
-                    // 小于移动速度，刷新
-                    if (Math.abs(mAngleX) <= speed && Math.abs(mAngleY) <= speed) {
-                        child.invalidate();
+                Object childTag = child.getTag();
+                if (null != childTag && childTag instanceof int[]) {
+                    int[] originLocation = (int[]) childTag;
+                    if (originLocation != null && originLocation.length > 0) {
+                        child.setTranslationX((float) (left - originLocation[0]));
+                        child.setTranslationY((float) (top - originLocation[1]));
+                        // 小于移动速度，刷新
+                        if (Math.abs(mAngleX) <= speed && Math.abs(mAngleY) <= speed) {
+                            child.invalidate();
+                        }
                     }
                 }
             }

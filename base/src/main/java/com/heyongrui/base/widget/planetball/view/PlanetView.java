@@ -59,6 +59,16 @@ public class PlanetView extends View {
         init(context);
     }
 
+    public PlanetView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        init(context);
+    }
+
+    public PlanetView(Context context, AttributeSet attributeSet, int i) {
+        super(context, attributeSet, i);
+        init(context);
+    }
+
     private void init(Context context) {
         starPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         starPaint.setColor(0xFFFF0000);
@@ -90,18 +100,21 @@ public class PlanetView extends View {
         radiusIncrement = starMin / 16.0f;
     }
 
-    public PlanetView(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
-        init(context);
-    }
-
-    public PlanetView(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
-        init(context);
-    }
-
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    /**
+     * 设置文本昵称颜色
+     *
+     * @param textColor int[]，渐变颜色数组(eg:new int[]{0x33333333, PlanetView.COLOR_BEST_MATCH, PlanetView.COLOR_MOST_ACTIVE, 0x33333333})
+     * @param position  int[]，对应color数组位置(eg:new float[]{0.0f, 0.15f, 0.85f, 1.0f})
+     */
+    public void setTextColor(int[] textColor, float[] position) {
+        int startX = sp2px(getContext(), 50.0f);
+        signPaint.setShader(new LinearGradient((float) startX, 0.0f, 0.0f, 0.0f,
+                textColor, position, TileMode.CLAMP));
+        invalidate();
     }
 
     /**
