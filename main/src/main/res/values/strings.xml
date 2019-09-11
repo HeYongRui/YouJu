@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">main</string>
-    <string name="gank">Gank</string>
+    <string name="tool">工具</string>
     <string name="tip_click_again_exit">再按一次退出程序</string>
+    <string name="participle_parse">分词解析</string>
+    <string name="flight_query">航班信息查询</string>
+    <string name="id_card_query">身份证信息查询</string>
+    <string name="weather_forecast">天气预报</string>
+    <string name="dictionary_query">新华字典查询</string>
+    <string name="idiom_query">成语查询</string>
+    <string name="motion_layout_anim">复杂动作布局动画</string>
+    <string name="planet">星球</string>
+    <string name="garbage_classify_query">垃圾分类查询</string>
+    <string name="artificial_intelligence">人工智障</string>
+    <string name="music_search">音乐搜索</string>
 </resources>

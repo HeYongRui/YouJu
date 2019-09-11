@@ -19,6 +19,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.heyongrui.base.glide.GlideApp;
 import com.heyongrui.base.utils.TimeUtil;
 import com.heyongrui.base.utils.UiUtil;
+import com.heyongrui.base.widget.CollapsedTextView;
 import com.heyongrui.module2.R;
 import com.heyongrui.module2.data.dto.GankDto;
 import com.heyongrui.module2.data.dto.HistoryTodayDto;
@@ -124,7 +125,7 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
             case Module2SectionEntity.TODAY_HISTORY: {
                 View dashTop = helper.getView(R.id.dash_top);
                 TextView tvDate = helper.getView(R.id.tv_date);
-                TextView tvContent = helper.getView(R.id.tv_content);
+                CollapsedTextView tvContent = helper.getView(R.id.tv_content);
                 View dashBottom = helper.getView(R.id.dash_bottom);
 
                 int layoutPosition = helper.getLayoutPosition();

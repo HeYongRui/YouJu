@@ -23,6 +23,7 @@ public class ConfigConstants {
     public static final String PATH_PLANET_BALL = "/main/planetBall";
     public static final String PATH_HOME_PROVIDER = "/home/main/service";
     //user模块路由路径
+    public static final String PATH_ENCOURAGE = "/user/encourage";
     public static final String PATH_KOTLIN = "/user/kotlin";
     public static final String PATH_LOGIN = "/user/login";
     public static final String PATH_USER = "/user/activity";
@@ -49,8 +50,6 @@ public class ConfigConstants {
     public static final String PATH_GANK = "/module2/gank";
     public static final String PATH_LEISURE_READ = "/module2/leisureRead";
     public static final String PATH_WELFARE = "/module2/welfare";
-    public static final String PATH_ABOUT = "/module2/about";
-    public static final String PATH_ENCOURAGE = "/module2/encourage";
     public static final String PATH_TODAY_HISTORY = "/module2/todayHistory";
     //科大讯飞Iflytek模块路径
     public static final String PATH_VOICE_DICATION_PROVIDER = "/iflytek/service";

@@ -28,8 +28,8 @@ public class ModuleFragment extends BaseFragment {
     public static ModuleFragment getInstance() {
         ModuleFragment fragment = new ModuleFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("tabIconId", R.drawable.ic_mono);
-        bundle.putInt("tabTitleId", R.string.mono);
+        bundle.putInt("tabIconId", R.drawable.ic_news);
+        bundle.putInt("tabTitleId", R.string.news);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -79,22 +79,13 @@ public class ModuleFragment extends BaseFragment {
                 case 3://诗词
                     ARouter.getInstance().build(ConfigConstants.PATH_POETRY).navigation();
                     break;
-                case 4://探索
-                    ARouter.getInstance().build(ConfigConstants.PATH_SMART_ROBOT).navigation();
-                    break;
-                case 5://音乐
-                    ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://ys.juan8014.cn/yin/").navigation();
-                    break;
-                case 6://开眼
+                case 4://开眼
                     ARouter.getInstance().build(ConfigConstants.PATH_KAIYAN_LIST).withInt("type", 1).navigation();
                     break;
-                case 7://垃圾分类
-                    ARouter.getInstance().build(ConfigConstants.PATH_GARBAGE_CLASSIFY).navigation();
-                    break;
-                case 8://电影
+                case 5://电影
                     ARouter.getInstance().build(ConfigConstants.PATH_DOUBAN).navigation();
                     break;
-                case 9://知乎日报
+                case 6://知乎日报
                     ARouter.getInstance().build(ConfigConstants.PATH_ZHIHU_DAILY_NEWS).navigation();
                     break;
             }
@@ -102,12 +93,9 @@ public class ModuleFragment extends BaseFragment {
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.tea), R.drawable.ic_tea, 1)));
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.hitokoto_title), R.drawable.ic_yiyan, 2)));
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.poetry), R.drawable.ic_poetry, 3)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.explore), R.drawable.ic_explore, 4)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.music), R.drawable.ic_music_disc, 5)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.kaiyan), R.drawable.ic_kaiyan, 6)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.garbage_classification2), R.drawable.ic_ashcan, 7)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.movie), R.drawable.ic_movie, 8)));
-        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.zhihu_daily), R.drawable.ic_zhihu, 9)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.kaiyan), R.drawable.ic_kaiyan, 4)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.movie), R.drawable.ic_movie, 5)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.zhihu_daily), R.drawable.ic_zhihu, 6)));
         monoAdapter.replaceData(dataList);
     }
 }

@@ -1,4 +1,4 @@
-package com.heyongrui.module2.utils;
+package com.heyongrui.user.utils;
 
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -20,7 +20,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.heyongrui.module2.R;
+import com.heyongrui.user.R;
 
 import java.io.Closeable;
 import java.io.File;

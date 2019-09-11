@@ -11,6 +11,9 @@
         <activity
             android:name=".KotlinActivity"
             android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".EncourageActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 
 </manifest>

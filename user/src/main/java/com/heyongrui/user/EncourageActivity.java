@@ -1,4 +1,4 @@
-package com.heyongrui.module2.about.view;
+package com.heyongrui.user;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -18,9 +18,8 @@ import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
 import com.heyongrui.base.utils.DialogUtil;
 import com.heyongrui.base.utils.DrawableUtil;
-import com.heyongrui.module2.R;
-import com.heyongrui.module2.utils.AliPay;
-import com.heyongrui.module2.utils.WXPay;
+import com.heyongrui.user.utils.AliPay;
+import com.heyongrui.user.utils.WXPay;
 
 import java.util.List;
 

@@ -12,6 +12,7 @@
         android:text="￥69.65"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/sp_30"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,45 +27,26 @@
         android:text="58"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/sp_30"
+        android:visibility="gone"
         app:duration="1500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ticker_view" />
 
-    <TextView
-        android:id="@+id/tv_home"
+    <com.heyongrui.base.widget.planetball.view.PlanetBallView
+        android:id="@+id/planet_ball"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="home fragment"
-        android:textColor="@color/text_color"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:autoScrollMode="decelerate"
+        app:darkColor="#ff0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_motion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Motion Layout"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home" />
-
-    <Button
-        android:id="@+id/btn_planet_ball"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Planet Ball"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_motion" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lightColor="#00ff00"
+        app:radiusPercent="0.75"
+        app:scrollSpeed="20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

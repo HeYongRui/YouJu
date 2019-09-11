@@ -1,19 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/window_background">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_logo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_30"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/dp_10"
+        app:cardElevation="@dimen/dp_10"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_user"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_intro"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="user fragment\n测试登录拦截"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:text="@string/app_intro"
         android:textColor="@color/text_color"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_logo" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/background"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_15"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/tv_intro">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/author"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/fragmentation_ic_right"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center"
+            android:text="HeYongRui"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/background"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_15"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/cl_author">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/version"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/fragmentation_ic_right"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1.0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_encourage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/background"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_15"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/cl_version">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/encourage"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/fragmentation_ic_right"
+            android:drawableRight="@drawable/fragmentation_ic_right"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

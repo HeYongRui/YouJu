@@ -1,4 +1,4 @@
-package com.heyongrui.module2.utils;
+package com.heyongrui.user.utils;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -11,7 +11,7 @@ import android.os.Build;
 import android.service.quicksettings.TileService;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.heyongrui.module2.R;
+import com.heyongrui.user.R;
 
 import java.net.URISyntaxException;
 
