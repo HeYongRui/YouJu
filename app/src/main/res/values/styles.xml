@@ -1,4 +1,10 @@
 <resources>
 
+    <style name="SplashThemeFullscreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/bg_splash_layer</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
 </resources>

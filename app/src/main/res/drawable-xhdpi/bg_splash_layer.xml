@@ -1,0 +1,24 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <!--适配不同机型尺寸不同导致冷启动背景拉伸问题-->
+    <!-- 背景颜色，在上图中该颜色为黑色 -->
+    <item android:drawable="@color/background" />
+    <!-- 黑色背景上的其他图片元素，比如 一个居中显示的 logo 图标-->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_launcher" />
+    </item>
+    <!-- 右上角的图标元素 -->
+    <!--<item>-->
+    <!--<bitmap-->
+    <!--android:gravity="top|right"-->
+    <!--android:src="@drawable/top_right" />-->
+    <!--</item>-->
+    <!--&lt;!&ndash; 最下面的文字，注意这里有个 bottom 设置 &ndash;&gt;-->
+    <!--<item android:bottom="@dimen/product_text_bottom">-->
+    <!--<bitmap-->
+    <!--android:gravity="bottom"-->
+    <!--android:src="@drawable/bottom_text" />-->
+    <!--</item>-->
+</layer-list>

@@ -14,7 +14,7 @@
         tools:replace="android:name">
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/BaseAppTheme">
+            android:theme="@style/SplashThemeFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />

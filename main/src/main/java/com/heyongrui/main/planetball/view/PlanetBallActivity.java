@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
 import com.heyongrui.base.widget.firefly.FireflyView;
@@ -26,6 +28,11 @@ public class PlanetBallActivity extends BaseActivity {
 
     private FireflyView fireflyView;
     private Handler mHandler = new Handler();
+
+    @Override
+    protected void initImmersionBar() {
+        ImmersionBar.with(this).hideBar(BarHide.FLAG_HIDE_STATUS_BAR).init();
+    }
 
     @Override
     protected int getLayoutId() {

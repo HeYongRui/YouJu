@@ -18,7 +18,7 @@ import androidx.core.view.ViewCompat;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.heyongrui.base.assist.ConfigConstants;
@@ -76,17 +76,21 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void loadLocalCover() {//加载本地封面图
+        Object res = R.drawable.welcomimg;
         File cacheDirectory = FileUtil.getCacheDirectory(this, null);
         if (cacheDirectory != null && cacheDirectory.exists()) {
             File file = new File(cacheDirectory.getPath(), "splash.jpg");
             if (file.exists()) {
-                RequestOptions requestOptions = new RequestOptions();
-                requestOptions.placeholder(R.drawable.welcomimg);
-                requestOptions.skipMemoryCache(true);
-                requestOptions.diskCacheStrategy(DiskCacheStrategy.NONE);
-                GlideApp.with(this).load(file.getAbsolutePath()).apply(requestOptions).into(ivWelcome);
+                res = file.getAbsolutePath();
             }
         }
+        GlideApp.with(this)
+                .load(res)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.welcomimg)
+                .error(R.drawable.welcomimg)
+                .into(ivWelcome);
     }
 
     private void startMainActivity() {//开始缩放动画
