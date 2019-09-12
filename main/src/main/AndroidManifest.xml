@@ -8,5 +8,11 @@
         <activity
             android:name=".planetball.view.PlanetBallActivity"
             android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".mob.view.MobActivity"
+            android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".mob.view.MobWeatherActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 </manifest>

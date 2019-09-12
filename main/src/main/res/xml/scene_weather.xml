@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="2000"
+        app:motionInterpolator="easeInOut">
+
+        <OnSwipe
+            app:dragDirection="dragDown"
+            app:touchAnchorId="@+id/iv"
+            app:touchAnchorSide="bottom" />
+
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@id/iv" />
+
+        <KeyFrameSet>
+            <KeyPosition
+                app:framePosition="25"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.25"
+                app:percentY="-0.25"
+                app:transitionEasing="accelerate" />
+
+            <KeyPosition
+                app:framePosition="50"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv"
+                app:pathMotionArc="flip"
+                app:percentX="0.5"
+                app:percentY="0.0"
+                app:transitionEasing="accelerate" />
+
+            <KeyPosition
+                app:framePosition="75"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.75"
+                app:percentY="0.25"
+                app:transitionEasing="accelerate" />
+
+            <!--<KeyCycle-->
+            <!--app:curveFit="spline"-->
+            <!--app:framePosition="50"-->
+            <!--app:motionTarget="@id/iv"-->
+            <!--app:waveOffset="0"-->
+            <!--app:wavePeriod="1"-->
+            <!--app:waveShape="triangle"-->
+            <!--app:waveVariesBy="path" />-->
+
+            <KeyAttribute
+                android:scaleX="2"
+                android:scaleY="2"
+                app:framePosition="25"
+                app:motionTarget="@id/iv"
+                app:transitionEasing="accelerate" />
+
+            <KeyAttribute
+                android:rotation="-90"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:framePosition="50"
+                app:motionTarget="@id/iv"
+                app:transitionEasing="accelerate" />
+
+            <KeyAttribute
+                android:scaleX="2"
+                android:scaleY="2"
+                app:framePosition="75"
+                app:motionTarget="@id/iv"
+                app:transitionEasing="accelerate" />
+
+            <KeyPosition
+                app:framePosition="25"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv2"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.25"
+                app:percentY="0.25"
+                app:transitionEasing="decelerate" />
+
+            <KeyPosition
+                app:framePosition="50"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv2"
+                app:pathMotionArc="flip"
+                app:percentX="0.5"
+                app:percentY="0.0"
+                app:transitionEasing="decelerate" />
+
+            <KeyPosition
+                app:framePosition="75"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/iv2"
+                app:pathMotionArc="startVertical"
+                app:percentX="0.75"
+                app:percentY="-0.25"
+                app:transitionEasing="decelerate" />
+
+            <!--<KeyCycle-->
+            <!--app:curveFit="spline"-->
+            <!--app:framePosition="50"-->
+            <!--app:motionTarget="@id/iv2"-->
+            <!--app:waveOffset="0"-->
+            <!--app:wavePeriod="1"-->
+            <!--app:waveShape="triangle"-->
+            <!--app:waveVariesBy="path" />-->
+
+            <KeyAttribute
+                android:scaleX="2"
+                android:scaleY="2"
+                app:framePosition="25"
+                app:motionTarget="@id/iv2"
+                app:transitionEasing="decelerate" />
+
+
+            <KeyAttribute
+                android:rotation="-90"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:framePosition="50"
+                app:motionTarget="@id/iv2"
+                app:transitionEasing="decelerate" />
+
+            <KeyAttribute
+                android:scaleX="2"
+                android:scaleY="2"
+                app:framePosition="75"
+                app:motionTarget="@id/iv2"
+                app:transitionEasing="decelerate" />
+
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/iv_sun"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            app:drawPath="pathRelative"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            app:pathMotionArc="startHorizontal">
+        </Constraint>
+        <Constraint
+            android:id="@+id/iv_moon"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            app:drawPath="pathRelative"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            app:pathMotionArc="startHorizontal">
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/iv_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/transparent" />
+        </Constraint>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/iv_sun"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            app:drawPath="pathRelative"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            app:pathMotionArc="startVertical">
+            <!--<CustomAttribute-->
+            <!--app:attributeName="backgroundColor"-->
+            <!--app:customColorValue="@color/gray" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="warmth"-->
+            <!--app:customFloatValue="0" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="contrast"-->
+            <!--app:customFloatValue="0" />-->
+            <!--<CustomAttribute-->
+            <!--app:attributeName="saturation"-->
+            <!--app:customFloatValue="0" />-->
+        </Constraint>
+        <Constraint
+            android:id="@+id/iv_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/transparentShadowColor" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

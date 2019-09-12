@@ -43,5 +43,6 @@ ext {
             jiaozivideoplayer : '7.0.4',
             ahbottomnavigation: '2.3.4',
             banner            : '2.3.16',
+            lottie            : '3.0.7',
     ]
 }

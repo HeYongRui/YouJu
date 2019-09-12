@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:shhLineWidth="2dp"
-            app:shhText="@string/gank" />
+            app:shhText="GANK" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

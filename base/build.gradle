@@ -105,6 +105,8 @@ dependencies {
     //刷新框架
     api "com.scwang.smartrefresh:SmartRefreshLayout:${versions.smartRefreshLayout}"
     api "com.scwang.smartrefresh:SmartRefreshHeader:${versions.smartRefreshLayout}"
+    //lottie动画
+    api "com.airbnb.android:lottie:${versions.lottie}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

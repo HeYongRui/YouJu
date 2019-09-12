@@ -89,7 +89,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initPlanetBallView(PlanetBallView planetBallView, List<FloatingDto> floatingDtoList) {
-        int dp70 = ConvertUtils.dp2px(70);
+        int dp80 = ConvertUtils.dp2px(80);
+        int dp30 = ConvertUtils.dp2px(30);
         planetBallView.setAdapter(new PlanetAdapter() {
             @Override
             public int getCount() {
@@ -110,7 +111,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     iconRes = ((FloatingDto) item).getIcon_res();
                 }
                 MarqueeTextView marqueeTextView = new MarqueeTextView(context);
-                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(dp70, dp70);
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(dp80, dp80);
                 marqueeTextView.setLayoutParams(layoutParams);
                 marqueeTextView.setBackgroundResource(R.drawable.bg_circle_shadow);
                 marqueeTextView.setGravity(Gravity.CENTER);
@@ -121,7 +122,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 marqueeTextView.setTextColor(Color.WHITE);
                 marqueeTextView.setText(TextUtils.isEmpty(name) ? "" : name);
                 Drawable drawable = ContextCompat.getDrawable(context, iconRes);
-                drawable.setBounds(0, 0, 80, 80 * drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth());
+                drawable.setBounds(0, 0, dp30, dp30 * drawable.getIntrinsicHeight() / drawable.getIntrinsicWidth());
                 marqueeTextView.setCompoundDrawables(null, drawable, null, null);
                 marqueeTextView.setFocusable(true);
                 marqueeTextView.post(() -> marqueeTextView.onWindowFocusChanged(true));
@@ -130,16 +131,22 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         int type = ((FloatingDto) item).getType();
                         switch (type) {
                             case 1://分词解析
+                                ARouter.getInstance().build(ConfigConstants.PATH_MOB).withInt("mobType", 1).navigation();
                                 break;
                             case 2://航班查询
+                                ARouter.getInstance().build(ConfigConstants.PATH_MOB).withInt("mobType", 2).navigation();
                                 break;
                             case 3://身份证查询
+                                ARouter.getInstance().build(ConfigConstants.PATH_MOB).withInt("mobType", 3).navigation();
                                 break;
                             case 4://天气预报
+                                ARouter.getInstance().build(ConfigConstants.PATH_WEATHER).navigation();
                                 break;
                             case 5://新华字典查询
+                                ARouter.getInstance().build(ConfigConstants.PATH_MOB).withInt("mobType", 5).navigation();
                                 break;
                             case 6://成语查询
+                                ARouter.getInstance().build(ConfigConstants.PATH_MOB).withInt("mobType", 6).navigation();
                                 break;
                             case 7://动作布局动画
                                 ARouter.getInstance().build(ConfigConstants.PATH_KOTLIN).navigation();

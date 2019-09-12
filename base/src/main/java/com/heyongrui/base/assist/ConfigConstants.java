@@ -19,9 +19,11 @@ public class ConfigConstants {
     public static final String PATH_TARGET = "target_path";
 
     //main模块路由路径
-    public static final String PATH_MAIN = "/main/activity";
-    public static final String PATH_PLANET_BALL = "/main/planetBall";
-    public static final String PATH_HOME_PROVIDER = "/home/main/service";
+    public static final String PATH_MAIN = "/home/main";
+    public static final String PATH_PLANET_BALL = "/home/planetBall";
+    public static final String PATH_MOB = "/home/mob";
+    public static final String PATH_WEATHER = "/home/weather";
+    public static final String PATH_HOME_PROVIDER = "/home/service";
     //user模块路由路径
     public static final String PATH_ENCOURAGE = "/user/encourage";
     public static final String PATH_KOTLIN = "/user/kotlin";
