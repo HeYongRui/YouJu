@@ -3,6 +3,7 @@ package com.heyongrui.main.adapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.entity.SectionMultiEntity;
 import com.heyongrui.main.data.dto.FlightDto;
+import com.heyongrui.main.data.dto.WeatherDto;
 
 import java.util.List;
 
@@ -13,12 +14,14 @@ import java.util.List;
 public class HomeSectionEntity extends SectionMultiEntity implements MultiItemEntity {
 
     public static final int FLIGHT = 100;
+    public static final int WEATHER = 101;
 
     private int itemType;
     private int spanSize;
 
     private Object object;
     private FlightDto flightDto;
+    private WeatherDto.FutureBean futureBean;
 
     public HomeSectionEntity(boolean isHeader, String header, boolean isShow) {
         super(isHeader, header);
@@ -41,6 +44,8 @@ public class HomeSectionEntity extends SectionMultiEntity implements MultiItemEn
 //                }
             } else if (object instanceof FlightDto) {
                 this.flightDto = (FlightDto) object;
+            } else if (object instanceof WeatherDto.FutureBean) {
+                this.futureBean = (WeatherDto.FutureBean) object;
             }
         }
     }
@@ -76,5 +81,13 @@ public class HomeSectionEntity extends SectionMultiEntity implements MultiItemEn
 
     public void setFlightDto(FlightDto flightDto) {
         this.flightDto = flightDto;
+    }
+
+    public WeatherDto.FutureBean getFutureBean() {
+        return futureBean;
+    }
+
+    public void setFutureBean(WeatherDto.FutureBean futureBean) {
+        this.futureBean = futureBean;
     }
 }

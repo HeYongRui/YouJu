@@ -6,6 +6,7 @@ import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 
+import com.heyongrui.base.assist.RxManager;
 import com.heyongrui.base.dagger.PerActivity;
 import com.heyongrui.main.data.service.MobService;
 
@@ -58,5 +59,10 @@ public class HomeModule {
     @PerActivity
     MobService provideMobService() {
         return new MobService();
+    }
+
+    @Provides
+    RxManager provideRxManager() {
+        return new RxManager();
     }
 }

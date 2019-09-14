@@ -20,11 +20,11 @@
         android:layout_height="@dimen/dp_60"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_sun"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <ImageView
         android:id="@+id/iv_mask"
@@ -32,30 +32,55 @@
         android:layout_height="match_parent"
         android:background="#77000000" />
 
-    <com.heyongrui.base.widget.tickerview.TickerView
-        android:id="@+id/ticker_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
-        android:text="27°"
-        android:textColor="@color/white"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
-        app:ticker_animationDuration="1000"
-        app:ticker_defaultCharacterList="alphabet" />
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_view"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <com.heyongrui.base.widget.numberruntextview.NumberRunningTextView
+        android:id="@+id/number_run_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
+        android:text="00"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_24"
+        app:duration="1500"
+        app:layout_constraintEnd_toStartOf="@+id/tv_temperature"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lottie_view"
+        app:minNum="1"
+        app:textType="num" />
+
+    <TextView
+        android:id="@+id/tv_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="℃"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_24"
+        app:layout_constraintBaseline_toBaselineOf="@+id/number_run_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/number_run_tv" />
+
+    <TextView
+        android:id="@+id/tv_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ticker_view" />
+        app:layout_constraintTop_toBottomOf="@+id/number_run_tv"
+        tools:text="@string/app_name" />
 
     <ImageView
         android:id="@+id/iv_back"
@@ -73,8 +98,8 @@
         android:id="@+id/rlv_weather"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_30"
+        android:layout_margin="@dimen/dp_20"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottie_view" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_weather" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

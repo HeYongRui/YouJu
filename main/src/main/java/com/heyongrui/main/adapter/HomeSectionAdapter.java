@@ -4,8 +4,10 @@ import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseSectionMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.heyongrui.base.utils.TimeUtil;
 import com.heyongrui.main.R;
 import com.heyongrui.main.data.dto.FlightDto;
+import com.heyongrui.main.data.dto.WeatherDto;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class HomeSectionAdapter extends BaseSectionMultiItemQuickAdapter<HomeSec
     public HomeSectionAdapter(int sectionHeadResId, List<HomeSectionEntity> data) {
         super(sectionHeadResId, data);
         addItemType(HomeSectionEntity.FLIGHT, R.layout.recycle_item_flight);
+        addItemType(HomeSectionEntity.WEATHER, R.layout.recycle_item_weather);
     }
 
     @Override
@@ -82,6 +85,27 @@ public class HomeSectionAdapter extends BaseSectionMultiItemQuickAdapter<HomeSec
                 helper.setText(R.id.tv_to_city_code, TextUtils.isEmpty(toCityCode) ? "" : toCityCode);
                 helper.setText(R.id.tv_to_terminal, TextUtils.isEmpty(toTerminal) ? "" : toTerminal);
                 helper.setText(R.id.tv_flight_cycle, TextUtils.isEmpty(flightCycle) ? "" : flightCycle);
+            }
+            break;
+            case HomeSectionEntity.WEATHER: {
+                WeatherDto.FutureBean futureBean = item.getFutureBean();
+                String temperature = "";
+                StringBuilder date = new StringBuilder();
+                StringBuilder weather = new StringBuilder();
+                if (null != futureBean) {
+                    date.append(TimeUtil.getDateString(futureBean.getDate(), "yyyy-MM-dd", "MM/dd"));
+                    date.append("\t");
+                    date.append(futureBean.getWeek());
+
+                    weather.append(futureBean.getDayTime());
+//                    weather.append("\t");
+//                    weather.append(futureBean.getWind());
+
+                    temperature = futureBean.getTemperature();
+                }
+                helper.setText(R.id.tv_date, TextUtils.isEmpty(date) ? "" : date);
+                helper.setText(R.id.tv_weather, TextUtils.isEmpty(weather) ? "" : weather);
+                helper.setText(R.id.tv_temperature, TextUtils.isEmpty(temperature) ? "" : temperature);
             }
             break;
         }

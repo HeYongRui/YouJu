@@ -1,4 +1,4 @@
-package com.heyongrui.main.mob.view;
+package com.heyongrui.main.mob;
 
 import android.animation.TypeEvaluator;
 import android.graphics.PointF;

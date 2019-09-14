@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import com.heyongrui.base.dagger.AppComponent;
 import com.heyongrui.base.dagger.PerActivity;
 import com.heyongrui.main.mob.presenter.MobPresenter;
+import com.heyongrui.main.mob.presenter.MobWeatherPresenter;
 
 import dagger.Component;
 
@@ -24,4 +25,6 @@ public interface HomeComponent {
     Fragment getFragment();
 
     void inject(MobPresenter mobPresenter);
+
+    void inject(MobWeatherPresenter mobWeatherPresenter);
 }

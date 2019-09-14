@@ -3,32 +3,96 @@ package com.heyongrui.main.mob.view;
 import android.animation.ValueAnimator;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.FloatRange;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.heyongrui.base.assist.ConfigConstants;
 import com.heyongrui.base.base.BaseActivity;
+import com.heyongrui.base.utils.DialogUtil;
 import com.heyongrui.base.utils.DrawableUtil;
+import com.heyongrui.base.utils.LocationUtil;
+import com.heyongrui.base.utils.TimeUtil;
+import com.heyongrui.base.widget.numberruntextview.NumberRunningTextView;
 import com.heyongrui.main.R;
+import com.heyongrui.main.adapter.HomeSectionAdapter;
+import com.heyongrui.main.adapter.HomeSectionEntity;
+import com.heyongrui.main.data.dto.WeatherDto;
+import com.heyongrui.main.mob.BezierEvaluator;
+import com.heyongrui.main.mob.contract.MobWeatherContract;
+import com.heyongrui.main.mob.presenter.MobWeatherPresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Route(path = ConfigConstants.PATH_WEATHER)
-public class MobWeatherActivity extends BaseActivity implements View.OnClickListener {
+public class MobWeatherActivity extends BaseActivity<MobWeatherContract.Presenter> implements
+        MobWeatherContract.View, View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
 
     private ImageView ivSun;
     private ImageView ivMask;
 
+    private HomeSectionAdapter mWeatherAdapter;
+
+    private LocationUtil mLocationUtil;
+    private Location mLocation;
+    private LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            if (null == mLocation) {
+                if (null != location) {
+                    mLocation = location;
+                    if (null != mPresenter) {
+                        mPresenter.getAddressByLocation(location.getLatitude(), location.getLongitude());
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+    private LottieAnimationView lottieView;
+    private NumberRunningTextView numberRunTv;
+    private TextView tvWeather;
+
     @Override
     protected void initImmersionBar() {
-        ImmersionBar.with(this).fullScreen(true).hideBar(BarHide.FLAG_SHOW_BAR).init();
+        ImmersionBar.with(this).fullScreen(true).hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR).init();
+    }
+
+    @Override
+    protected MobWeatherContract.Presenter setPresenter() {
+        return new MobWeatherPresenter();
     }
 
     @Override
@@ -50,7 +114,13 @@ public class MobWeatherActivity extends BaseActivity implements View.OnClickList
         ImageView ivBack = findViewById(R.id.iv_back);
         ivSun = findViewById(R.id.iv_sun);
         ivMask = findViewById(R.id.iv_mask);
+        lottieView = findViewById(R.id.lottie_view);
+        numberRunTv = findViewById(R.id.number_run_tv);
+        tvWeather = findViewById(R.id.tv_weather);
+        RecyclerView rlvWeather = findViewById(R.id.rlv_weather);
+
         ivMask.getBackground().mutate().setAlpha(0);
+        mWeatherAdapter = mPresenter.initRecyclerView(rlvWeather, this);
 
         int statusBarHeight = ImmersionBar.getStatusBarHeight(this);
         ViewGroup.LayoutParams layoutParams = ivBack.getLayoutParams();
@@ -68,15 +138,62 @@ public class MobWeatherActivity extends BaseActivity implements View.OnClickList
         addOnClickListeners(this, ivBack);
     }
 
-    private void playSunAnim(float stopPercent) {
-        float startX = 0;
-        float startY = ivSun.getY();
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-        float endX = ScreenUtils.getScreenWidth();
+    }
+
+    @Override
+    public void weatherQuerySuccess(List<WeatherDto> weatherDtoList) {
+        if (null != weatherDtoList) {
+            WeatherDto weatherDto = weatherDtoList.get(0);
+            String temperature = weatherDto.getTemperature();
+            temperature = temperature.replace("℃", "");
+            numberRunTv.setContent(temperature);
+
+            StringBuilder weatherBuilder = new StringBuilder();
+            String weather = weatherDto.getWeather();
+            String week = weatherDto.getWeek();
+            String wind = weatherDto.getWind();
+            String date = weatherDto.getDate();
+            date = TimeUtil.getDateString(date, "yyyy-MM-dd", "yyyy/MM/dd");
+            weatherBuilder.append(date);
+            weatherBuilder.append("\t");
+            weatherBuilder.append(week);
+            weatherBuilder.append("\n");
+            weatherBuilder.append(weather);
+            weatherBuilder.append("\t");
+            weatherBuilder.append(wind);
+            tvWeather.setText(weatherBuilder);
+
+            lottieView.setAnimation("sunny.json");
+            lottieView.setRepeatCount(ValueAnimator.INFINITE);
+            lottieView.playAnimation();
+
+            List<HomeSectionEntity> dataList = new ArrayList<>();
+            List<WeatherDto.FutureBean> futureBeanList = weatherDto.getFuture();
+            if (null != futureBeanList) {
+                for (WeatherDto.FutureBean futureBean : futureBeanList) {
+                    dataList.add(new HomeSectionEntity(HomeSectionEntity.WEATHER, futureBean));
+                }
+            }
+            mWeatherAdapter.replaceData(dataList);
+        }
+    }
+
+    @Override
+    public void playSunAnim(@FloatRange(from = 0.0, to = 1.0) float stopPercent) {
+        int screenWidth = ScreenUtils.getScreenWidth();
+        int screenHeight = ScreenUtils.getScreenHeight();
+
+        float startX = 0;
+        float startY = screenHeight / 4;
+
+        float endX = screenWidth;
         float endY = startY;
 
-        float controlY = 0;
-        float controlX = ScreenUtils.getScreenWidth() / 2;
+        float controlY = -200;
+        float controlX = screenWidth / 2;
         //贝塞尔二阶曲线控制点
         PointF controlP = new PointF(controlX, controlY);
         //构造贝塞尔估值器
@@ -87,9 +204,6 @@ public class MobWeatherActivity extends BaseActivity implements View.OnClickList
         animator.addUpdateListener(valueAnimator -> {
             PointF pointF = (PointF) valueAnimator.getAnimatedValue();
             //设置目标位置
-            if (ivSun.getVisibility() != View.VISIBLE) {
-                ivSun.setVisibility(View.VISIBLE);
-            }
             ivSun.setX(pointF.x);
             ivSun.setY(pointF.y);
             //设置透明度
@@ -131,5 +245,33 @@ public class MobWeatherActivity extends BaseActivity implements View.OnClickList
         animator.setTarget(ivSun);
         animator.setDuration(4000);
         animator.start();
+        ivSun.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PermissionUtils.permission(PermissionConstants.LOCATION)
+                .rationale(shouldRequest -> shouldRequest.again(true))
+                .callback(new PermissionUtils.FullCallback() {
+                    @Override
+                    public void onGranted(List<String> permissionsGranted) {
+                        mLocationUtil = null != mLocationUtil ? mLocationUtil : new LocationUtil(MobWeatherActivity.this);
+                        mLocationUtil.addLocationListener(mLocationListener);
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
+                        DialogUtil.showPermissionDialog(MobWeatherActivity.this, getString(R.string.location_permisson));
+                    }
+                }).request();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != mLocationUtil) {
+            mLocationUtil.removeLocationUpdatesListener();
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.heyongrui.main.data.api;
 
 import com.heyongrui.main.data.dto.DictionaryDto;
 import com.heyongrui.main.data.dto.FlightDto;
+import com.heyongrui.main.data.dto.GeocoderDto;
 import com.heyongrui.main.data.dto.IDCardDto;
 import com.heyongrui.main.data.dto.IdiomDto;
 import com.heyongrui.main.data.dto.MobResponse;
@@ -66,11 +67,27 @@ public interface MobApi {
                                                            @Query("name") String flightNo);
 
     /**
-     * 根据ip地址查询天气
+     * 查询天气（根据ip地址）
      */
     @GET("v1/weather/ip")
     Observable<MobResponse<List<WeatherDto>>> weatherQueryByIp(@Query("key") String key,
                                                                @Query("duid") String duid,
                                                                @Query("ip") String ip);
+
+    /**
+     * 查询天气（根据城市名称）
+     */
+    @GET("v1/weather/query")
+    Observable<MobResponse<List<WeatherDto>>> weatherQueryByCity(@Query("key") String key,
+                                                                 @Query("duid") String duid,
+                                                                 @Query("city") String city);
+
+    /**
+     * 根据经纬度获取地址信息
+     */
+    @GET("geocoder")
+    Observable<GeocoderDto> getAddressByLocation(@Query("output") String output,
+                                                 @Query("location") String location,
+                                                 @Query("ak") String ak);
 
 }

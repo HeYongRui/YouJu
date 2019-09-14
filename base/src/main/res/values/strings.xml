@@ -15,6 +15,7 @@
     <string name="cancel">取消</string>
     <string name="permisson_title">权限提示</string>
     <string name="read_write_permisson">此功能需要开启读写权限</string>
+    <string name="location_permisson">此功能需要开启定位权限</string>
     <string name="related_permisson">此功能需要开启相关权限</string>
     <string name="install_permisson">请开启安装权限</string>
     <string name="system_title">系统提示</string>
