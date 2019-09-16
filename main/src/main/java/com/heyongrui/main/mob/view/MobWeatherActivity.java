@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.FloatRange;
+import androidx.constraintlayout.utils.widget.ImageFilterView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ import com.heyongrui.main.mob.presenter.MobWeatherPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Route(path = ConfigConstants.PATH_WEATHER)
 public class MobWeatherActivity extends BaseActivity<MobWeatherContract.Presenter> implements
@@ -112,6 +114,9 @@ public class MobWeatherActivity extends BaseActivity<MobWeatherContract.Presente
     protected void init(Bundle savedInstanceState) {
         //初始化View
         ImageView ivBack = findViewById(R.id.iv_back);
+        ImageFilterView ifvBg = findViewById(R.id.ifv_bg);
+        int[] resIds = new int[]{R.drawable.bg_weather_one, R.drawable.bg_weather_two, R.drawable.bg_weather_three};
+        ifvBg.setImageResource(resIds[new Random().nextInt(3)]);
         ivSun = findViewById(R.id.iv_sun);
         ivMask = findViewById(R.id.iv_mask);
         lottieView = findViewById(R.id.lottie_view);
@@ -166,7 +171,7 @@ public class MobWeatherActivity extends BaseActivity<MobWeatherContract.Presente
             weatherBuilder.append(wind);
             tvWeather.setText(weatherBuilder);
 
-            lottieView.setAnimation("sunny.json");
+            lottieView.setAnimation(mPresenter.getAnimJsonFromWeather(weather));
             lottieView.setRepeatCount(ValueAnimator.INFINITE);
             lottieView.playAnimation();
 

@@ -23,6 +23,8 @@ public interface MobWeatherContract {
 
         public abstract void weatherQuery(String cityName);
 
+        public abstract String getAnimJsonFromWeather(String weather);
+
         public abstract void getAddressByLocation(double lat, double lon);
     }
 }

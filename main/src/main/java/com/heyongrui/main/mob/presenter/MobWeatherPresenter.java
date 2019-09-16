@@ -110,6 +110,19 @@ public class MobWeatherPresenter extends MobWeatherContract.Presenter {
     }
 
     @Override
+    public String getAnimJsonFromWeather(String weather) {
+        if (TextUtils.isEmpty(weather)) return "sunny.json";
+        if (weather.contains("晴")) return "sunny.json";
+        if (weather.contains("云")) return "cloudy.json";
+        if (weather.contains("阴")) return "ying.json";
+        if (weather.contains("雷阵雨")) return "thunder_shower.json";
+        if (weather.contains("雷雨")) return "thunder_shower.json";
+        if (weather.contains("雨")) return "rain.json";
+        if (weather.contains("雪")) return "snow.json";
+        return "sunny.json";
+    }
+
+    @Override
     public void getAddressByLocation(double lat, double lon) {
         mRxManager.add(mMobService.getAddressByLocation(lat, lon)
                 .subscribeWith(new ResponseDisposable<GeocoderDto>(mContext, false) {
