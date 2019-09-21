@@ -11,7 +11,7 @@
 目前包含的主要模块有：base基础模块、network网络请求模块、语音识别模块、Gank模块、资讯模块。除base和network外，每个模块都可单独抽离为APP运行，不影响主工程，具体参照config.gradle配置文件。
 
 ### 架构模式
-项目采用组件化Arouter+MVP+RxJava2+Retrofit2+AndroidX+Dagger2+Kotlin/Java混编模式
+项目采用组件化MVP+Walle+ARouter+Dagger2+AndroidX+Butterknife+Retrofit2+Okhttp3+RxJava2+EventBus+Kotlin/Java混编模式开发
 
 ### \*注\*
 此项目属于业余时间练手的项目，接口数据来源均来自网络，如果存在侵权情况，请第一时间告知。本项目仅做学习交流使用，API数据内容所有权归原作公司所有，请勿用于其他用途！！
