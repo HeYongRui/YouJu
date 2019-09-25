@@ -163,6 +163,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                             case 11://音乐搜索
                                 ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://ys.juan8014.cn/yin/").navigation();
                                 break;
+                            case 12://炫光
+                                ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "http://weavesilk.com/").navigation();
+                                break;
+                            case 13://唐宋文学编年地图
+                                ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://sou-yun.cn/MPoetLifeMap.aspx").navigation();
+                                break;
                         }
                     }
                 });
@@ -203,6 +209,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         floatingDtoList.add(creatFloatingDto(getString(R.string.garbage_classify_query), R.drawable.ic_ashcan, 9));
         floatingDtoList.add(creatFloatingDto(getString(R.string.artificial_intelligence), R.drawable.ic_robot, 10));
         floatingDtoList.add(creatFloatingDto(getString(R.string.music_search), R.drawable.ic_music_disc, 11));
+        floatingDtoList.add(creatFloatingDto(getString(R.string.weavesilk), R.drawable.ic_weavesilk, 12));
+        floatingDtoList.add(creatFloatingDto(getString(R.string.literature_chronicle_map), R.drawable.ic_literature_chronicle, 13));
         return floatingDtoList;
     }
 

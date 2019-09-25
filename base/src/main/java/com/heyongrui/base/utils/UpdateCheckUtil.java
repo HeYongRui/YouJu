@@ -26,6 +26,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.heyongrui.base.R;
+import com.heyongrui.base.assist.AppManager;
 import com.heyongrui.base.widget.catloadingview.CatLoadingDialog;
 
 import org.json.JSONException;
@@ -170,6 +171,9 @@ public class UpdateCheckUtil {
                     @Override
                     public void onNo(Dialog dialog) {
                         dialog.dismiss();
+                        if (isForceUpdate) {
+                            AppManager.getInstance().exitApp();
+                        }
                     }
                 }).showRemindDialog();
     }

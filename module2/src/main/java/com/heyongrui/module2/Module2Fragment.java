@@ -143,6 +143,9 @@ public class Module2Fragment extends BaseFragment {
                     case 8://瞎推荐
                         ARouter.getInstance().build(ConfigConstants.PATH_LEISURE_READ).navigation();
                         break;
+                    case 9://小专栏
+                        ARouter.getInstance().build(ConfigConstants.PATH_H5).withString("h5Url", "https://xiaozhuanlan.com/").navigation();
+                        break;
                 }
             });
             poolBall.addView(floatingActionButton, layoutParams);
@@ -159,6 +162,7 @@ public class Module2Fragment extends BaseFragment {
         gankMenuDtos.add(new GankMenuDto(getString(R.string.expand), R.drawable.ic_expand, 6));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.app), R.drawable.ic_app, 7));
         gankMenuDtos.add(new GankMenuDto(getString(R.string.blind_recommend), R.drawable.ic_recommend, 8));
+        gankMenuDtos.add(new GankMenuDto(getString(R.string.xiaozhuanlan), R.drawable.ic_xiaozhuanlan, 9));
         return gankMenuDtos;
     }
 
