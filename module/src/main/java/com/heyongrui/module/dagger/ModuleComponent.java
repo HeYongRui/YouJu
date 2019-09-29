@@ -9,6 +9,7 @@ import com.heyongrui.base.dagger.PerActivity;
 import com.heyongrui.module.ModuleFragment;
 import com.heyongrui.module.douban.presenter.DouBanPresenter;
 import com.heyongrui.module.douban.view.DouBanActivity;
+import com.heyongrui.module.qdaily.presenter.QDailyPresenter;
 import com.heyongrui.module.textword.view.SmartRobotActivity;
 import com.heyongrui.module.zhihu.presenter.ZhiHuDailyNewsPresenter;
 
@@ -36,4 +37,6 @@ public interface ModuleComponent {
     void inject(SmartRobotActivity smartRobotActivity);
 
     void inject(ZhiHuDailyNewsPresenter zhiHuDailyNewsPresenter);
+
+    void inject(QDailyPresenter zhiHuDailyNewsPresenter);
 }

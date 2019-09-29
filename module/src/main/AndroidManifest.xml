@@ -49,5 +49,8 @@
         <activity
             android:name=".zhihu.view.ZhiHuDailyNewsActivity"
             android:theme="@style/BaseAppTheme" />
+        <activity
+            android:name=".qdaily.view.QDailyActivity"
+            android:theme="@style/BaseAppTheme" />
     </application>
 </manifest>

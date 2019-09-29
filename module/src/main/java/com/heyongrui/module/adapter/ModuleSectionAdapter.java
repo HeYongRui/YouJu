@@ -52,6 +52,7 @@ import com.heyongrui.module.data.dto.MonoTeaDto;
 import com.heyongrui.module.data.dto.PoemGroupDetailDto;
 import com.heyongrui.module.data.dto.PoemGroupDto;
 import com.heyongrui.module.data.dto.PoemSearchDto;
+import com.heyongrui.module.data.dto.Post;
 import com.heyongrui.module.data.dto.TodayRecommendPoemDto;
 import com.heyongrui.module.data.dto.ZhiHuDailyNewsDto;
 import com.heyongrui.module.mono.view.MonoTeaActivity;
@@ -88,6 +89,8 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
         addItemType(ModuleSectionEntity.POEM_GROUP, R.layout.recycle_item_poem_group);
         addItemType(ModuleSectionEntity.DOUBAN_MOVIE, R.layout.recycle_item_douban_movie);
         addItemType(ModuleSectionEntity.ZHIHU_NEWS, R.layout.recycle_item_zhihu_news);
+        addItemType(ModuleSectionEntity.Q_DAILY_ONE, R.layout.recycle_item_q_daily_one);
+        addItemType(ModuleSectionEntity.Q_DAILY_TWO, R.layout.recycle_item_q_daily_two);
     }
 
     @Override
@@ -610,6 +613,36 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
                 }
                 tvTitle.setText(TextUtils.isEmpty(title) ? "" : title);
                 GlideUtil.loadImage(mContext, cover, ivCover, ContextCompat.getDrawable(mContext, R.drawable.placeholder));
+            }
+            break;
+            case ModuleSectionEntity.Q_DAILY_ONE: {
+                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+
+                String cover = "", title = "", desc = "";
+                Post post = item.getPost();
+                if (null != post) {
+                    cover = post.getImage();
+                    title = post.getTitle();
+                    desc = post.getDescription();
+                }
+                ImageView ivCover = helper.getView(R.id.iv_cover);
+                GlideUtil.loadImage(mContext, cover, ivCover, null);
+                helper.setText(R.id.tv_title, title);
+                helper.setText(R.id.tv_desc, desc);
+            }
+            break;
+            case ModuleSectionEntity.Q_DAILY_TWO: {
+                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+
+                String cover = "", title = "";
+                Post post = item.getPost();
+                if (null != post) {
+                    cover = post.getImage();
+                    title = post.getTitle();
+                }
+                ImageView ivCover = helper.getView(R.id.iv_cover);
+                GlideUtil.loadImage(mContext, cover, ivCover, null);
+                helper.setText(R.id.tv_title, title);
             }
             break;
         }

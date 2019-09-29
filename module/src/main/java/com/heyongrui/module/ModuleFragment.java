@@ -88,6 +88,9 @@ public class ModuleFragment extends BaseFragment {
                 case 6://知乎日报
                     ARouter.getInstance().build(ConfigConstants.PATH_ZHIHU_DAILY_NEWS).navigation();
                     break;
+                case 7://好奇心日报
+                    ARouter.getInstance().build(ConfigConstants.PATH_Q_DAILY).navigation();
+                    break;
             }
         });
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.tea), R.drawable.ic_tea, 1)));
@@ -96,6 +99,7 @@ public class ModuleFragment extends BaseFragment {
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.kaiyan), R.drawable.ic_kaiyan, 4)));
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.movie), R.drawable.ic_movie, 5)));
         dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.zhihu_daily), R.drawable.ic_zhihu, 6)));
+        dataList.add(new ModuleSectionEntity(ModuleSectionEntity.MENU_CARD, new MenuCardDto(getString(R.string.qdaily), R.drawable.ic_qdaily, 7)));
         monoAdapter.replaceData(dataList);
     }
 }
