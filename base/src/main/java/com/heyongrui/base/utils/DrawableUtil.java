@@ -128,11 +128,14 @@ public class DrawableUtil {
         @DrawableRes
         private int mStateListPressedRes;
         @DrawableRes
+        private int mStateListCheckRes;
+        @DrawableRes
         private int mStateListFocusedRes;
         @DrawableRes
         private int mStateListUnableRes;
         private Drawable mStateListNormalDrawable;//StateList
         private Drawable mStateListPressedDrawable;//Selector
+        private Drawable mStateListCheckDrawable;
         private Drawable mStateListFocusedDrawable;
         private Drawable mStateListUnableDrawable;
         //水波纹(5.0以上)
@@ -310,6 +313,11 @@ public class DrawableUtil {
             return this;
         }
 
+        public DrawableBuilder setStateListCheckRes(int mStateListCheckRes) {
+            this.mStateListCheckRes = mStateListCheckRes;
+            return this;
+        }
+
         public DrawableBuilder setStateListFocusedRes(int mStateListFocusedRes) {
             this.mStateListFocusedRes = mStateListFocusedRes;
             return this;
@@ -327,6 +335,11 @@ public class DrawableUtil {
 
         public DrawableBuilder setStateListPressedDrawable(Drawable mStateListPressedDrawable) {
             this.mStateListPressedDrawable = mStateListPressedDrawable;
+            return this;
+        }
+
+        public DrawableBuilder setStateListCheckDrawable(Drawable mStateListCheckDrawable) {
+            this.mStateListCheckDrawable = mStateListCheckDrawable;
             return this;
         }
 
@@ -482,6 +495,9 @@ public class DrawableUtil {
             if (mStateListPressedDrawable == null && mContext != null && mStateListPressedRes != 0) {
                 mStateListPressedDrawable = ContextCompat.getDrawable(mContext, mStateListPressedRes);
             }
+            if (mStateListCheckDrawable == null && mContext != null && mStateListCheckRes != 0) {
+                mStateListCheckDrawable = ContextCompat.getDrawable(mContext, mStateListCheckRes);
+            }
             if (mStateListFocusedDrawable == null && mContext != null && mStateListFocusedRes != 0) {
                 mStateListFocusedDrawable = ContextCompat.getDrawable(mContext, mStateListFocusedRes);
             }
@@ -491,6 +507,9 @@ public class DrawableUtil {
             // View.PRESSED_ENABLED_STATE_SET
             if (mStateListPressedDrawable != null) {
                 stateListDrawable.addState(new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled}, mStateListPressedDrawable);
+            }
+            if (mStateListCheckDrawable != null) {
+                stateListDrawable.addState(new int[]{android.R.attr.state_checked, android.R.attr.state_enabled}, mStateListCheckDrawable);
             }
             // View.ENABLED_FOCUSED_STATE_SET
             if (mStateListFocusedDrawable != null) {
