@@ -8,6 +8,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -19,11 +20,68 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import com.blankj.utilcode.util.ConvertUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lambert on 2018/8/30.
  * Drawable工具类，避免过多的drawable.xml资源创建
  */
 public class DrawableUtil {
+
+    /**
+     *     个别复杂使用示例
+     *
+     *     int roundRadius = 20;
+     *     GradientDrawable maskDrawable = new GradientDrawable();
+     *             maskDrawable.setColor(Color.BLACK);
+     *             maskDrawable.setCornerRadius(roundRadius);
+     *             maskDrawable.setStroke(1, Color.WHITE);
+     *     GradientDrawable inviteNormalDrawable = new DrawableUtil.DrawableBuilder(mContext).setGradientRoundRadius(roundRadius)
+     *             .setGradientColors(new int[]{Color.CYAN, Color.LTGRAY})
+     *             .setGradientOrientation(GradientDrawable.Orientation.TOP_BOTTOM)
+     *             .createGradientDrawable();
+     *     GradientDrawable invitePressDrawable = new DrawableUtil.DrawableBuilder(mContext).setGradientRoundRadius(roundRadius)
+     *             .setColor(Color.BLUE).createGradientDrawable();
+     *     StateListDrawable inviteStateListDrawable = new DrawableUtil.DrawableBuilder(mContext).setStateListPressedDrawable(invitePressDrawable)
+     *             .setStateListNormalDrawable(inviteNormalDrawable).createStateListDrawable();
+     *     Drawable rippleDrawable = new DrawableUtil.DrawableBuilder(mContext)
+     *             .setRippleColor(ContextCompat.getColor(mContext, R.color.colorAccent))
+     *             .setRippleNormalDrawable(inviteStateListDrawable)
+     *             .setRippleMaskDrawable(maskDrawable).createRippleDrawable();
+     *     LayerDrawable shadonLayerDrawable = DrawableUtil.createShadowLayerDrawable(roundRadius + shadowColors.length, shadowColors, rippleDrawable);
+     *
+     *
+     *     int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+     *     int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+     *             border.measure(w, h);
+     *     int height = border.getMeasuredHeight();
+     *     int width = border.getMeasuredWidth();
+     *     //启用时边框背景
+     *     int[] colors = {ContextCompat.getColor(mContext, R.color.colorPrimary),
+     *             ContextCompat.getColor(mContext, R.color.colorPrimary)};
+     *     LinearGradient shader = new LinearGradient(0, 0, width, height, colors, null, Shader.TileMode.MIRROR);
+     *     ShapeDrawable borderEnableBg = new DrawableUtil.DrawableBuilder(mContext).setRingOutRadius(10).setRingInnerRadius(8)
+     *             .setRingShader(shader)
+     *             .setRingSpaceOutAndInner(2).setColor(R.color.colorPrimary).createRingDrawable();
+     *     //禁用时边框背景
+     *     ShapeDrawable borderDisableBg = new DrawableUtil.DrawableBuilder(mContext).setRingOutRadius(10)
+     *             .setRingInnerRadius(8).setRingSpaceOutAndInner(2).setColor(R.color.gray).createRingDrawable();
+     *     //启用时兑换按钮背景
+     *     GradientDrawable convertEnableBg = new DrawableUtil.DrawableBuilder(mContext).setGradientOrientation(GradientDrawable.Orientation.TL_BR)
+     *             .setGradientColors(new int[]{R.color.colorPrimary, R.color.colorPrimary})
+     *             .setGradientType(GradientDrawable.LINEAR_GRADIENT).setGradientRoundRadius(10).createGradientDrawable();
+     *     //禁用时兑换按钮背景
+     *     GradientDrawable convertDisableBg = new DrawableUtil.DrawableBuilder(mContext)
+     *             .setColor(R.color.gray).setGradientRoundRadius(10).createGradientDrawable();
+     *     //初始化输入控件背景(左边圆角)
+     *     ShapeDrawable etBg = new DrawableUtil.DrawableBuilder(mContext).setRingLTOutRadius(10).setRingLBOutRadius(10)
+     *             .setColor(R.color.white).setGradientRoundRadius(10).createRingDrawable();
+     */
+
+
     /**
      * 对目标Drawable 进行着色
      */
@@ -84,6 +142,72 @@ public class DrawableUtil {
         Drawable.ConstantState state = drawable.getConstantState();
         // 对drawable 进行重新实例化、包装、可变操作
         return DrawableCompat.wrap(state == null ? drawable : state.newDrawable()).mutate();
+    }
+
+    /**
+     * 创建带阴影的图层Drawable
+     *
+     * @param shadowRoundRadius 阴影半径
+     * @param shadowColors      阴影颜色数组(一般渐隐递减)
+     * @param offset            阴影偏移(固定四个数，分别对应左、上、右、下)
+     * @param drawable          最上层的Drawable
+     */
+    public static LayerDrawable createShadowLayerDrawable(int shadowRoundRadius, int[] shadowColors, int[] offset, Drawable drawable) {
+        List<Drawable> layers = new ArrayList<>();
+
+        //设置阴影层
+        if (null != shadowColors && shadowColors.length > 0) {
+            for (int i = 0; i < shadowColors.length; i++) {
+                //阴影层级颜色，从最外层到最里层
+                int shadowColor = shadowColors[i];
+                ShapeDrawable shapeDrawableBg = new ShapeDrawable();
+
+                int radius0 = (shadowRoundRadius - ConvertUtils.dp2px(1)) < 0 ? 0 : (shadowRoundRadius - ConvertUtils.dp2px(1));
+                float[] outerR = new float[]{radius0, radius0, radius0, radius0, radius0, radius0, radius0, radius0};
+                RoundRectShape roundRectShape0 = new RoundRectShape(outerR, null, null);
+
+                shapeDrawableBg.setPadding(ConvertUtils.dp2px(1), ConvertUtils.dp2px(1), ConvertUtils.dp2px(1), ConvertUtils.dp2px(1));
+                shapeDrawableBg.setShape(roundRectShape0);
+//                    shapeDrawableBg.setShape(new OvalShape());
+
+                shapeDrawableBg.getPaint().setStyle(Paint.Style.FILL);
+                shapeDrawableBg.getPaint().setColor(shadowColor);
+
+                layers.add(shapeDrawableBg);
+            }
+        }
+
+        //设置阴影与顶层Drawable中间的透明过渡层
+//            int radius1 = (shadowRoundRadius - ConvertUtils.dp2px(shadowColors.length - 1)) < 0 ? 0 : (shadowRoundRadius - ConvertUtils.dp2px(shadowColors.length - 1));
+//            float[] outerR1 = new float[]{radius1, radius1, radius1, radius1, radius1, radius1, radius1, radius1};
+//            RoundRectShape roundRectShape1 = new RoundRectShape(outerR1, null, null);
+//            ShapeDrawable shapeDrawableFg = new ShapeDrawable();
+//            shapeDrawableFg.setPadding(ConvertUtils.dp2px(1), ConvertUtils.dp2px(1), ConvertUtils.dp2px(1), ConvertUtils.dp2px(1));
+//            shapeDrawableFg.setShape(roundRectShape1);
+//            shapeDrawableFg.getPaint().setStyle(Paint.Style.FILL);
+//            shapeDrawableFg.getPaint().setColor(Color.TRANSPARENT);
+//            layers.add(shapeDrawableFg);
+
+        //设置顶层背景
+        if (null != drawable) {
+            layers.add(drawable);
+        }
+        LayerDrawable layerDrawable = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+        //设置偏移
+        if (null != layers && !layers.isEmpty()) {
+            if (null != offset) {
+                try {
+                    layerDrawable.setLayerInset(layers.size() - 1, offset[0], offset[1], offset[2], offset[3]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return layerDrawable;
+    }
+
+    public static LayerDrawable createShadowLayerDrawable(int shadowRoundRadius, int[] shadowColors, Drawable drawable) {
+        return createShadowLayerDrawable(shadowRoundRadius, shadowColors, null, drawable);
     }
 
     public static class DrawableBuilder {

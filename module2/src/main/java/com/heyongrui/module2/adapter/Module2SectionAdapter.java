@@ -77,7 +77,7 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
             }
             break;
             case Module2SectionEntity.GANK: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 TextView tvTitle = helper.getView(R.id.tv_title);
                 TextView tvType = helper.getView(R.id.tv_type);
                 TextView tvDate = helper.getView(R.id.tv_date);
@@ -96,7 +96,7 @@ public class Module2SectionAdapter extends BaseSectionMultiItemQuickAdapter<Modu
             }
             break;
             case Module2SectionEntity.LEISURE_READ: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 ConstraintLayout content = helper.getView(R.id.content);
                 ImageView ivCover = helper.getView(R.id.iv_cover);
                 TextView tvTitle = helper.getView(R.id.tv_title);

@@ -109,7 +109,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
     protected void convert(BaseViewHolder helper, ModuleSectionEntity item) {
         switch (helper.getItemViewType()) {
             case ModuleSectionEntity.KAIYAN_ONE: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 ImageView ivCover = helper.getView(R.id.iv_cover);
                 TextView tvDuration = helper.getView(R.id.tv_duration);
                 ImageView ivAvatar = helper.getView(R.id.iv_avatar);
@@ -152,7 +152,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.KAIYAN_TWO: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 ImageView ivCover = helper.getView(R.id.iv_cover);
                 TextView tvDuration = helper.getView(R.id.tv_duration);
                 TextView tvTitle = helper.getView(R.id.tv_title);
@@ -280,7 +280,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.TEA_NORMAL: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 ImageView oneAvatarIv = helper.getView(R.id.avatar_iv);
                 TextView oneNameTv = helper.getView(R.id.name_tv);
                 TextView oneCategoryTv = helper.getView(R.id.category_tv);
@@ -341,7 +341,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.TEA_NINE_GRID: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 ImageView twoAvatarIv = helper.getView(R.id.avatar_iv);
                 TextView twoNameTv = helper.getView(R.id.name_tv);
                 TextView twoCategoryTv = helper.getView(R.id.category_tv);
@@ -447,7 +447,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.MONO_HISTORY_DATE: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 TextView yearMonthTv = helper.getView(R.id.year_month_tv);
                 TextView dayTv = helper.getView(R.id.day_tv);
                 ImageView iconIv = helper.getView(R.id.icon_iv);
@@ -469,7 +469,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.MONO_CATEGORY: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 ImageView categoryThumbIv = helper.getView(R.id.thumb_iv);
                 TextView categoryMultipleTv = helper.getView(R.id.multiple_tv);
                 TextView categoryTitleTv = helper.getView(R.id.title_tv);
@@ -521,7 +521,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.POEM: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 TextView tvName = helper.getView(R.id.tv_name);
                 TextView tvAuthor = helper.getView(R.id.tv_author);
                 TextView tvContent = helper.getView(R.id.tv_content);
@@ -572,7 +572,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.DOUBAN_MOVIE: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 ImageView ivCover = helper.getView(R.id.iv_cover);
                 TextView tvName = helper.getView(R.id.tv_name);
                 RatingBar ratingBar = helper.getView(R.id.rating_bar);
@@ -598,7 +598,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.ZHIHU_NEWS: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
                 TextView tvTitle = helper.getView(R.id.tv_title);
                 ImageView ivCover = helper.getView(R.id.iv_cover);
 
@@ -616,7 +616,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.Q_DAILY_ONE: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
 
                 String cover = "", title = "", desc = "";
                 Post post = item.getPost();
@@ -632,7 +632,7 @@ public class ModuleSectionAdapter extends BaseSectionMultiItemQuickAdapter<Modul
             }
             break;
             case ModuleSectionEntity.Q_DAILY_TWO: {
-                UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+                UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
 
                 String cover = "", title = "";
                 Post post = item.getPost();

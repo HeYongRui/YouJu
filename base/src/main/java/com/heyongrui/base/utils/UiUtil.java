@@ -267,40 +267,28 @@ public class UiUtil {
     }
 
     /**
-     * 为单个view设置点击效果，高版本带涟漪反馈
+     * 设置按钮反馈效果
      *
-     * @param context     上下文
-     * @param normalColor 未点击的颜色
-     * @param pressColor  按下的颜色
-     * @param view        目标view
-     */
-    public static void setOnclickFeedBack(Context context, int normalColor, int pressColor, View view) {
-        Drawable bgDrawble;
-        ColorDrawable drawablePressed = new ColorDrawable(pressColor);//分别解析两种颜色为colordrawble
-        ColorDrawable drawableNormal = new ColorDrawable(normalColor);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//高版本设置RippleDrawable 而低版本设置 StateListDrawable也就是selector
-            ColorStateList stateList = ColorStateList.valueOf(pressColor);
-            bgDrawble = new RippleDrawable(stateList, drawableNormal, drawablePressed);
-        } else {
-            StateListDrawable stateListDrawable = new StateListDrawable();
-            stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
-            stateListDrawable.addState(new int[]{-android.R.attr.state_pressed}, drawableNormal);
-            bgDrawble = stateListDrawable;
-        }
-        ViewCompat.setBackground(view, bgDrawble);
-    }
-
-    /**
-     * 支持同时设置多个view
-     *
-     * @param context     上下文
      * @param normalColor 正常颜色
      * @param pressColor  按下颜色
      * @param views       目标view群
      */
-    public static void setOnclickFeedBack(Context context, @ColorInt int normalColor, @ColorInt int pressColor, View... views) {
+    public static void setOnclickFeedBack(@ColorInt int normalColor, @ColorInt int pressColor, View... views) {
+        if (null == views || views.length <= 0) return;
         for (View view : views) {
-            setOnclickFeedBack(context, normalColor, pressColor, view);
+            Drawable bgDrawble;
+            ColorDrawable drawablePressed = new ColorDrawable(pressColor);//分别解析两种颜色为colordrawble
+            ColorDrawable drawableNormal = new ColorDrawable(normalColor);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//高版本设置RippleDrawable 而低版本设置 StateListDrawable也就是selector
+                ColorStateList stateList = ColorStateList.valueOf(pressColor);
+                bgDrawble = new RippleDrawable(stateList, drawableNormal, drawablePressed);
+            } else {
+                StateListDrawable stateListDrawable = new StateListDrawable();
+                stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
+                stateListDrawable.addState(new int[]{-android.R.attr.state_pressed}, drawableNormal);
+                bgDrawble = stateListDrawable;
+            }
+            ViewCompat.setBackground(view, bgDrawble);
         }
     }
 

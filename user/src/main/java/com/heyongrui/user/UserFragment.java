@@ -63,7 +63,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         ConstraintLayout clAuthor = mView.findViewById(R.id.cl_author);
         ConstraintLayout clVersion = mView.findViewById(R.id.cl_version);
         ConstraintLayout clEncourage = mView.findViewById(R.id.cl_encourage);
-        UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background),
+        UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background),
                 ContextCompat.getColor(mContext, R.color.gray), clAuthor, clVersion, clEncourage);
 
         tvVersion.setText(AppUtils.getAppVersionName());

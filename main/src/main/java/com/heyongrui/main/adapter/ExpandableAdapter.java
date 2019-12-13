@@ -25,7 +25,7 @@ public class ExpandableAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
 
     @Override
     protected void convert(BaseViewHolder helper, MultiItemEntity item) {
-        UiUtil.setOnclickFeedBack(mContext, ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
+        UiUtil.setOnclickFeedBack(ContextCompat.getColor(mContext, R.color.background), ContextCompat.getColor(mContext, R.color.gray), helper.itemView);
         switch (helper.getItemViewType()) {
         }
     }
