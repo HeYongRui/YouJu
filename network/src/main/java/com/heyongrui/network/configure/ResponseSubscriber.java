@@ -10,28 +10,28 @@ import com.heyongrui.network.core.CoreApiException;
 
 import java.lang.ref.SoftReference;
 
-import io.reactivex.observers.DisposableObserver;
+import io.reactivex.subscribers.DisposableSubscriber;
+
 
 /**
  * Created by lambert on 2018/10/23.
- * 适用于Observable
+ * 适用于Flowable
  */
-
-public abstract class ResponseDisposable<T> extends DisposableObserver<T> {
+public abstract class ResponseSubscriber<T> extends DisposableSubscriber<T> {
 
     private SoftReference<Context> mContext;
     private Dialog mLoadingDialog;
 
     //调用此无参构造函数无网络加载框
-    public ResponseDisposable(Context context) {
+    public ResponseSubscriber(Context context) {
         this(context, false);
     }
 
-    public ResponseDisposable(Context context, boolean isShowLoading) {
+    public ResponseSubscriber(Context context, boolean isShowLoading) {
         this(context, isShowLoading, null);
     }
 
-    public ResponseDisposable(Context context, boolean isShowLoading, String loadingContent) {
+    public ResponseSubscriber(Context context, boolean isShowLoading, String loadingContent) {
         if (context != null) {
             mContext = new SoftReference(context);
             if (isShowLoading) {
@@ -106,4 +106,5 @@ public abstract class ResponseDisposable<T> extends DisposableObserver<T> {
             dispose();
         }
     }
+
 }

@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -292,19 +293,29 @@ public class UiUtil {
         }
     }
 
-    private static long lastClickTime;//标识最后一次点击的时间
+    private static long[] mHits = new long[2];
+    private static String mLastMark;
 
     /**
-     * 是否可以执行点击事件(防止按钮多次点击导致事件重复的方法判断)
+     * 每两次点击时间间隔在一定范围{@intervals}内，且点击达到指定次数{@clickCount}视为一次有效点击(适用于频繁点击只响应一次事件或者特殊需求)
+     *
+     * @return true-此次为有效点击 false-此次为无效点击
      */
-    public static boolean isPerformClickEvent() {
-        boolean flag = false;
-        long curClickTime = System.currentTimeMillis();
-        if ((curClickTime - lastClickTime) >= 1000) {
-            //两次点击按钮之间的点击间隔不能少于1000毫秒
-            flag = true;
+    public static boolean isMultipleClickValid(int clickCount, long intervals) {
+        StackTraceElement ste = new Throwable().getStackTrace()[1];
+        String key = ste.getFileName() + ste.getLineNumber();
+
+        if (!TextUtils.equals(mLastMark, key)) {
+            mHits = new long[clickCount];
         }
-        lastClickTime = curClickTime;
-        return flag;
+        mLastMark = key;
+
+        System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+        mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+
+        if ((mHits[mHits.length - 1] - mHits[0] <= intervals)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -47,4 +47,12 @@ public class KaiYanService {
                 .getRelatedRecommend(id)
                 .compose(RxHelper.rxSchedulerHelper());
     }
+
+//    public Flowable<Optional<KaiYanDto>> contractExpire(int id) {
+//        return ApiService.createApi(KaiYanApi.class, "", CustomConverterFactory.create())
+//                .getRelatedRecommend(id)
+//                .compose(RxHelper.rxSchedulerHelperFlowable())
+//                .compose(RxHelper.rxHandleResultFlowableNullable());
+//    }
+
 }

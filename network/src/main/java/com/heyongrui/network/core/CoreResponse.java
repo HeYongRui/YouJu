@@ -16,7 +16,7 @@ public class CoreResponse<T> {
      */
     private T data;
 
-    public CoreResponse(){
+    public CoreResponse() {
         super();
     }
 
@@ -40,5 +40,9 @@ public class CoreResponse<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Optional<T> transform() {
+        return new Optional<>(data);
     }
 }

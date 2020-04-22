@@ -45,19 +45,24 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.CacheControl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class UpdateCheckUtil {
+
+    private final String TAG = "UpdateCheckUtil";
     public static final int REQUEST_CODE_APP_INSTALL = 1000;
 
     private AppCompatActivity mActivity;
     private CompositeDisposable mCompositeDisposable;
 
-    private NotificationManager notificationManager;
-    private NotificationCompat.Builder builder;
-    private ProgressDialog progressDialog;
+    private NotificationManager mNotificationManager;
+    private NotificationCompat.Builder mBuilder;
+    private ProgressDialog mProgressDialog;
+    private boolean mIsDownLoadSucess;
+    private int NOTIFY_ID = 0x3;
 
     public UpdateCheckUtil(AppCompatActivity activity) {
         mActivity = activity;
@@ -179,12 +184,14 @@ public class UpdateCheckUtil {
     }
 
     private void startDownload(@NonNull String downloadUrl, @NonNull String authority, @NonNull String appName) {
+        mIsDownLoadSucess = false;
         initNotification();
         mCompositeDisposable.add(Observable.create((ObservableOnSubscribe<Integer>) emitter -> {
             InputStream inputStream = null;
             OutputStream outputStream = null;
             OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder().url(downloadUrl).build();
+            CacheControl cc = new CacheControl.Builder().noStore().build();
+            Request request = new Request.Builder().cacheControl(cc).url(downloadUrl).build();
             try {
                 Response response = client.newCall(request).execute();
                 if (response.isSuccessful()) {
@@ -204,14 +211,15 @@ public class UpdateCheckUtil {
                         if (progress != progress2) {
                             progress2 = progress;
 //                            emitter.onNext(progress2);
-                            builder.setProgress(100, progress2, false);
-                            builder.setContentText(mActivity.getString(R.string.download_progress, progress2));
+                            mBuilder.setProgress(100, progress2, false);
+                            mBuilder.setContentText(mActivity.getString(R.string.download_progress, progress2));
                             if (progress2 == 100) {
-                                builder.setContentInfo(mActivity.getString(R.string.download_done))
+                                mIsDownLoadSucess = true;
+                                mBuilder.setContentInfo(mActivity.getString(R.string.download_done))
                                         .setContentTitle(mActivity.getString(R.string.download_done));
                             }
-                            notificationManager.notify(0x3, builder.build());
-                            progressDialog.setProgress(progress2);
+                            mNotificationManager.notify(NOTIFY_ID, mBuilder.build());
+                            mProgressDialog.setProgress(progress2);
                             Log.v("startDownload: ", progress2 + "%");
                         }
                         outputStream.write(data, 0, count);
@@ -242,9 +250,14 @@ public class UpdateCheckUtil {
             //更新通知栏的下载进度
         }, throwable -> {//onError
             cancelTask();
+            ToastUtils.showShort(R.string.update_error);
         }, () -> {//onComplete
-            progressDialog.dismiss();
-            installApp(mActivity, authority, appName);
+            cancelNotifyAndDialog();
+            if (mIsDownLoadSucess) {
+                installApp(mActivity, authority, appName);
+            } else {
+                ToastUtils.showShort(R.string.update_error);
+            }
         }));
     }
 
@@ -252,42 +265,52 @@ public class UpdateCheckUtil {
         //初始化通知栏
         String channelId = "channell_id1";
         String channelName = "下载通知";
-        if (notificationManager == null) {
-            notificationManager = (NotificationManager) mActivity.getSystemService(Activity.NOTIFICATION_SERVICE);
+        if (mNotificationManager == null) {
+            mNotificationManager = (NotificationManager) mActivity.getSystemService(Activity.NOTIFICATION_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationManager.createNotificationChannel(new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT));
+                mNotificationManager.createNotificationChannel(new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_LOW));
             }
         }
-        if (builder == null) {
-            builder = new NotificationCompat.Builder(mActivity, channelId);
+        if (mBuilder == null) {
+            mBuilder = new NotificationCompat.Builder(mActivity, channelId);
         }
         //设置通知栏属性
-        builder.setSmallIcon(R.drawable.ic_launcher)
+        mBuilder.setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true)
                 .setOngoing(false)
                 .setContentInfo(mActivity.getString(R.string.downloading))
                 .setContentTitle(mActivity.getString(R.string.doing_download));
         //初始化下载进度条弹窗
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(mActivity);
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(mActivity);
         }
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);// 设置水平进度条
-        progressDialog.setCancelable(false);// 设置是否可以通过点击Back键取消
-        progressDialog.setCanceledOnTouchOutside(false);// 设置在点击Dialog外是否取消Dialog进度条
-        progressDialog.setTitle(R.string.downloading);
-        progressDialog.setMax(100);
-        progressDialog.setProgress(0);
-        progressDialog.setOnCancelListener(dialogInterface -> cancelTask());
-        progressDialog.show();
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);// 设置水平进度条
+        mProgressDialog.setCancelable(false);// 设置是否可以通过点击Back键取消
+        mProgressDialog.setCanceledOnTouchOutside(false);// 设置在点击Dialog外是否取消Dialog进度条
+        mProgressDialog.setTitle(R.string.downloading);
+        mProgressDialog.setMax(100);
+        mProgressDialog.setProgress(0);
+        mProgressDialog.setOnCancelListener(dialogInterface -> cancelTask());
+        mProgressDialog.show();
     }
 
     public void cancelTask() {
-        //取消任务
+        cancelDisposable();
+        cancelNotifyAndDialog();
+    }
+
+    private void cancelDisposable() {
         if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
             mCompositeDisposable.clear();
         }
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
+    }
+
+    private void cancelNotifyAndDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+        if (null != mNotificationManager) {
+            mNotificationManager.cancel(NOTIFY_ID);
         }
     }
 

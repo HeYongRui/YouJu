@@ -12,7 +12,7 @@ public class HttpLogger implements HttpLogInterceptor.Logger {
 
     @Override
     public void log(String message) {
-//        Log.i("HttpLogger", message);
+//        longLogPrint("HttpLogger", message, 3);
         if (message.startsWith("--> POST") || message.startsWith("--> GET")) {
             mMessage.setLength(0);
         }
@@ -22,7 +22,67 @@ public class HttpLogger implements HttpLogInterceptor.Logger {
         }
         mMessage.append(message.concat("\n"));
         if (message.startsWith("<-- END HTTP")) {
-            Log.i("HttpLogger", mMessage.toString());
+            longLogPrint("HttpLogger", mMessage.toString(), 3);
+        }
+    }
+
+    /**
+     * 长日志截断处理
+     *
+     * @param tag   标识
+     * @param msg   打印数据
+     * @param level 打印的日志等级(1=Verbose 2=Debug 3=Info 4=Warn 5=Error)
+     */
+    private void longLogPrint(String tag, String msg, int level) {
+        if (tag == null || tag.length() == 0
+                || msg == null || msg.length() == 0) {
+            return;
+        }
+
+        int segmentSize = 3 * 1024;
+        long length = msg.length();
+        // 长度小于等于限制直接打印
+        if (length <= segmentSize) {
+            if (level == 1) {
+                Log.v(tag, msg);
+            } else if (level == 2) {
+                Log.d(tag, msg);
+            } else if (level == 3) {
+                Log.i(tag, msg);
+            } else if (level == 4) {
+                Log.w(tag, msg);
+            } else if (level == 5) {
+                Log.e(tag, msg);
+            }
+        } else {
+            // 循环分段打印日志
+            while (msg.length() > segmentSize) {
+                String logContent = msg.substring(0, segmentSize);
+                msg = msg.replace(logContent, "");
+                if (level == 1) {
+                    Log.v(tag, logContent);
+                } else if (level == 2) {
+                    Log.d(tag, logContent);
+                } else if (level == 3) {
+                    Log.i(tag, logContent);
+                } else if (level == 4) {
+                    Log.w(tag, logContent);
+                } else if (level == 5) {
+                    Log.e(tag, logContent);
+                }
+            }
+            // 打印剩余日志
+            if (level == 1) {
+                Log.v(tag, msg);
+            } else if (level == 2) {
+                Log.d(tag, msg);
+            } else if (level == 3) {
+                Log.i(tag, msg);
+            } else if (level == 4) {
+                Log.w(tag, msg);
+            } else if (level == 5) {
+                Log.e(tag, msg);
+            }
         }
     }
 
@@ -33,7 +93,9 @@ public class HttpLogger implements HttpLogInterceptor.Logger {
      * @return 格式化后的json串
      */
     public static String formatJson(String jsonStr) {
-        if (null == jsonStr || "".equals(jsonStr)) return "";
+        if (null == jsonStr || "".equals(jsonStr)) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         char last = '\0';
         char current = '\0';
@@ -71,10 +133,7 @@ public class HttpLogger implements HttpLogInterceptor.Logger {
     }
 
     /**
-     * 添加space
-     *
-     * @param sb
-     * @param indent
+     * 添加空格
      */
     private static void addIndentBlank(StringBuilder sb, int indent) {
         for (int i = 0; i < indent; i++) {
@@ -134,18 +193,20 @@ public class HttpLogger implements HttpLogInterceptor.Logger {
                     }
                     outBuffer.append((char) value);
                 } else {
-                    if (aChar == 't')
+                    if (aChar == 't') {
                         aChar = '\t';
-                    else if (aChar == 'r')
+                    } else if (aChar == 'r') {
                         aChar = '\r';
-                    else if (aChar == 'n')
+                    } else if (aChar == 'n') {
                         aChar = '\n';
-                    else if (aChar == 'f')
+                    } else if (aChar == 'f') {
                         aChar = '\f';
+                    }
                     outBuffer.append(aChar);
                 }
-            } else
+            } else {
                 outBuffer.append(aChar);
+            }
         }
         return outBuffer.toString();
     }

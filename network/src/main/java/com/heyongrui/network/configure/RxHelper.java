@@ -4,6 +4,7 @@ package com.heyongrui.network.configure;
 import com.heyongrui.network.core.CoreApiException;
 import com.heyongrui.network.core.CoreHeader;
 import com.heyongrui.network.core.CoreResponse;
+import com.heyongrui.network.core.Optional;
 
 import org.reactivestreams.Publisher;
 
@@ -85,6 +86,36 @@ public class RxHelper {
     }
 
     /**
+     * 请求数据统一再处理（常规式，可为空）
+     */
+    public static <T> ObservableTransformer<CoreResponse<T>, Optional<T>> rxHandleResultObservableNullable() {
+        return new ObservableTransformer<CoreResponse<T>, Optional<T>>() {
+            @Override
+            public ObservableSource<Optional<T>> apply(Observable<CoreResponse<T>> upstream) {
+                return upstream.flatMap(new Function<CoreResponse<T>, ObservableSource<Optional<T>>>() {
+                    @Override
+                    public ObservableSource<Optional<T>> apply(CoreResponse<T> tCoreResponse) throws Exception {
+                        CoreHeader header = tCoreResponse.getHeader();
+                        int responseCode = header == null ? -1 : header.getStatus();
+                        if (responseCode == 200) {
+                            return Observable.create(e -> {
+                                try {
+                                    e.onNext(tCoreResponse.transform());
+                                    e.onComplete();
+                                } catch (Exception exc) {
+                                    e.onError(exc);
+                                }
+                            });
+                        } else {
+                            return Observable.error(new CoreApiException(responseCode, tCoreResponse.getHeader().getMsg()));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    /**
      * 请求数据统一再处理（背压式）
      */
     public static <T> FlowableTransformer<CoreResponse<T>, T> rxHandleResultFlowable() {
@@ -102,6 +133,39 @@ public class RxHelper {
                                 public void subscribe(FlowableEmitter<T> emitter) throws Exception {
                                     try {
                                         emitter.onNext(tCoreResponse.getData());
+                                        emitter.onComplete();
+                                    } catch (Exception e) {
+                                        emitter.onError(e);
+                                    }
+                                }
+                            }, BackpressureStrategy.BUFFER);
+                        } else {
+                            return Flowable.error(new CoreApiException(responseCode, tCoreResponse.getHeader().getMsg()));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    /**
+     * 请求数据统一再处理（背压式，可为空）
+     */
+    public static <T> FlowableTransformer<CoreResponse<T>, Optional<T>> rxHandleResultFlowableNullable() {
+        return new FlowableTransformer<CoreResponse<T>, Optional<T>>() {
+            @Override
+            public Publisher<Optional<T>> apply(Flowable<CoreResponse<T>> upstream) {
+                return upstream.flatMap(new Function<CoreResponse<T>, Publisher<Optional<T>>>() {
+                    @Override
+                    public Publisher<Optional<T>> apply(CoreResponse<T> tCoreResponse) throws Exception {
+                        CoreHeader header = tCoreResponse.getHeader();
+                        int responseCode = header == null ? -1 : header.getStatus();
+                        if (responseCode == 200) {
+                            return Flowable.create(new FlowableOnSubscribe<Optional<T>>() {
+                                @Override
+                                public void subscribe(FlowableEmitter<Optional<T>> emitter) throws Exception {
+                                    try {
+                                        emitter.onNext(tCoreResponse.transform());
                                         emitter.onComplete();
                                     } catch (Exception e) {
                                         emitter.onError(e);

@@ -7,6 +7,10 @@ import java.io.Serializable;
  */
 
 public class CoreHeader implements Serializable {
+
+    public static final String KEY_STATUS = "status";
+    public static final String KEY_MSG = "msg";
+
     private int status;
     private String msg;
     private String request;

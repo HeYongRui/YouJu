@@ -3,7 +3,9 @@ package com.heyongrui.network.configure;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import com.heyongrui.network.convert.CustomIOException;
 import com.heyongrui.network.core.CoreApiException;
+import com.heyongrui.network.core.CoreHeader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,8 +55,8 @@ public class FactoryException {
             try {
                 String errorBody = ((HttpException) e).response().errorBody().string();
                 JSONObject jsonObject = new JSONObject(errorBody);
-                int status = jsonObject.getInt("status");
-                String info = jsonObject.getString("info");
+                int status = jsonObject.getInt(CoreHeader.KEY_STATUS);
+                String info = jsonObject.getString(CoreHeader.KEY_MSG);
                 apiException = new CoreApiException(status, info);
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -63,6 +65,8 @@ public class FactoryException {
                 ex.printStackTrace();
                 apiException = new CoreApiException(e, TIMEOUT_ERROR, "解析错误");
             }
+        } else if (e instanceof CustomIOException) {
+            apiException = new CoreApiException(e.getCause(), ((CustomIOException) e).getErrorCode(), ((CustomIOException) e).getMsg());
         } else if (e instanceof UnknownHostException) {
             //主机挂了，也就是你服务器关了
             apiException = new CoreApiException(e, UNKOWNHOST_ERROR, "服务异常");
