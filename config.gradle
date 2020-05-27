@@ -36,7 +36,7 @@ ext {
             rxandroid         : '2.1.1',
             glide             : '4.9.0',
             fragmentationx    : '1.0.1',
-            utilcode          : '1.25.5',
+            utilcode          : '1.28.6',
             immersionbar      : '3.0.0-beta05',
             baseRlvAdapter    : '2.9.49-androidx',
             smartRefreshLayout: '1.1.0-andx-15',

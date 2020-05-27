@@ -257,7 +257,7 @@ public class MobWeatherActivity extends BaseActivity<MobWeatherContract.Presente
     protected void onResume() {
         super.onResume();
         PermissionUtils.permission(PermissionConstants.LOCATION)
-                .rationale(shouldRequest -> shouldRequest.again(true))
+                .rationale((activity, shouldRequest) -> shouldRequest.again(true) )
                 .callback(new PermissionUtils.FullCallback() {
                     @Override
                     public void onGranted(List<String> permissionsGranted) {

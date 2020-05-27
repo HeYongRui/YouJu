@@ -45,7 +45,7 @@ public class EncourageActivity extends BaseActivity {
                 finish();
             } else if (id == R.id.btn_wx_encourage) {
                 PermissionUtils.permission(PermissionConstants.STORAGE)
-                        .rationale(shouldRequest -> shouldRequest.again(true))
+                        .rationale((activity, shouldRequest) -> shouldRequest.again(true))
                         .callback(new PermissionUtils.FullCallback() {
                             @Override
                             public void onGranted(List<String> permissionsGranted) {

@@ -166,7 +166,7 @@ public class SmartRobotActivity extends BaseActivity implements View.OnClickList
     private void performSpeechAnalysis() {
         if (null != mIiflytekProvider) {
             PermissionUtils.permission(PermissionConstants.STORAGE, PermissionConstants.MICROPHONE, PermissionConstants.CONTACTS, PermissionConstants.PHONE)
-                    .rationale(shouldRequest -> shouldRequest.again(true))
+                    .rationale((activity, shouldRequest) -> shouldRequest.again(true))
                     .callback(new PermissionUtils.SimpleCallback() {
                         @Override
                         public void onGranted() {

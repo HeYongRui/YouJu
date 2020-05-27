@@ -87,7 +87,7 @@ public class MobActivity extends BaseActivity<MobContract.Presenter> implements 
         etEnd = findViewById(R.id.et_end);
         etInput = findViewById(R.id.et_input);
         Button btnQuery = findViewById(R.id.btn_query);
-        ClickUtils.applyScale(btnQuery);
+        ClickUtils.applyPressedViewScale(btnQuery);
         tvContent = findViewById(R.id.tv_content);
         tvContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         rlvMob = findViewById(R.id.rlv_mob);

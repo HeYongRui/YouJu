@@ -156,7 +156,7 @@ public class UpdateCheckUtil {
                         dialog.dismiss();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//6.0加入了动态权限
                             PermissionUtils.permission(PermissionConstants.STORAGE)
-                                    .rationale(shouldRequest -> shouldRequest.again(true))
+                                    .rationale((activity, shouldRequest) -> { shouldRequest.again(true);})
                                     .callback(new PermissionUtils.FullCallback() {
                                         @Override
                                         public void onGranted(List<String> permissionsGranted) {

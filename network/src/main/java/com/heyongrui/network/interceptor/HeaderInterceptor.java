@@ -86,4 +86,5 @@ public class HeaderInterceptor implements Interceptor {
         UniqueID = new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
         return UniqueID;
     }
+
 }
